@@ -8,4 +8,5 @@ func _plugging():
 	# plug("imjp94/gd-YAFSM", {"include": ["addons/"]}) # By default, gd-plug will only install anything from "addons/" directory
 	
 	plug("NoctemCat/BottomPanelShortcuts")
+	plug("zaevi/godot-filesystem-view")
 	# Rapier2D is compiled, so it can't be installed like this.
