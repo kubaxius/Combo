@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://cxluvvv4avrb"]
 
 [ext_resource type="Texture2D" uid="uid://qqgpgfbxb4r7" path="res://textures/Tileset_pack/Grass_tileset.png" id="2_ph3mi"]
-[ext_resource type="PackedScene" uid="uid://dsqvt1sqlawyv" path="res://worm_joints/worm.tscn" id="3_fko4x"]
+[ext_resource type="PackedScene" uid="uid://dsqvt1sqlawyv" path="res://worm/worm.tscn" id="3_fko4x"]
 [ext_resource type="Script" path="res://ground.gd" id="4_wp4o0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6ota"]
