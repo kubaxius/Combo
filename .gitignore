@@ -15,6 +15,7 @@ data_*/
 mono_crash.*.json
 
 # Addons
+bin/.plugged/*
 bin/addons/*
 !bin/addons/gd-plug
 !bin/addons/gd-plug-ui
