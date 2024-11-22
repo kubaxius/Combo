@@ -13,3 +13,9 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Addons
+bin/addons/*
+!bin/addons/gd-plug
+!bin/addons/gd-plug-ui
+!bin/addons/godot-rapier2d
