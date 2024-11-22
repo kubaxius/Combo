@@ -7,5 +7,5 @@ func _plugging():
 	# Or you can explicitly specify which file/directory to include
 	# plug("imjp94/gd-YAFSM", {"include": ["addons/"]}) # By default, gd-plug will only install anything from "addons/" directory
 	
-	plug("/NoctemCat/BottomPanelShortcuts")
+	plug("NoctemCat/BottomPanelShortcuts")
 	# Rapier2D is compiled, so it can't be installed like this.
