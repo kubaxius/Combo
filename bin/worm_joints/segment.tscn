@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dw6jmyir54hxt"]
 
 [ext_resource type="Texture2D" uid="uid://uxrjm2flrc87" path="res://textures/worm_segment.png" id="1_3ij64"]
-[ext_resource type="Script" path="res://worm/segment.gd" id="1_desv7"]
-[ext_resource type="PackedScene" uid="uid://lexv2v5ekgrh" path="res://worm/segment_connection_component.tscn" id="3_gmev0"]
+[ext_resource type="Script" path="res://worm_joints/segment.gd" id="1_desv7"]
+[ext_resource type="PackedScene" uid="uid://lexv2v5ekgrh" path="res://worm_joints/segment_connection_component.tscn" id="3_gmev0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgwxp"]
 radius = 15.0

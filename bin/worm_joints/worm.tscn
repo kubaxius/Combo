@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsqvt1sqlawyv"]
 
-[ext_resource type="PackedScene" uid="uid://lexv2v5ekgrh" path="res://worm/segment_connection_component.tscn" id="1_1qa3m"]
+[ext_resource type="PackedScene" uid="uid://lexv2v5ekgrh" path="res://worm_joints/segment_connection_component.tscn" id="1_1qa3m"]
 [ext_resource type="Texture2D" uid="uid://bncyhw4v2cw1u" path="res://textures/worm_head.png" id="1_41mj8"]
 [ext_resource type="Script" path="res://control_component.gd" id="1_gkjxc"]
-[ext_resource type="PackedScene" uid="uid://cdd8jseei1hnt" path="res://worm/part.tscn" id="2_n58mh"]
+[ext_resource type="PackedScene" uid="uid://cdd8jseei1hnt" path="res://worm_joints/part.tscn" id="2_n58mh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwm3e"]
 radius = 64.0312
