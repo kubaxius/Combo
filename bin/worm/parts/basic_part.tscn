@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2antciuen2pm"]
+
+[ext_resource type="Script" path="res://worm/base/part/part.gd" id="1_ofxbu"]
+[ext_resource type="PackedScene" uid="uid://60b4o56c3hdd" path="res://worm/segments/basic_segment.tscn" id="2_t0o2e"]
+
+[node name="BasicWormPart" type="Node2D"]
+script = ExtResource("1_ofxbu")
+
+[node name="BasicWormSegment2" parent="." instance=ExtResource("2_t0o2e")]
+
+[node name="BasicWormSegment" parent="." instance=ExtResource("2_t0o2e")]
+position = Vector2(0, 31)
+
+[node name="BasicWormSegment3" parent="." instance=ExtResource("2_t0o2e")]
+position = Vector2(0, 62)
+
+[node name="BasicWormSegment4" parent="." instance=ExtResource("2_t0o2e")]
+position = Vector2(0, 93)
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

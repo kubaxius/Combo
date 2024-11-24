@@ -1,10 +1,9 @@
 extends TileMapLayer
 
-@export_node_path("Camera2D") var camera_path: NodePath
 @export var tilegen_margin: Vector2i
-@onready var camera: Camera2D = get_node(camera_path)
 
 func get_visible_rect_t() -> Rect2i:
+	var camera: Camera2D = get_viewport().get_camera_2d()
 	var camera_pos := camera.global_position
 	var screen_size := get_viewport().get_visible_rect().size/camera.zoom
 	
@@ -30,10 +29,7 @@ func generate() -> void:
 				else:
 					set_cell(pos_t, 0, Vector2i(1, 2))
 
-func _ready():
-	generate()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("ui_accept"):
-	generate()
+	if get_viewport().get_camera_2d():
+		generate()

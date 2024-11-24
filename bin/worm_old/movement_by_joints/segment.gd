@@ -1,4 +1,4 @@
-class_name WormSegment extends Node2D
+class_name WormSegmentJointed extends Node2D
 
 var preceding_part_path:
 	set(new_path):

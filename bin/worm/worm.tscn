@@ -1,29 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsqvt1sqlawyv"]
+[gd_scene load_steps=3 format=3 uid="uid://dsqvt1sqlawyv"]
 
-[ext_resource type="PackedScene" uid="uid://lexv2v5ekgrh" path="res://worm/movement_by_joints/segment_connection_component.tscn" id="1_1qa3m"]
-[ext_resource type="Texture2D" uid="uid://bncyhw4v2cw1u" path="res://textures/worm_head.png" id="1_41mj8"]
-[ext_resource type="Script" path="res://worm/control_component.gd" id="1_gkjxc"]
+[ext_resource type="Script" path="res://worm/worm.gd" id="1_bdlk6"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lwm3e"]
-radius = 64.0312
+[sub_resource type="Curve2D" id="Curve2D_faajy"]
 
-[node name="Worm" type="Node2D"]
+[node name="Worm" type="Node2D" groups=["worm"]]
+script = ExtResource("1_bdlk6")
 
-[node name="Head" type="CharacterBody2D" parent="."]
-collision_mask = 0
-motion_mode = 1
+[node name="Body" type="Node2D" parent="."]
 
-[node name="ControlComponent" type="Node2D" parent="Head"]
-script = ExtResource("1_gkjxc")
-
-[node name="SegmentConnectionComponent" parent="Head" instance=ExtResource("1_1qa3m")]
-connection_body = NodePath("..")
-
-[node name="WormHead" type="Sprite2D" parent="Head"]
-scale = Vector2(1.62, 1.62)
-texture = ExtResource("1_41mj8")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-shape = SubResource("CircleShape2D_lwm3e")
-
-[node name="Camera2D" type="Camera2D" parent="Head"]
+[node name="WormPath2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_faajy")

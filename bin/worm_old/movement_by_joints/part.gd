@@ -1,7 +1,7 @@
 #@tool
 extends Node2D
 
-var segment_res = preload("res://worm_joints/segment.tscn")
+var segment_res = preload("res://worm/movement_by_joints/segment.tscn")
 
 @export_node_path var preceding_part_path:
 	get():

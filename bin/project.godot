@@ -26,6 +26,10 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/FileSystemView/plugin.cfg", "res://addons/bottom_panel_shortcuts/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg")
 
+[global_group]
+
+worm=""
+
 [input]
 
 up={
