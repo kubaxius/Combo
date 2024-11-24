@@ -30,6 +30,6 @@ func generate() -> void:
 					set_cell(pos_t, 0, Vector2i(1, 2))
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if get_viewport().get_camera_2d():
 		generate()

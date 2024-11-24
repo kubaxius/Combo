@@ -1,9 +1,9 @@
-class_name WormHead extends WormPart
+class_name WormHead extends CharacterBody2D
 
-func _ready() -> void:
-	pass
+var speed
+var desired_movement_vector = Vector2i.UP
 
 
-func setup(p_first_segment_index: int, p_speed: int, p_worm_path:Path2D = null):
-	super(p_first_segment_index, p_speed, p_worm_path)
-	$PathCreatorComponent.worm_path = worm_path
+func _physics_process(delta: float) -> void:
+	if speed:
+		move_and_collide(Vector2.UP.rotated(rotation) * speed)

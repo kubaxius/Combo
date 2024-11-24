@@ -1,23 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://camjvgx5kvtmh"]
+[gd_scene load_steps=5 format=3 uid="uid://camjvgx5kvtmh"]
 
 [ext_resource type="Script" path="res://worm/base/head/head.gd" id="1_asjjq"]
 [ext_resource type="Script" path="res://worm/base/head/components/follow_mouse.gd" id="2_oxss4"]
 [ext_resource type="Texture2D" uid="uid://bncyhw4v2cw1u" path="res://worm/assets/worm_head.png" id="3_lnd62"]
-[ext_resource type="Script" path="res://worm/base/head/components/path_creator.gd" id="4_4yexi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwm3e"]
 radius = 40.3113
 
-[node name="BasicWormHead" type="CharacterBody2D"]
+[node name="BasicWormHead" type="CharacterBody2D" groups=["needs_worm_speed"]]
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_asjjq")
 
 [node name="FollowMouseComponent" type="Node2D" parent="."]
 script = ExtResource("2_oxss4")
-
-[node name="PathCreatorComponent" type="Marker2D" parent="."]
-script = ExtResource("4_4yexi")
 
 [node name="WormHead" type="Sprite2D" parent="."]
 texture = ExtResource("3_lnd62")

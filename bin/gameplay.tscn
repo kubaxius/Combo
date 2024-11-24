@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://cxluvvv4avrb"]
+[gd_scene load_steps=8 format=4 uid="uid://cxluvvv4avrb"]
 
 [ext_resource type="Texture2D" uid="uid://qqgpgfbxb4r7" path="res://textures/Tileset_pack/Grass_tileset.png" id="2_ph3mi"]
 [ext_resource type="PackedScene" uid="uid://dsqvt1sqlawyv" path="res://worm/worm.tscn" id="3_fko4x"]
+[ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="4_pxibo"]
 [ext_resource type="Script" path="res://ground.gd" id="4_wp4o0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6ota"]
@@ -78,6 +79,20 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_n6ota")
 
+[sub_resource type="GDScript" id="GDScript_4yvm4"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	look_at($\"../Worm/Head/BasicWormHead\".global_position)
+"
+
 [node name="Gameplay" type="Node2D"]
 position = Vector2(1, 0)
 
@@ -88,5 +103,10 @@ script = ExtResource("4_wp4o0")
 tilegen_margin = Vector2i(2, 2)
 
 [node name="Worm" parent="." instance=ExtResource("3_fko4x")]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(153, 96)
+texture = ExtResource("4_pxibo")
+script = SubResource("GDScript_4yvm4")
 
 [editable path="Worm"]

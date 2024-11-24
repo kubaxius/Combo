@@ -9,4 +9,5 @@ func _plugging():
 	
 	plug("NoctemCat/BottomPanelShortcuts")
 	plug("zaevi/godot-filesystem-view")
+	plug("derkork/godot-statecharts")
 	# Rapier2D is compiled, so it can't be installed like this.
