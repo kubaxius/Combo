@@ -1,26 +1,27 @@
 class_name SegmentPathFollower extends PathFollow2D
 
-var pixel_position_in_worm
-var speed
-var part_before: Node2D
+var enabled := false
+var pixel_position_in_worm:int
+var speed:int
 
-func _ready() -> void:
+func setup(p_speed:int, p_pixel_position_in_worm:int) -> void:
+	speed = p_speed
+	pixel_position_in_worm = p_pixel_position_in_worm
 	get_parent().connect("path_changed", reset_movement)
 	progress = -pixel_position_in_worm
+	enabled = true
 
 
 
 func _physics_process(delta: float) -> void:
-	move_and_rotate()
+	if enabled:
+		move()
 
 
 var distance_traveled = 0
-func move_and_rotate():
+func move():
 	progress = distance_traveled-pixel_position_in_worm
 	distance_traveled += speed
-	look_at(part_before.global_position)
-	rotate(0.5*PI)
-
 
 
 func reset_movement():

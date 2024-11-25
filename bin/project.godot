@@ -58,6 +58,7 @@ right={
 [layer_names]
 
 2d_physics/layer_1="worm"
+2d_physics/layer_2="hole_walls"
 
 [physics]
 

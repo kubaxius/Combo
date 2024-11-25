@@ -6,11 +6,12 @@
 [ext_resource type="Script" path="res://worm/segments.gd" id="3_q35mp"]
 [ext_resource type="Script" path="res://worm/worm_path.gd" id="5_2gpbu"]
 
-[sub_resource type="Curve2D" id="Curve2D_6016b"]
+[sub_resource type="Curve2D" id="Curve2D_ifevq"]
 
 [node name="Worm" type="Node2D" groups=["worm"]]
 script = ExtResource("1_bdlk6")
-worm_path = NodePath("WormPath2D")
+speed = 6
+worm_path = NodePath("WormPath")
 
 [node name="Head" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -65,7 +66,20 @@ script = ExtResource("3_q35mp")
 
 [node name="BasicWormSegment22" parent="Segments" instance=ExtResource("3_puycw")]
 
-[node name="WormPath2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_6016b")
+[node name="BasicWormSegment23" parent="Segments" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment24" parent="Segments" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment25" parent="Segments" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment26" parent="Segments" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment27" parent="Segments" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment28" parent="Segments" instance=ExtResource("3_puycw")]
+
+[node name="WormPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ifevq")
 script = ExtResource("5_2gpbu")
+max_length = 4000
 worm_head_path = NodePath("../Head/BasicWormHead")

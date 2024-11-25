@@ -1,18 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://60b4o56c3hdd"]
+[gd_scene load_steps=7 format=3 uid="uid://60b4o56c3hdd"]
 
 [ext_resource type="Script" path="res://worm/base/segment/segment.gd" id="1_40qbx"]
 [ext_resource type="Texture2D" uid="uid://uxrjm2flrc87" path="res://worm/assets/worm_segment.png" id="3_h2s2v"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_iuk12"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_bvidn"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_sk6r2"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_846nu"]
+[ext_resource type="Script" path="res://worm/base/segment/path_follower.gd" id="3_p4m0n"]
+[ext_resource type="Script" path="res://worm/base/segment/components/path_follower.gd" id="4_mna22"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_aqgr2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r5knf"]
 radius = 22.0
 height = 80.0
 
-[node name="BasicWormSegment" type="AnimatableBody2D" groups=["needs_worm_path", "needs_worm_speed"]]
+[node name="BasicWormSegment" type="RigidBody2D"]
 collision_mask = 0
+mass = 800.0
+gravity_scale = 0.0
+linear_damp = 47.626
 script = ExtResource("1_40qbx")
 spacing = 35
 
@@ -23,21 +25,19 @@ texture = ExtResource("3_h2s2v")
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_r5knf")
 
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, -13)
+node_a = NodePath("..")
+angular_limit_enabled = true
+angular_limit_lower = -0.349066
+angular_limit_upper = 0.349066
+
+[node name="PathFollowerComp" type="Node2D" parent="."]
+script = ExtResource("4_mna22")
+
+[node name="SegmentPathFollower" type="PathFollow2D" parent="PathFollowerComp"]
+rotates = false
+script = ExtResource("3_p4m0n")
+
 [node name="StateChart" type="Node" parent="."]
-script = ExtResource("3_iuk12")
-
-[node name="Root" type="Node" parent="StateChart"]
-script = ExtResource("4_bvidn")
-initial_state = NodePath("Setup")
-
-[node name="Setup" type="Node" parent="StateChart/Root"]
-script = ExtResource("5_sk6r2")
-
-[node name="StartMoving" type="Node" parent="StateChart/Root/Setup"]
-script = ExtResource("6_846nu")
-to = NodePath("../../Move")
-event = &"finished"
-delay_in_seconds = "0.0"
-
-[node name="Move" type="Node" parent="StateChart/Root"]
-script = ExtResource("5_sk6r2")
+script = ExtResource("5_aqgr2")

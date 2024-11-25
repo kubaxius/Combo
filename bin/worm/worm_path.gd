@@ -1,4 +1,4 @@
-extends Path2D
+class_name WormPath extends Path2D
 
 @export_range(1, 200) var point_distance:int = 30
 @export_range(100, 20000) var max_length:int = 1000

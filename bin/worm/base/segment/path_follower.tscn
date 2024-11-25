@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://8h7shfllswl5"]
-
-[ext_resource type="Script" path="res://worm/base/segment/path_follower.gd" id="1_pop04"]
-
-[node name="SegmentPathFollower" type="PathFollow2D"]
-rotates = false
-script = ExtResource("1_pop04")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]

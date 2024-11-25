@@ -1,12 +1,11 @@
 class_name Worm extends Node2D
 
 @export_range(1, 100) var speed = 10
-@export_node_path("Path2D") var worm_path
+@export_node_path("WormPath") var worm_path
 
 func _ready() -> void:
 	pass_worm_path()
 	pass_speed()
-	
 
 
 func pass_worm_path():
