@@ -14,7 +14,8 @@ height = 80.0
 collision_mask = 0
 mass = 800.0
 gravity_scale = 0.0
-linear_damp = 47.626
+linear_damp = 40.0
+angular_damp = 100.0
 script = ExtResource("1_40qbx")
 spacing = 35
 

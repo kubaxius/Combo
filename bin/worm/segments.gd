@@ -13,3 +13,7 @@ func get_segment_at_position(index:int):
 		return %Head.get_child(0)
 	
 	return get_child(index)
+
+func get_length():
+	var last_segment:WormSegment = get_child(-1)
+	return last_segment.get_pixel_position_in_worm()

@@ -11,6 +11,7 @@
 
 [node name="Worm" type="Node2D" groups=["worm"]]
 script = ExtResource("1_bdlk6")
+base_speed = 420
 base_turning_speed = 1.5
 worm_path = NodePath("WormPath")
 

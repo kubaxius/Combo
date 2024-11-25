@@ -8,7 +8,11 @@ class_name WormPath extends Path2D
 signal path_changed
 
 
-func _physics_process(delta: float) -> void:
+func _ready() -> void:
+	max_length = $"../Segments".get_length() + 100
+
+
+func _physics_process(_delta: float) -> void:
 	update_path()
 
 

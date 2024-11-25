@@ -5,6 +5,8 @@
 @onready var path_follower:SegmentPathFollower = $SegmentPathFollower
 
 var enabled = false
+
+#
 var worm_path:WormPath:
 	set(new_worm_path):
 		worm_path = new_worm_path
@@ -32,13 +34,13 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return warnings
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if enabled:
 		pull()
 
 
 func try_setup():
-	if not (speed and worm_path and pixel_position_in_worm):
+	if speed == null or worm_path == null or pixel_position_in_worm == null:
 		return
 	path_follower.reparent(worm_path)
 	path_follower.enabled = true
