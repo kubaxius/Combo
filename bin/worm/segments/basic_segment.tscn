@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://worm/base/segment/segment.gd" id="1_40qbx"]
 [ext_resource type="Texture2D" uid="uid://uxrjm2flrc87" path="res://worm/assets/worm_segment.png" id="3_h2s2v"]
 [ext_resource type="Script" path="res://worm/base/segment/path_follower.gd" id="3_p4m0n"]
+[ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="4_067rk"]
 [ext_resource type="Script" path="res://worm/base/segment/components/path_follower.gd" id="4_mna22"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_aqgr2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r5knf"]
 radius = 22.0
@@ -39,5 +39,6 @@ script = ExtResource("4_mna22")
 rotates = false
 script = ExtResource("3_p4m0n")
 
-[node name="StateChart" type="Node" parent="."]
-script = ExtResource("5_aqgr2")
+[node name="Icon" type="Sprite2D" parent="PathFollowerComp/SegmentPathFollower"]
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("4_067rk")

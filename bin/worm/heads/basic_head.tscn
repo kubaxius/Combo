@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwm3e"]
 radius = 40.3113
 
-[node name="BasicWormHead" type="CharacterBody2D" groups=["needs_worm_speed"]]
+[node name="BasicWormHead" type="CharacterBody2D" groups=["needs_worm_speed", "needs_worm_turning_speed"]]
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_asjjq")

@@ -1,5 +1,6 @@
 @tool class_name PathFollowerComp extends Node2D
 
+@export var pull_power = 2
 
 @onready var path_follower:SegmentPathFollower = $SegmentPathFollower
 
@@ -48,4 +49,4 @@ func try_setup():
 func pull():
 	var parent:RigidBody2D = get_parent()
 	var force = path_follower.global_position - parent.global_position
-	parent.apply_central_force(force * 100000)
+	parent.apply_central_force(force * 100000 * pull_power)
