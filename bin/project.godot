@@ -12,8 +12,12 @@ config_version=5
 
 config/name="Combo"
 run/main_scene="res://gameplay.tscn"
-config/features=PackedStringArray("4.3")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://global.gd"
 
 [display]
 
@@ -24,7 +28,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/FileSystemView/plugin.cfg", "res://addons/bottom_panel_shortcuts/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/FileSystemView/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/bottom_panel_shortcuts/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [global_group]
 
@@ -32,6 +36,7 @@ worm=""
 needs_worm_path="Used by Worm node to pass reference to the WormPath2D."
 needs_worm_speed=""
 needs_worm_turning_speed=""
+trail_texture_generator_viewport=""
 
 [input]
 
@@ -68,6 +73,7 @@ stop_moving={
 
 [layer_names]
 
+2d_render/layer_2="hole_mask"
 2d_physics/layer_1="worm"
 2d_physics/layer_2="hole_walls"
 
