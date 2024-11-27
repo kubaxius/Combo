@@ -10,7 +10,6 @@ var speed:
 	set(new_speed):
 		speed = new_speed
 		_pass_speed_to_children()
-		print(speed)
 var desired_speed:int
 var turning_speed:
 	set(new_turning_speed):

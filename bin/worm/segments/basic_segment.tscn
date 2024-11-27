@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://60b4o56c3hdd"]
+[gd_scene load_steps=8 format=3 uid="uid://60b4o56c3hdd"]
 
-[ext_resource type="Script" path="res://worm/base/segment/segment.gd" id="1_40qbx"]
+[ext_resource type="Script" uid="uid://bvftcxlknehg" path="res://worm/base/segment/segment.gd" id="1_40qbx"]
 [ext_resource type="Texture2D" uid="uid://uxrjm2flrc87" path="res://worm/assets/worm_segment.png" id="3_h2s2v"]
-[ext_resource type="Script" path="res://worm/base/segment/path_follower.gd" id="3_p4m0n"]
+[ext_resource type="Script" uid="uid://xdtx5tb3kh5o" path="res://worm/base/segment/path_follower.gd" id="3_p4m0n"]
 [ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="4_067rk"]
-[ext_resource type="Script" path="res://worm/base/segment/components/path_follower.gd" id="4_mna22"]
+[ext_resource type="Script" uid="uid://dcxpps2sv608r" path="res://worm/base/segment/components/path_follower.gd" id="4_mna22"]
+[ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="6_d6ev6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r5knf"]
 radius = 22.0
@@ -17,7 +18,10 @@ gravity_scale = 0.0
 linear_damp = 40.0
 angular_damp = 100.0
 script = ExtResource("1_40qbx")
-spacing = 35
+
+[node name="LeaveTrailComp" type="Node2D" parent="."]
+script = ExtResource("6_d6ev6")
+texture = ExtResource("3_h2s2v")
 
 [node name="WormSegment" type="Sprite2D" parent="."]
 texture = ExtResource("3_h2s2v")

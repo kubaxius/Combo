@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://dsqvt1sqlawyv"]
 
-[ext_resource type="Script" path="res://worm/worm.gd" id="1_bdlk6"]
+[ext_resource type="Script" uid="uid://cmaolrnwa4ykp" path="res://worm/worm.gd" id="1_bdlk6"]
 [ext_resource type="PackedScene" uid="uid://camjvgx5kvtmh" path="res://worm/heads/basic_head.tscn" id="2_7haj8"]
 [ext_resource type="PackedScene" uid="uid://60b4o56c3hdd" path="res://worm/segments/basic_segment.tscn" id="3_puycw"]
-[ext_resource type="Script" path="res://worm/segments.gd" id="3_q35mp"]
-[ext_resource type="Script" path="res://worm/worm_path.gd" id="5_2gpbu"]
-[ext_resource type="Script" path="res://worm/base/components/pc_controls.gd" id="6_onaht"]
+[ext_resource type="Script" uid="uid://bl52pjxf7ysd5" path="res://worm/segments.gd" id="3_q35mp"]
+[ext_resource type="Script" uid="uid://basltku41sxt1" path="res://worm/worm_path.gd" id="5_2gpbu"]
+[ext_resource type="Script" uid="uid://drmfg37hppgt1" path="res://worm/base/components/pc_controls.gd" id="6_onaht"]
 
 [sub_resource type="Curve2D" id="Curve2D_ifevq"]
 
