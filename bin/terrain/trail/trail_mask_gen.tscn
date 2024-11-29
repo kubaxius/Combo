@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvq76e0f57j05"]
+[gd_scene load_steps=10 format=3 uid="uid://dvq76e0f57j05"]
 
 [ext_resource type="Script" uid="uid://bmrbd6jsj0wkm" path="res://terrain/trail/trail_mask_gen.gd" id="1_uiioc"]
-[ext_resource type="Shader" uid="uid://bblnwnktfdsn2" path="res://shaders/black_white.tres" id="2_1yegx"]
-[ext_resource type="Shader" uid="uid://cats3c871kyxy" path="res://shaders/grow_black.gdshader" id="2_dm850"]
+[ext_resource type="Shader" uid="uid://bblnwnktfdsn2" path="res://shaders/red_to_white.tres" id="2_1yegx"]
+[ext_resource type="Shader" uid="uid://cats3c871kyxy" path="res://shaders/shrink_trail.gdshader" id="2_dm850"]
 [ext_resource type="Shader" uid="uid://dp5jkuyqxn410" path="res://shaders/worley_mosaic.gdshader" id="2_fveui"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v4wuq"]
@@ -15,9 +15,16 @@ viewport_path = NodePath("FullTrailMaskGen")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_smepj"]
 shader = ExtResource("2_1yegx")
 
+[sub_resource type="GDScript" id="GDScript_sswum"]
+script/source = "extends ColorRect
+
+func _process(delta: float) -> void:
+	global_position = -get_canvas_transform().origin
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sswum"]
 shader = ExtResource("2_dm850")
-shader_parameter/SPEED = 100
+shader_parameter/SPEED = 1.1
 
 [node name="TrailMaskGen" type="SubViewport" groups=["trail_texture_generator_viewport"]]
 handle_input_locally = false
@@ -40,7 +47,6 @@ repeat_times = 3
 
 [node name="Mask" type="Sprite2D" parent="MaskParallax"]
 unique_name_in_owner = true
-texture_filter = 4
 scale = Vector2(4, 4)
 texture = SubResource("ViewportTexture_fveui")
 
@@ -55,19 +61,20 @@ render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="FullTrailMaskGen"]
 
-[node name="TurnBlackWhite" type="CanvasLayer" parent="FullTrailMaskGen"]
-
-[node name="FilterRect" type="ColorRect" parent="FullTrailMaskGen/TurnBlackWhite"]
+[node name="RedToWhiteShader" type="ColorRect" parent="FullTrailMaskGen"]
+top_level = true
+z_index = 1
 material = SubResource("ShaderMaterial_smepj")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_sswum")
 
 [node name="Shrink" type="CanvasLayer" parent="FullTrailMaskGen"]
 
-[node name="FilterRect" type="ColorRect" parent="FullTrailMaskGen/Shrink"]
+[node name="ShrinkShader" type="ColorRect" parent="FullTrailMaskGen/Shrink"]
 top_level = true
 material = SubResource("ShaderMaterial_sswum")
 anchors_preset = 15

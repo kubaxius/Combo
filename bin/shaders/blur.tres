@@ -1,0 +1,59 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://citrr4j7lda0t"]
+
+[ext_resource type="Script" uid="uid://cyah3oqdn2ki8" path="res://addons/shaderV/rgba/blur/blur9sample.gd" id="1_bin4n"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_3v2jk"]
+default_input_values = [2, -1.0, 3, 0.5]
+initialized = true
+script = ExtResource("1_bin4n")
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_8mpj7"]
+parameter_name = "Texture2DParameter"
+texture_source = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_5omur"]
+input_name = "uv"
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D Texture2DParameter : hint_screen_texture;
+
+
+// BlurBasic
+#include \"res://addons/shaderV/rgba/blur/blur9sample.gdshaderinc\"
+
+void fragment() {
+// Input:5
+	vec2 n_out5p0 = UV;
+
+
+	vec3 n_out3p0;
+	float n_out3p1;
+// BlurBasic:3
+	float n_in3p2 = -1.00000;
+	float n_in3p3 = 0.50000;
+	{
+		vec4 n_out3p0n_out3p1 = _blur9sampleFunc(Texture2DParameter, vec3(n_out5p0, 0.0).xy, n_in3p2, n_in3p3);
+		n_out3p0 = n_out3p0n_out3p1.rgb;
+		n_out3p1 = n_out3p0n_out3p1.a;
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out3p0;
+
+
+}
+"
+graph_offset = Vector2(-276.042, -33.8821)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeCustom_3v2jk")
+nodes/fragment/3/position = Vector2(140, 140)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_8mpj7")
+nodes/fragment/4/position = Vector2(-260, 180)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_5omur")
+nodes/fragment/5/position = Vector2(-260, 100)
+nodes/fragment/connections = PackedInt32Array(4, 0, 3, 0, 5, 0, 3, 1, 3, 0, 0, 0)

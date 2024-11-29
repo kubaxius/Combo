@@ -2,6 +2,16 @@ extends TileMapLayer
 
 @export var tilegen_margin: Vector2i
 
+
+func _ready() -> void:
+	set_material_texture()
+
+
+func _process(_delta: float) -> void:
+	if get_viewport().get_camera_2d():
+		generate()
+
+
 func get_visible_rect_t() -> Rect2i:
 	var camera: Camera2D = get_viewport().get_camera_2d()
 	var camera_pos := camera.global_position
@@ -30,6 +40,9 @@ func generate() -> void:
 					set_cell(pos_t, 0, Vector2i(1, 2))
 
 
-func _process(_delta: float) -> void:
-	if get_viewport().get_camera_2d():
-		generate()
+# HACK: Viewport path set in editor likes to reset to the main node in Godot v4.4.dev5.official [9e6098432]
+func set_material_texture():
+	if material:
+		var mat:ShaderMaterial = material
+		var trail_gen:TrailMaskGen = $"../TrailGen"
+		mat.set_shader_parameter("MaskTexture", trail_gen.get_texture())

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://xkmfadssgw8m"]
+[gd_scene load_steps=8 format=3 uid="uid://xkmfadssgw8m"]
 
 [ext_resource type="PackedScene" uid="uid://dvq76e0f57j05" path="res://terrain/trail/trail_mask_gen.tscn" id="1_mq5i2"]
 [ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="2_qifjg"]
@@ -20,6 +20,8 @@ func _physics_process(delta: float) -> void:
 	position.x += delta*20
 	position.y += delta*20
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qifjg"]
 
 [sub_resource type="GDScript" id="GDScript_hcm0e"]
 script/source = "extends Sprite2D
@@ -46,6 +48,8 @@ anchor_mode = 0
 script = SubResource("GDScript_qifjg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_qifjg")
 position = Vector2(387, 531)
 texture = ExtResource("3_gg1j1")
 script = SubResource("GDScript_hcm0e")
