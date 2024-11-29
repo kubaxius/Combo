@@ -1,6 +1,10 @@
 class_name Worm extends Node2D
 
-@export_range(1, 10000) var base_speed := 600
+## Expressed in km/h.
+@export_custom(PROPERTY_HINT_RANGE, "1,200,1,suffix:km/h") var base_speed := 50.:
+	get():
+		# Convert into px/s
+		return float(base_speed) * 6.9444
 @export_range(0.1, 1, 0.1) var acceleration := 0.5
 @export_range(1, 2, 0.1) var base_turning_speed := 1.
 @export_range(1, 10, 0.1) var boost_speed_multiplier := 2.
