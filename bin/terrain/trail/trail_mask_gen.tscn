@@ -7,8 +7,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v4wuq"]
 shader = ExtResource("2_fveui")
+shader_parameter/noise_strength = 0.7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_v4wuq"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fveui"]
 viewport_path = NodePath("FullTrailMaskGen")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_smepj"]
@@ -24,7 +25,7 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 script = ExtResource("1_uiioc")
 
-[node name="Mosaic" type="ColorRect" parent="."]
+[node name="MosaicShader" type="ColorRect" parent="."]
 z_index = 100
 material = SubResource("ShaderMaterial_v4wuq")
 anchors_preset = 15
@@ -33,18 +34,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[node name="MaskParallax" type="Parallax2D" parent="."]
+repeat_size = Vector2(4000, 4000)
 repeat_times = 3
 
-[node name="Mask" type="Sprite2D" parent="Parallax2D"]
+[node name="Mask" type="Sprite2D" parent="MaskParallax"]
+unique_name_in_owner = true
 texture_filter = 4
-texture = SubResource("ViewportTexture_v4wuq")
+scale = Vector2(4, 4)
+texture = SubResource("ViewportTexture_fveui")
 
 [node name="FullTrailMaskGen" type="SubViewport" parent="."]
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(2000, 2000)
+size = Vector2i(1000, 1000)
 size_2d_override_stretch = true
 render_target_clear_mode = 1
 render_target_update_mode = 4
