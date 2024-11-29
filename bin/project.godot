@@ -36,7 +36,7 @@ worm=""
 needs_worm_path="Used by Worm node to pass reference to the WormPath2D."
 needs_worm_speed=""
 needs_worm_turning_speed=""
-full_trail_texture_generator_viewport=""
+trail_texture_generator_viewport=""
 
 [input]
 

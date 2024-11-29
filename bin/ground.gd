@@ -31,7 +31,5 @@ func generate() -> void:
 
 
 func _process(_delta: float) -> void:
-	# HACK: Fuck this new "Occlude children" system
-	global_position = Vector2.ZERO
 	if get_viewport().get_camera_2d():
 		generate()

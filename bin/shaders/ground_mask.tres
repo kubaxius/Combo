@@ -1,20 +1,55 @@
-[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://cnp5wpadtx0xv"]
+[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://cnp5wpadtx0xv"]
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_pbaar"]
+linked_parent_graph_frame = 12
+size = Vector2(560, 500)
+expression = "vec2 mask_size = vec2(textureSize(mask, 0));
+vec2 screen_size = 1./screen_pixel_size;
+// center mask horizontaly
+if(screen_size.x < mask_size.x){
+	float ratio_x = screen_size.x/mask_size.x;
+	float margin_x = (mask_size.x - screen_size.x)/2.;
+	uv.x = uv.x * ratio_x + margin_x * screen_pixel_size.x;
+}
+// center mask verticaly
+if(screen_size.y < mask_size.y){
+	float ratio_y = screen_size.y/mask_size.y;
+	float margin_y = (mask_size.y - screen_size.y)/2.;
+	uv.y = uv.y * ratio_y + margin_y * screen_pixel_size.y;
+}
+color = texture(mask, uv);"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_eic27"]
+input_name = "screen_pixel_size"
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_pbaar"]
+size = Vector2(640, 580)
+title = "Crop mask to center"
+attached_nodes = PackedInt32Array(10)
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_fq10c"]
+size = Vector2(244, 159)
+title = "White to transparent"
+attached_nodes = PackedInt32Array(15)
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_eic27"]
+size = Vector2(373, 391)
+title = "TrailGen mask"
+attached_nodes = PackedInt32Array(2)
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_pbaar"]
+linked_parent_graph_frame = 13
+function = 31
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_pbaar"]
+linked_parent_graph_frame = 14
 parameter_name = "Texture2DParameter"
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_fq10c"]
 input_name = "screen_uv"
 
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_eic27"]
-source = 5
-
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_pbaar"]
 input_name = "color"
-
-[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_pbaar"]
-default_input_values = [0, 0.0, 1, 0.0, 2, 1e-05, 3, Vector3(1, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(1, 0, 0)]
-expanded_output_ports = [0]
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_pbaar"]
 default_input_values = [0, Quaternion(0, 0, 0, 0)]
@@ -44,39 +79,42 @@ void fragment() {
 	float n_out7p3 = n_out5p0.w;
 
 
+// Input:11
+	vec2 n_out11p0 = SCREEN_PIXEL_SIZE;
+
+
 // Input:3
 	vec2 n_out3p0 = SCREEN_UV;
 
 
-	vec4 n_out4p0;
-// Texture2D:4
-	n_out4p0 = texture(Texture2DParameter, n_out3p0);
+	vec4 n_out10p0;
+// Expression:10
+	n_out10p0 = vec4(0.0, 0.0, 0.0, 0.0);
+	{
+		vec2 mask_size = vec2(textureSize(Texture2DParameter, 0));
+		vec2 screen_size = 1./n_out11p0;
+		// center Texture2DParameter horizontaly
+		if(screen_size.x < mask_size.x){
+			float ratio_x = screen_size.x/mask_size.x;
+			float margin_x = (mask_size.x - screen_size.x)/2.;
+			n_out3p0.x = n_out3p0.x * ratio_x + margin_x * n_out11p0.x;
+		}
+		// center Texture2DParameter verticaly
+		if(screen_size.y < mask_size.y){
+			float ratio_y = screen_size.y/mask_size.y;
+			float margin_y = (mask_size.y - screen_size.y)/2.;
+			n_out3p0.y = n_out3p0.y * ratio_y + margin_y * n_out11p0.y;
+		}
+		n_out10p0 = texture(Texture2DParameter, n_out3p0);
+	}
 
 
-	vec3 n_out6p0;
-// If:6
-	float n_in6p1 = 0.00000;
-	float n_in6p2 = 0.00001;
-	vec3 n_in6p3 = vec3(1.00000, 0.00000, 0.00000);
-	vec3 n_in6p4 = vec3(0.00000, 0.00000, 0.00000);
-	vec3 n_in6p5 = vec3(1.00000, 0.00000, 0.00000);
-	if(abs(n_out4p0.x - n_in6p1) < n_in6p2)
-	{
-		n_out6p0 = n_in6p3;
-	}
-	else if(n_out4p0.x < n_in6p1)
-	{
-		n_out6p0 = n_in6p5;
-	}
-	else
-	{
-		n_out6p0 = n_in6p4;
-	}
-	float n_out6p1 = n_out6p0.r;
+// FloatFunc:15
+	float n_out15p0 = 1.0 - n_out10p0.x;
 
 
 // FloatOp:8
-	float n_out8p0 = min(n_out7p3, n_out6p1);
+	float n_out8p0 = min(n_out7p3, n_out15p0);
 
 
 // Output:0
@@ -86,21 +124,48 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-384.876, -266.655)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(900, -100)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_pbaar")
-nodes/fragment/2/position = Vector2(-340, 80)
+nodes/fragment/2/position = Vector2(-820, -40)
 nodes/fragment/3/node = SubResource("VisualShaderNodeInput_fq10c")
-nodes/fragment/3/position = Vector2(-340, 0)
-nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_eic27")
-nodes/fragment/4/position = Vector2(120, 80)
+nodes/fragment/3/position = Vector2(-820, 480)
 nodes/fragment/5/node = SubResource("VisualShaderNodeInput_pbaar")
-nodes/fragment/5/position = Vector2(40, -120)
-nodes/fragment/6/node = SubResource("VisualShaderNodeIf_pbaar")
-nodes/fragment/6/position = Vector2(360, 220)
+nodes/fragment/5/position = Vector2(120, -180)
 nodes/fragment/7/node = SubResource("VisualShaderNodeVectorDecompose_pbaar")
-nodes/fragment/7/position = Vector2(360, 20)
+nodes/fragment/7/position = Vector2(460, 0)
 nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_fq10c")
 nodes/fragment/8/position = Vector2(673.019, 106.966)
-nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 2, 4, 0, 6, 0, 5, 0, 7, 0, 5, 0, 0, 0, 7, 3, 8, 0, 6, 1, 8, 1, 8, 0, 0, 1)
+nodes/fragment/10/node = SubResource("VisualShaderNodeExpression_pbaar")
+nodes/fragment/10/position = Vector2(-360, 80)
+nodes/fragment/10/size = Vector2(560, 500)
+nodes/fragment/10/input_ports = "0,8,mask;1,3,screen_pixel_size;2,3,uv;"
+nodes/fragment/10/output_ports = "0,5,color;"
+nodes/fragment/10/expression = "vec2 mask_size = vec2(textureSize(mask, 0));
+vec2 screen_size = 1./screen_pixel_size;
+// center mask horizontaly
+if(screen_size.x < mask_size.x){
+	float ratio_x = screen_size.x/mask_size.x;
+	float margin_x = (mask_size.x - screen_size.x)/2.;
+	uv.x = uv.x * ratio_x + margin_x * screen_pixel_size.x;
+}
+// center mask verticaly
+if(screen_size.y < mask_size.y){
+	float ratio_y = screen_size.y/mask_size.y;
+	float margin_y = (mask_size.y - screen_size.y)/2.;
+	uv.y = uv.y * ratio_y + margin_y * screen_pixel_size.y;
+}
+color = texture(mask, uv);"
+nodes/fragment/11/node = SubResource("VisualShaderNodeInput_eic27")
+nodes/fragment/11/position = Vector2(-820, 400)
+nodes/fragment/12/node = SubResource("VisualShaderNodeFrame_pbaar")
+nodes/fragment/12/position = Vector2(-400, 40)
+nodes/fragment/13/node = SubResource("VisualShaderNodeFrame_fq10c")
+nodes/fragment/13/position = Vector2(300, 240)
+nodes/fragment/14/node = SubResource("VisualShaderNodeFrame_eic27")
+nodes/fragment/14/position = Vector2(-860, -80)
+nodes/fragment/15/node = SubResource("VisualShaderNodeFloatFunc_pbaar")
+nodes/fragment/15/position = Vector2(420, 380)
+nodes/fragment/connections = PackedInt32Array(5, 0, 7, 0, 5, 0, 0, 0, 7, 3, 8, 0, 8, 0, 0, 1, 2, 0, 10, 0, 11, 0, 10, 1, 3, 0, 10, 2, 10, 0, 15, 0, 15, 0, 8, 1)

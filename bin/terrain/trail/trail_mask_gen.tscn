@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvq76e0f57j05"]
+[gd_scene load_steps=9 format=3 uid="uid://dvq76e0f57j05"]
 
 [ext_resource type="Script" uid="uid://bmrbd6jsj0wkm" path="res://terrain/trail/trail_mask_gen.gd" id="1_uiioc"]
 [ext_resource type="Shader" uid="uid://bblnwnktfdsn2" path="res://shaders/black_white.tres" id="2_1yegx"]
-[ext_resource type="Shader" uid="uid://cats3c871kyxy" path="res://shaders/shrink_white.gdshader" id="2_dm850"]
+[ext_resource type="Shader" uid="uid://cats3c871kyxy" path="res://shaders/grow_black.gdshader" id="2_dm850"]
+[ext_resource type="Shader" uid="uid://dp5jkuyqxn410" path="res://shaders/worley_mosaic.gdshader" id="2_fveui"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4wuq"]
+shader = ExtResource("2_fveui")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_v4wuq"]
 viewport_path = NodePath("FullTrailMaskGen")
@@ -12,24 +16,36 @@ shader = ExtResource("2_1yegx")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sswum"]
 shader = ExtResource("2_dm850")
+shader_parameter/SPEED = 100
 
-[node name="SubViewport" type="SubViewport"]
+[node name="TrailMaskGen" type="SubViewport" groups=["trail_texture_generator_viewport"]]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 script = ExtResource("1_uiioc")
 
+[node name="Mosaic" type="ColorRect" parent="."]
+z_index = 100
+material = SubResource("ShaderMaterial_v4wuq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Parallax2D" type="Parallax2D" parent="."]
-repeat_size = Vector2(4000, 4000)
 repeat_times = 3
 
 [node name="Mask" type="Sprite2D" parent="Parallax2D"]
+texture_filter = 4
 texture = SubResource("ViewportTexture_v4wuq")
 
-[node name="FullTrailMaskGen" type="SubViewport" parent="." groups=["full_trail_texture_generator_viewport"]]
+[node name="FullTrailMaskGen" type="SubViewport" parent="."]
 disable_3d = true
 handle_input_locally = false
-size = Vector2i(4000, 4000)
+canvas_item_default_texture_filter = 0
+size = Vector2i(2000, 2000)
+size_2d_override_stretch = true
 render_target_clear_mode = 1
 render_target_update_mode = 4
 
@@ -48,6 +64,7 @@ grow_vertical = 2
 [node name="Shrink" type="CanvasLayer" parent="FullTrailMaskGen"]
 
 [node name="FilterRect" type="ColorRect" parent="FullTrailMaskGen/Shrink"]
+top_level = true
 material = SubResource("ShaderMaterial_sswum")
 anchors_preset = 15
 anchor_right = 1.0
