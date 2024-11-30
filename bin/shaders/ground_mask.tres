@@ -28,12 +28,12 @@ title = "Crop mask to center"
 attached_nodes = PackedInt32Array(10)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_fq10c"]
-size = Vector2(244, 159)
+size = Vector2(244, 118)
 title = "Red to transparent"
 attached_nodes = PackedInt32Array(15)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_eic27"]
-size = Vector2(373, 391)
+size = Vector2(244, 118)
 title = "TrailGen mask"
 attached_nodes = PackedInt32Array(2)
 
@@ -124,7 +124,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-447.207, 234.896)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(900, -100)

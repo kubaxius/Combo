@@ -47,6 +47,7 @@ repeat_times = 3
 
 [node name="Mask" type="Sprite2D" parent="MaskParallax"]
 unique_name_in_owner = true
+texture_filter = 2
 scale = Vector2(4, 4)
 texture = SubResource("ViewportTexture_fveui")
 

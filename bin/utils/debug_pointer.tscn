@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cadrral3ga0dq"]
+
+[ext_resource type="Script" uid="uid://7ratmbcdaifx" path="res://utils/debug_pointer.gd" id="1_6dsrh"]
+
+[node name="DebugPointer" type="Marker2D"]
+modulate = Color(1, 0, 1, 1)
+script = ExtResource("1_6dsrh")
+
+[node name="VerticalLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, -10, 0, 10)
+width = 2.0
+
+[node name="HorizontalLine" type="Line2D" parent="."]
+points = PackedVector2Array(-10, 0, 10, 0)
+width = 2.0

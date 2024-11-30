@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bvftcxlknehg" path="res://worm/base/segment/segment.gd" id="1_40qbx"]
 [ext_resource type="Texture2D" uid="uid://uxrjm2flrc87" path="res://worm/assets/worm_segment.png" id="3_h2s2v"]
 [ext_resource type="Script" uid="uid://xdtx5tb3kh5o" path="res://worm/base/segment/path_follower.gd" id="3_p4m0n"]
-[ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="4_067rk"]
 [ext_resource type="Script" uid="uid://dcxpps2sv608r" path="res://worm/base/segment/components/path_follower.gd" id="4_mna22"]
+[ext_resource type="PackedScene" uid="uid://cadrral3ga0dq" path="res://utils/debug_pointer.tscn" id="6_71hr3"]
 [ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="6_d6ev6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r5knf"]
@@ -44,6 +44,5 @@ script = ExtResource("4_mna22")
 rotates = false
 script = ExtResource("3_p4m0n")
 
-[node name="Icon" type="Sprite2D" parent="PathFollowerComp/SegmentPathFollower"]
-scale = Vector2(0.18, 0.18)
-texture = ExtResource("4_067rk")
+[node name="DebugPointer" parent="PathFollowerComp/SegmentPathFollower" instance=ExtResource("6_71hr3")]
+scale = Vector2(2, 2)

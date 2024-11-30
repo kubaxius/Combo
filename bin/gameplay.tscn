@@ -118,6 +118,5 @@ script = ExtResource("4_wp4o0")
 tilegen_margin = Vector2i(2, 2)
 
 [node name="Worm" parent="." instance=ExtResource("3_fko4x")]
-base_speed = 50.0
 
 [editable path="Worm"]
