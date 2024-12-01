@@ -9,8 +9,8 @@ class_name WormSegment extends RigidBody2D
 func _ready() -> void:
 	freeze = true
 	position.y = get_pixel_position_in_worm()
-	if has_node("PathFollowerComp"):
-		$PathFollowerComp.pixel_position_in_worm = get_pixel_position_in_worm()
+	if has_node("PathFollower"):
+		$PathFollower.pixel_position_in_worm = get_pixel_position_in_worm()
 	connect_to_preceding()
 	freeze = false
 

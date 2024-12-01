@@ -7,7 +7,7 @@
 
 var enabled = false
 
-#
+
 var worm_path:WormPath:
 	set(new_worm_path):
 		worm_path = new_worm_path
