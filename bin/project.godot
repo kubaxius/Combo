@@ -80,7 +80,7 @@ toggle_debug={
 
 2d_render/layer_2="hole_mask"
 2d_physics/layer_1="worm"
-2d_physics/layer_2="hole_walls"
+2d_physics/layer_2="ground"
 
 [physics]
 

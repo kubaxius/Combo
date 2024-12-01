@@ -40,10 +40,10 @@ vec3 smooth_shrink(vec2 screen_uv, vec2 screen_pixel_size, float speed) {
 	// if the pixel that we check is either red or black, return it
 	if(texture(SCREEN, screen_uv).g < 0.01)
 		return texture(SCREEN, screen_uv).rgb;
-	
+
 	// Since we work only on white pixels, we can just use red value
 	float brightness = texture(SCREEN, screen_uv).r;
-	
+
 	// check the neighbors declared in CHECK_RANGE ranges
 	for(int x = X_CHECK_RANGE.x; x < X_CHECK_RANGE.y+1; x++){
 		for(int y = Y_CHECK_RANGE.x; y < Y_CHECK_RANGE.y+1; y++){
@@ -52,7 +52,7 @@ vec3 smooth_shrink(vec2 screen_uv, vec2 screen_pixel_size, float speed) {
 			vec2 neighbor_pos = screen_uv + vec2(screen_pixel_size.x*float(x), screen_pixel_size.y*float(y));
 			// here we use red, since we don't want to shrink away from red pixels
 			float neighbor_brightness = texture(SCREEN, neighbor_pos).r;
-			
+
 			// if any of the neighbors is black, return black
 			if(neighbor_brightness < 0.01){
 				brightness -= 0.1 * speed;
