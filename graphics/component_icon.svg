@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="16"
+   height="16"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="component_icon.svg"
+   inkscape:export-filename="../bin/components/component_icon.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#1f1f1f"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="45.254834"
+     inkscape:cx="6.5959804"
+     inkscape:cy="8.010194"
+     inkscape:window-width="1920"
+     inkscape:window-height="1008"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:export-bgcolor="#1b1b1b00">
+    <inkscape:grid
+       id="grid2"
+       units="px"
+       originx="0.5"
+       originy="0.5"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#ba00e5"
+       empopacity="0.30196078"
+       color="#ac00e5"
+       opacity="0.14901961"
+       empspacing="1"
+       enabled="true"
+       visible="true"
+       dotted="true" />
+    <inkscape:grid
+       id="grid3"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Mask"
+     style="display:none;mix-blend-mode:normal">
+    <rect
+       style="display:inline;mix-blend-mode:normal;fill:#8da5f3;fill-opacity:1;stroke:none;stroke-width:1.06666;stroke-opacity:1"
+       id="rect3"
+       width="16"
+       height="16"
+       x="4.4408921e-16"
+       y="-2.553513e-15"
+       inkscape:label="mask"
+       ry="0" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="mix-blend-mode:normal">
+    <path
+       fill="none"
+       stroke="#8da5f3"
+       stroke-linejoin="round"
+       stroke-width="2"
+       d="M 14,14 H 2 V 2 h 12 z"
+       id="path1"
+       style="stroke:#8da5f3;stroke-opacity:1"
+       inkscape:label="Container" />
+    <rect
+       style="fill:#8da5f3;fill-opacity:1;stroke:none;stroke-width:0.948683;stroke-opacity:1"
+       id="rect1-6"
+       width="3"
+       height="2.9999998"
+       x="4"
+       y="4"
+       inkscape:label="Square LU" />
+    <rect
+       style="mix-blend-mode:normal;fill:#8da5f3;fill-opacity:1;stroke:none;stroke-width:0.948683;stroke-opacity:1"
+       id="rect1-6-5"
+       width="3"
+       height="2.9999998"
+       x="4"
+       y="9"
+       inkscape:label="Square LU" />
+    <rect
+       style="mix-blend-mode:normal;fill:#8da5f3;fill-opacity:1;stroke:none;stroke-width:0.948683;stroke-opacity:1"
+       id="rect1-6-2"
+       width="3"
+       height="2.9999998"
+       x="9"
+       y="9"
+       inkscape:label="Square LU" />
+  </g>
+</svg>
