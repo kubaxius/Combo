@@ -14,12 +14,6 @@ script = ExtResource("1_bdlk6")
 base_turning_speed = 1.5
 worm_path = NodePath("WormPath")
 
-[node name="Head" type="Node2D" parent="."]
-unique_name_in_owner = true
-z_index = 1
-
-[node name="BasicWormHead" parent="Head" instance=ExtResource("2_7haj8")]
-
 [node name="Segments" type="Node2D" parent="."]
 script = ExtResource("3_q35mp")
 
@@ -79,11 +73,14 @@ script = ExtResource("3_q35mp")
 
 [node name="BasicWormSegment28" parent="Segments" instance=ExtResource("3_puycw")]
 
+[node name="Head" parent="." instance=ExtResource("2_7haj8")]
+unique_name_in_owner = true
+
 [node name="WormPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_ifevq")
 script = ExtResource("5_2gpbu")
 max_length = 4000
-worm_head_path = NodePath("../Head/BasicWormHead")
+worm_head_path = NodePath("../Head")
 
 [node name="PCControls" type="Node" parent="."]
 script = ExtResource("6_onaht")

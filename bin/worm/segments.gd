@@ -10,7 +10,7 @@ func add_segment(segment_res:Resource, index: int = -1):
 
 func get_segment_at_position(index:int):
 	if index == -1:
-		return %Head.get_child(0)
+		return %Head
 	
 	return get_child(index)
 
