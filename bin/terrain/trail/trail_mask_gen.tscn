@@ -18,7 +18,7 @@ shader = ExtResource("2_1yegx")
 [sub_resource type="GDScript" id="GDScript_sswum"]
 script/source = "extends ColorRect
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	global_position = -get_canvas_transform().origin
 "
 
