@@ -19,9 +19,19 @@ linear_damp = 40.0
 angular_damp = 100.0
 script = ExtResource("1_40qbx")
 
-[node name="LeaveTrailComp" type="Node2D" parent="."]
+[node name="LeaveTrail" type="Node2D" parent="."]
 script = ExtResource("6_d6ev6")
 texture = ExtResource("3_h2s2v")
+
+[node name="PathFollower" type="Node2D" parent="."]
+script = ExtResource("4_mna22")
+
+[node name="SegmentPathFollower" type="PathFollow2D" parent="PathFollower"]
+rotates = false
+script = ExtResource("3_p4m0n")
+
+[node name="DebugPointer" parent="PathFollower/SegmentPathFollower" instance=ExtResource("6_71hr3")]
+scale = Vector2(2, 2)
 
 [node name="WormSegment" type="Sprite2D" parent="."]
 texture = ExtResource("3_h2s2v")
@@ -36,13 +46,3 @@ node_a = NodePath("..")
 angular_limit_enabled = true
 angular_limit_lower = -0.349066
 angular_limit_upper = 0.349066
-
-[node name="PathFollowerComp" type="Node2D" parent="."]
-script = ExtResource("4_mna22")
-
-[node name="SegmentPathFollower" type="PathFollow2D" parent="PathFollowerComp"]
-rotates = false
-script = ExtResource("3_p4m0n")
-
-[node name="DebugPointer" parent="PathFollowerComp/SegmentPathFollower" instance=ExtResource("6_71hr3")]
-scale = Vector2(2, 2)

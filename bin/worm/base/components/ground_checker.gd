@@ -1,3 +1,4 @@
+@icon("res://components/component_icon_2d.svg")
 class_name GroundCheckerComp extends Area2D
 
 @export var grounded = true:

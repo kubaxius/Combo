@@ -1,4 +1,5 @@
-extends Node2D
+@icon("res://components/component_icon.svg")
+class_name FollowMouseComp extends Node2D
 
 @onready var parent: WormHead = get_parent()
 

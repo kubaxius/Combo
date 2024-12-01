@@ -1,4 +1,5 @@
-class_name LeaveTrailComp extends Node2D
+@icon("res://components/component_icon.svg")
+class_name LeaveTrailComp extends Node
 
 
 @export var texture: Texture2D

@@ -1,4 +1,5 @@
-@tool class_name PathFollowerComp extends Node2D
+@icon("res://components/component_icon.svg")
+@tool class_name PathFollowerComp extends Node
 
 @export var pull_power = 2
 
