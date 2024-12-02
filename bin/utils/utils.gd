@@ -50,5 +50,5 @@ static func mps_to_kmph(mps:float) -> float:
 	return mps * 18. / 5.
 
 
-static func pps_to_kmph(pps:float, pixels_per_meter:float = 25) -> float:
+static func pps_to_kmph(pps:float) -> float:
 	return mps_to_kmph(pps_to_mps(pps))
