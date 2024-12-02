@@ -33,6 +33,11 @@ signal desired_speed_changed(new_desired_speed)
 signal turning_speed_changed(new_turning_speed)
 signal current_speed_changed(new_current_speed)
 
+
+# -------------------------------- #
+#         Built-in methods         #
+# -------------------------------- #
+
 func _ready() -> void:
 	desired_speed = base_speed
 	turning_speed = base_turning_speed
@@ -42,6 +47,10 @@ func _physics_process(delta: float) -> void:
 	current_speed_changed.emit(current_speed)
 	#print(Utils.pps_to_kmph(current_speed))
 
+
+# -------------------------------- #
+#          Custom methods          #
+# -------------------------------- #
 
 func apply_boost() -> void:
 	if not is_boosted:

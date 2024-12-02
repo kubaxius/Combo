@@ -13,9 +13,9 @@ var desired_movement_vector := Vector2.UP
 var gravity = 29.8
 var air_resistance = 0.01
 
-# -------------------
-# Setters and getters
-# -------------------
+# -------------------------------- #
+#        Setters and getters       #
+# -------------------------------- #
 
 func set_desired_speed(val:float):
 	desired_speed = val
@@ -30,9 +30,9 @@ func set_turning_speed(val:float):
 	turning_speed = val
 
 
-# -------------------
-# Special methods
-# -------------------
+# -------------------------------- #
+#         Built-in methods         #
+# -------------------------------- # 
 
 func _ready() -> void:
 	var worm:Worm = Utils.get_parent_from_group(self, "worm")
@@ -41,6 +41,14 @@ func _ready() -> void:
 		worm.turning_speed_changed.connect(set_turning_speed)
 
 
+func _physics_process(_delta: float) -> void:
+	move_and_slide()
+	_look_forward()
+
+# -------------------------------- #
+#          State methods           #
+# -------------------------------- #
+ 
 func _on_grounded_state_entered() -> void:
 	pass
 
@@ -55,11 +63,6 @@ func _airborn_state_physics_processing(delta: float) -> void:
 	_turn(delta, 0.3)
 
 
-func _physics_process(_delta: float) -> void:
-	move_and_slide()
-	_look_forward()
-
-
 func _on_ground_checker_comp_grounded_state_changed(grounded: bool, _last_ground: Node2D) -> void:
 	if grounded:
 		$PhysicsStateChart.send_event("segment_entered_ground")
@@ -67,10 +70,10 @@ func _on_ground_checker_comp_grounded_state_changed(grounded: bool, _last_ground
 		$PhysicsStateChart.send_event("segment_exited_ground")
 
 
-# -------------------
-# Custom methods
-# -------------------
-
+# -------------------------------- #
+#          Custom methods          #
+# -------------------------------- #
+ 
 func _look_forward() -> void:
 	rotation = velocity.angle() + PI/2.
 

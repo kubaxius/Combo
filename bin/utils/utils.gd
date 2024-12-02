@@ -21,9 +21,11 @@ static func get_named_parent(node:Node, group_name:String) -> Node:
 	return get_named_parent(parent, group_name)
 
 
-# -------------------
-# Velocity Conversions
-# -------------------
+
+# -------------------------------- #
+#       Velocity conversions       #
+# -------------------------------- #
+
 
 const pixels_per_meter = 25.
 

@@ -3,13 +3,25 @@ class_name WormSegmentsList extends Node2D
 signal segments_changed(segments_list:WormSegmentsList)
 
 
+# -------------------------------- #
+#         Built-in methods         #
+# -------------------------------- #
+
 func _ready() -> void:
 	segments_changed.emit(self)
 
 
+# -------------------------------- #
+#     Signal-connected methods     #
+# -------------------------------- #
+
 func _on_child_order_changed() -> void:
 	segments_changed.emit(self)
 
+
+# -------------------------------- #
+#          Custom methods          #
+# -------------------------------- #
 
 func add_segment(segment_res:Resource, index: int = -1):
 	var segment:WormSegment = segment_res.instantiate()

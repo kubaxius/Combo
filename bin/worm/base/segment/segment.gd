@@ -11,10 +11,18 @@ var path_follower:WormSegmentPathFollower
 var pull_power = 2.
 
 
+# -------------------------------- #
+#        Setters and getters       #
+# -------------------------------- #
+ 
 func _set_current_speed(val:float) -> void:
 	current_speed = val
 
 
+# -------------------------------- #
+#         Built-in methods         #
+# -------------------------------- #
+ 
 func _ready() -> void:
 	_update_pixel_position_in_worm()
 	freeze = true
@@ -32,9 +40,17 @@ func _physics_process(delta: float) -> void:
 	_pull_to_path_follower()
 
 
+# -------------------------------- #
+#     Signal-connected methods     #
+# -------------------------------- #
+
 func _on_segments_changed(_segments_list):
 	_update_pixel_position_in_worm()
 
+
+# -------------------------------- #
+#          Custom methods          #
+# -------------------------------- #
 
 func _connect_to_preceding():
 	# if no preceding part, exit

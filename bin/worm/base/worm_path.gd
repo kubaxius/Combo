@@ -12,9 +12,17 @@ var max_length:int
 signal path_changed
 
 
+# -------------------------------- #
+#         Built-in methods         #
+# -------------------------------- #
+
 func _physics_process(_delta: float) -> void:
 	_update_path()
 
+
+# -------------------------------- #
+#     Signal-connected methods     #
+# -------------------------------- #
 
 func _on_segments_changed(segments_list: WormSegmentsList) -> void:
 	_remove_all_followers()
@@ -25,6 +33,10 @@ func _on_segments_changed(segments_list: WormSegmentsList) -> void:
 		add_child(path_follower)
 	max_length = segments_list.get_length() + length_padding
 
+
+# -------------------------------- #
+#          Custom methods          #
+# -------------------------------- #
 
 func _remove_all_followers():
 	for follower:WormSegmentPathFollower in get_children():
