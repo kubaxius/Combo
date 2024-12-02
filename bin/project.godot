@@ -85,6 +85,7 @@ toggle_debug={
 [physics]
 
 2d/physics_engine="Rapier2D"
+2d/default_gravity=245.0
 
 [rendering]
 
