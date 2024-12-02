@@ -45,8 +45,8 @@ func _remove_all_followers():
 
 var last_point: Vector2
 func _update_path():
-	var dist_sq = last_point.distance_squared_to(worm_head.global_position)
-	if not dist_sq >= pow(point_distance, 2):
+	var dist_sq = last_point.distance_squared_to(worm_head.position)
+	if not dist_sq >= point_distance * point_distance:
 		return
 	
 	_add_point()
@@ -57,8 +57,8 @@ func _update_path():
 
 
 func _add_point():
-	curve.add_point(worm_head.global_position)
-	last_point = worm_head.global_position
+	curve.add_point(worm_head.position)
+	last_point = worm_head.position
 
 
 func _remove_point():
