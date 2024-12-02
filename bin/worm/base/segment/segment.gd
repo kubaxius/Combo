@@ -5,6 +5,8 @@ class_name WormSegment extends RigidBody2D
 
 @onready var part_before:Node2D = get_parent().get_segment_at_position(get_index() - 1)
 
+@onready var state_chart = $StateChart
+
 var current_speed
 var pixel_position_in_worm:int
 var path_follower:WormSegmentPathFollower
@@ -47,6 +49,26 @@ func _physics_process(delta: float) -> void:
 func _on_segments_changed(_segments_list):
 	_update_pixel_position_in_worm()
 
+
+func _on_ground_checker_grounded_state_changed(grounded: bool, _last_ground: Node2D) -> void:
+	if grounded:
+		state_chart.send_event("segment_entered_ground")
+	else:
+		state_chart.send_event("segment_exited_ground")
+
+
+# -------------------------------- #
+#     Signal-connected methods     #
+# -------------------------------- #
+
+func _on_grounded_state_entered():
+	gravity_scale = 0
+	pull_power = 4.
+
+
+func _on_airborn_state_entered():
+	gravity_scale = 1
+	pull_power = 1
 
 # -------------------------------- #
 #          Custom methods          #

@@ -2,9 +2,13 @@ class_name Worm extends Node2D
 
 ## Expressed in km/h.
 @export_custom(PROPERTY_HINT_RANGE, "1,200,1,suffix:km/h") var real_base_speed := 50.
+## Expressed in km/h/s.
+@export_custom(PROPERTY_HINT_RANGE, "1,20,0.1,suffix:km/h/s") var real_boost_component := 20.
 @export_range(0.1, 1, 0.1) var acceleration := 0.5
 @export_range(1, 2, 0.1) var base_turning_speed := 1.
-@export_range(1, 10, 0.1) var boost_speed_multiplier := 2.
+@export_range(1, 10, 0.1) var boost_component:
+	get():
+		return Utils.kmph_to_pps(real_boost_component)
 
 @onready var head:WormHead = %Head
 @onready var worm_path:WormPath = %Path
@@ -51,15 +55,15 @@ func _physics_process(_delta: float) -> void:
 	current_speed_changed.emit(current_speed)
 	if $FollowMouse.vector_to_mouse:
 		desired_direction = $FollowMouse.vector_to_mouse
-	#print(Utils.pps_to_kmph(current_speed))
+	#print(Utils.pps_to_kmph(desired_speed))
 
 
 # -------------------------------- #
 #          State methods           #
 # -------------------------------- #
 
-func _on_boosted_state_physics_processing(_delta: float) -> void:
-	desired_speed = base_speed * boost_speed_multiplier
+func _on_boosted_state_physics_processing(delta: float) -> void:
+	desired_speed += boost_component * delta
 
 
 func _on_not_boosted_state_physics_processing(_delta: float) -> void:

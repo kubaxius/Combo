@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://60b4o56c3hdd"]
+[gd_scene load_steps=8 format=3 uid="uid://60b4o56c3hdd"]
 
 [ext_resource type="Script" uid="uid://bvftcxlknehg" path="res://worm/base/segment/segment.gd" id="1_40qbx"]
 [ext_resource type="Texture2D" uid="uid://uxrjm2flrc87" path="res://worm/assets/worm_segment.png" id="3_h2s2v"]
+[ext_resource type="Script" uid="uid://w1w66en5t7v1" path="res://worm/base/components/ground_checker.gd" id="4_nmbpe"]
+[ext_resource type="Script" uid="uid://car5i8e3rlaxi" path="res://addons/godot_state_charts/state_chart.gd" id="5_gc2m5"]
+[ext_resource type="PackedScene" uid="uid://bsrsym1dfoo3m" path="res://worm/base/components/in_ground_compound_state.tscn" id="6_71hr3"]
 [ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="6_d6ev6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r5knf"]
@@ -33,3 +36,26 @@ node_a = NodePath("..")
 angular_limit_enabled = true
 angular_limit_lower = -0.349066
 angular_limit_upper = 0.349066
+
+[node name="GroundChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_nmbpe")
+metadata/_custom_type_script = ExtResource("4_nmbpe")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GroundChecker"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_r5knf")
+debug_color = Color(0.827451, 0, 0.952941, 0.419608)
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("5_gc2m5")
+metadata/_custom_type_script = ExtResource("5_gc2m5")
+
+[node name="InGround" parent="StateChart" instance=ExtResource("6_71hr3")]
+
+[connection signal="grounded_state_changed" from="GroundChecker" to="." method="_on_ground_checker_grounded_state_changed"]
+[connection signal="state_entered" from="StateChart/InGround/Grounded" to="." method="_on_grounded_state_entered"]
+[connection signal="state_entered" from="StateChart/InGround/Airborn" to="." method="_on_airborn_state_entered"]
+
+[editable path="StateChart/InGround"]

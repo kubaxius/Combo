@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://camjvgx5kvtmh"]
+[gd_scene load_steps=8 format=3 uid="uid://camjvgx5kvtmh"]
 
 [ext_resource type="Script" uid="uid://lsuqgvu148ih" path="res://worm/base/head/head.gd" id="1_asjjq"]
 [ext_resource type="Texture2D" uid="uid://bncyhw4v2cw1u" path="res://worm/assets/worm_head.png" id="3_lnd62"]
 [ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="4_bnwxt"]
 [ext_resource type="Script" uid="uid://car5i8e3rlaxi" path="res://addons/godot_state_charts/state_chart.gd" id="5_jg30f"]
 [ext_resource type="Script" uid="uid://w1w66en5t7v1" path="res://worm/base/components/ground_checker.gd" id="5_xreio"]
-[ext_resource type="Script" uid="uid://6rnr5ee3s4j3" path="res://addons/godot_state_charts/compound_state.gd" id="6_2m4l2"]
-[ext_resource type="Script" uid="uid://cp0gcn2oc6f1v" path="res://addons/godot_state_charts/atomic_state.gd" id="7_xreio"]
-[ext_resource type="Script" uid="uid://brbkwqgqhymfi" path="res://addons/godot_state_charts/transition.gd" id="8_8lhov"]
+[ext_resource type="PackedScene" uid="uid://bsrsym1dfoo3m" path="res://worm/base/components/in_ground_compound_state.tscn" id="6_l7250"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwm3e"]
 radius = 40.3113
@@ -24,6 +22,12 @@ texture = ExtResource("3_lnd62")
 script = ExtResource("4_bnwxt")
 texture = ExtResource("3_lnd62")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lwm3e")
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
 [node name="GroundChecker" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
@@ -34,39 +38,14 @@ metadata/_custom_type_script = ExtResource("5_xreio")
 shape = SubResource("CircleShape2D_lwm3e")
 debug_color = Color(0.825765, 0.00158581, 0.954354, 0.42)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_lwm3e")
-
-[node name="MainCamera" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("5_jg30f")
 metadata/_custom_type_script = ExtResource("5_jg30f")
 
-[node name="Root" type="Node" parent="StateChart"]
-script = ExtResource("6_2m4l2")
-initial_state = NodePath("Grounded")
+[node name="InGround" parent="StateChart" instance=ExtResource("6_l7250")]
 
-[node name="Grounded" type="Node" parent="StateChart/Root"]
-script = ExtResource("7_xreio")
+[connection signal="grounded_state_changed" from="GroundChecker" to="." method="_on_ground_checker_grounded_state_changed"]
+[connection signal="state_physics_processing" from="StateChart/InGround/Grounded" to="." method="_grounded_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/InGround/Airborn" to="." method="_airborn_state_physics_processing"]
 
-[node name="ToAirborn" type="Node" parent="StateChart/Root/Grounded"]
-script = ExtResource("8_8lhov")
-to = NodePath("../../Airborn")
-event = &"segment_exited_ground"
-delay_in_seconds = "0.0"
-
-[node name="Airborn" type="Node" parent="StateChart/Root"]
-script = ExtResource("7_xreio")
-
-[node name="ToGrounded" type="Node" parent="StateChart/Root/Airborn"]
-script = ExtResource("8_8lhov")
-to = NodePath("../../Grounded")
-event = &"segment_entered_ground"
-delay_in_seconds = "0.0"
-
-[connection signal="grounded_state_changed" from="GroundChecker" to="." method="_on_ground_checker_comp_grounded_state_changed"]
-[connection signal="state_entered" from="StateChart/Root/Grounded" to="." method="_on_grounded_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/Root/Grounded" to="." method="_grounded_state_physics_processing"]
-[connection signal="state_physics_processing" from="StateChart/Root/Airborn" to="." method="_airborn_state_physics_processing"]
+[editable path="StateChart/InGround"]

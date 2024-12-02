@@ -18,6 +18,7 @@
 [node name="Worm" type="Node2D" groups=["worm"]]
 script = ExtResource("1_bdlk6")
 real_base_speed = 70.0
+real_boost_component = 9.9
 
 [node name="SegmentsList" type="Node2D" parent="."]
 unique_name_in_owner = true

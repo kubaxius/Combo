@@ -56,13 +56,21 @@ func _physics_process(_delta: float) -> void:
 		if c.get_collider() is RigidBody2D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * 100)
 
+
+# -------------------------------- #
+#     Signal-connected methods     #
+# -------------------------------- #
+
+func _on_ground_checker_grounded_state_changed(grounded: bool, _last_ground: Node2D) -> void:
+	if grounded:
+		state_chart.send_event("segment_entered_ground")
+	else:
+		state_chart.send_event("segment_exited_ground")
+
+
 # -------------------------------- #
 #          State methods           #
 # -------------------------------- #
- 
-func _on_grounded_state_entered() -> void:
-	pass
-
 
 func _grounded_state_physics_processing(delta: float) -> void:
 	_move_and_turn(delta)
@@ -72,13 +80,6 @@ func _airborn_state_physics_processing(delta: float) -> void:
 	_apply_gravity(delta)
 	_apply_air_resistance(delta)
 	_turn(delta, 0.3)
-
-
-func _on_ground_checker_comp_grounded_state_changed(grounded: bool, _last_ground: Node2D) -> void:
-	if grounded:
-		state_chart.send_event("segment_entered_ground")
-	else:
-		state_chart.send_event("segment_exited_ground")
 
 
 # -------------------------------- #
