@@ -1,10 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://60b4o56c3hdd"]
+[gd_scene load_steps=5 format=3 uid="uid://60b4o56c3hdd"]
 
 [ext_resource type="Script" uid="uid://bvftcxlknehg" path="res://worm/base/segment/segment.gd" id="1_40qbx"]
 [ext_resource type="Texture2D" uid="uid://uxrjm2flrc87" path="res://worm/assets/worm_segment.png" id="3_h2s2v"]
-[ext_resource type="Script" uid="uid://xdtx5tb3kh5o" path="res://worm/base/segment/path_follower.gd" id="3_p4m0n"]
-[ext_resource type="Script" uid="uid://dcxpps2sv608r" path="res://worm/base/segment/components/path_follower.gd" id="4_mna22"]
-[ext_resource type="PackedScene" uid="uid://cadrral3ga0dq" path="res://utils/debug_pointer.tscn" id="6_71hr3"]
 [ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="6_d6ev6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r5knf"]
@@ -22,16 +19,6 @@ script = ExtResource("1_40qbx")
 [node name="LeaveTrail" type="Node2D" parent="."]
 script = ExtResource("6_d6ev6")
 texture = ExtResource("3_h2s2v")
-
-[node name="PathFollower" type="Node2D" parent="."]
-script = ExtResource("4_mna22")
-
-[node name="SegmentPathFollower" type="PathFollow2D" parent="PathFollower"]
-rotates = false
-script = ExtResource("3_p4m0n")
-
-[node name="DebugPointer" parent="PathFollower/SegmentPathFollower" instance=ExtResource("6_71hr3")]
-scale = Vector2(2, 2)
 
 [node name="WormSegment" type="Sprite2D" parent="."]
 texture = ExtResource("3_h2s2v")

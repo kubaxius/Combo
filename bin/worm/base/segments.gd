@@ -1,4 +1,14 @@
-extends Node2D
+class_name WormSegmentsList extends Node2D
+
+signal segments_changed(segments_list:WormSegmentsList)
+
+
+func _ready() -> void:
+	segments_changed.emit(self)
+
+
+func _on_child_order_changed() -> void:
+	segments_changed.emit(self)
 
 
 func add_segment(segment_res:Resource, index: int = -1):
@@ -14,6 +24,7 @@ func get_segment_at_position(index:int):
 	
 	return get_child(index)
 
+
 func get_length():
 	var last_segment:WormSegment = get_child(-1)
-	return last_segment.get_pixel_position_in_worm()
+	return last_segment.pixel_position_in_worm

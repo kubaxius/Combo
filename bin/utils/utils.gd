@@ -1,6 +1,16 @@
 class_name Utils extends Node
 
 
+static func get_parent_from_group(node:Node, group_name:StringName) -> Node:
+	var group = node.get_tree().get_nodes_in_group(group_name)
+	
+	for possible_parent in group:
+		if possible_parent.is_ancestor_of(node):
+			return possible_parent
+	
+	return null
+
+
 static func get_named_parent(node:Node, group_name:String) -> Node:
 	var parent = node.get_parent()
 	

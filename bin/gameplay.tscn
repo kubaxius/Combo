@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dvq76e0f57j05" path="res://terrain/trail/trail_mask_gen.tscn" id="1_xuee5"]
 [ext_resource type="Texture2D" uid="uid://qqgpgfbxb4r7" path="res://textures/Tileset_pack/Grass_tileset.png" id="2_ph3mi"]
-[ext_resource type="PackedScene" uid="uid://dsqvt1sqlawyv" path="res://worm/worm.tscn" id="3_fko4x"]
+[ext_resource type="PackedScene" uid="uid://dsqvt1sqlawyv" path="res://worm/base/worm.tscn" id="3_fko4x"]
 [ext_resource type="Script" uid="uid://bx5e17uuees5w" path="res://ground.gd" id="4_wp4o0"]
 [ext_resource type="Shader" uid="uid://cnp5wpadtx0xv" path="res://shaders/ground_mask.tres" id="5_cbffv"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="6_cbffv"]

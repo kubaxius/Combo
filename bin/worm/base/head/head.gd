@@ -1,20 +1,44 @@
 class_name WormHead extends CharacterBody2D
 
 ## set by worm
-var speed
-var turning_speed
+var desired_speed:float: set = set_desired_speed
+var acceleration:float = 2.0
+var turning_speed:float = 2.0
 
 ## set by components
 #TODO: make it set by signals instead
 var desired_movement_vector := Vector2.UP
 
 ## in m/s
-var gravity = 19.8
-var air_resistance = 0.02
+var gravity = 29.8
+var air_resistance = 0.01
 
+# -------------------
+# Setters and getters
+# -------------------
+
+func set_desired_speed(val:float):
+	desired_speed = val
+
+
+func set_acceleration(val:float):
+	acceleration = val
+
+
+func set_turning_speed(val:float):
+	print(val)
+	turning_speed = val
+
+
+# -------------------
+# Special methods
+# -------------------
 
 func _ready() -> void:
-	velocity = Vector2.UP
+	var worm:Worm = Utils.get_parent_from_group(self, "worm")
+	if worm:
+		worm.desired_speed_changed.connect(set_desired_speed)
+		worm.turning_speed_changed.connect(set_turning_speed)
 
 
 func _on_grounded_state_entered() -> void:
@@ -22,18 +46,16 @@ func _on_grounded_state_entered() -> void:
 
 
 func _grounded_state_physics_processing(delta: float) -> void:
-	velocity = lerp(velocity.length(), speed, 2.0 * delta) * velocity.normalized()
-	var target_angle = lerp_angle(velocity.angle(), desired_movement_vector.angle(), 2.0 * delta)
-	velocity = velocity.rotated(target_angle - velocity.angle())
+	_move_and_turn(delta)
 
 
 func _airborn_state_physics_processing(delta: float) -> void:
 	_apply_gravity(delta)
 	_apply_air_resistance(delta)
+	_turn(delta, 0.3)
 
 
-func _physics_process(delta: float) -> void:
-	print(Utils.pps_to_kmph(velocity.length()))
+func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	_look_forward()
 
@@ -45,6 +67,10 @@ func _on_ground_checker_comp_grounded_state_changed(grounded: bool, _last_ground
 		$PhysicsStateChart.send_event("segment_exited_ground")
 
 
+# -------------------
+# Custom methods
+# -------------------
+
 func _look_forward() -> void:
 	rotation = velocity.angle() + PI/2.
 
@@ -55,3 +81,19 @@ func _apply_gravity(delta: float) -> void:
 
 func _apply_air_resistance(delta: float) -> void:
 	velocity *= pow(1. - air_resistance, delta)
+
+
+func _move_and_turn(delta) -> void:
+	# fix the edgecase where velocity is 0
+	if desired_speed > 0.0001 and velocity.length() == 0:
+		velocity = Vector2.UP
+	
+	# accelerate worm towards desired velocity
+	velocity = lerp(velocity.length(), desired_speed, acceleration * delta) * velocity.normalized()
+	_turn(delta)
+
+
+func _turn(delta:float, strength:float = 1.0) -> void:
+	# turn the head in the desired direction
+	var target_angle = lerp_angle(velocity.angle(), desired_movement_vector.angle(), turning_speed * delta * strength)
+	velocity = velocity.rotated(target_angle - velocity.angle())

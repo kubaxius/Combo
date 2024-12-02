@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn7o7wkiajk8q"]
+
+[ext_resource type="Script" uid="uid://xdtx5tb3kh5o" path="res://worm/base/segment/path_follower.gd" id="1_81esm"]
+[ext_resource type="PackedScene" uid="uid://cadrral3ga0dq" path="res://utils/debug_pointer.tscn" id="2_uyie1"]
+
+[node name="PathFollower" type="PathFollow2D"]
+script = ExtResource("1_81esm")
+
+[node name="DebugPointer" parent="." instance=ExtResource("2_uyie1")]
