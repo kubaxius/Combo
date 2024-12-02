@@ -16,23 +16,27 @@ var base_speed:float:
 		return Utils.kmph_to_pps(real_base_speed)
 var desired_speed:float:
 	set(val):
-		desired_speed = val
-		desired_speed_changed.emit(desired_speed)
+		if desired_speed != val:
+			desired_speed = val
+			desired_speed_changed.emit(desired_speed)
 var turning_speed:float:
 	set(val):
 		turning_speed = val
 		turning_speed_changed.emit(turning_speed)
-var is_boosted = false
-var is_moving = true
+var desired_direction:Vector2:
+	set(val):
+		desired_direction = val
+		desired_direction_changed.emit(desired_direction)
+
 
 var current_speed:float:
 	get():
 		return head.velocity.length()
 
-signal desired_speed_changed(new_desired_speed)
-signal turning_speed_changed(new_turning_speed)
-signal current_speed_changed(new_current_speed)
-
+signal desired_speed_changed(new_value:float)
+signal turning_speed_changed(new_value:float)
+signal current_speed_changed(new_value:float)
+signal desired_direction_changed(new_value:Vector2)
 
 # -------------------------------- #
 #         Built-in methods         #
@@ -43,34 +47,24 @@ func _ready() -> void:
 	turning_speed = base_turning_speed
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	current_speed_changed.emit(current_speed)
+	if $FollowMouse.vector_to_mouse:
+		desired_direction = $FollowMouse.vector_to_mouse
 	#print(Utils.pps_to_kmph(current_speed))
 
 
 # -------------------------------- #
-#          Custom methods          #
+#          State methods           #
 # -------------------------------- #
 
-func apply_boost() -> void:
-	if not is_boosted:
-		desired_speed = base_speed * boost_speed_multiplier
-		is_boosted = true
+func _on_boosted_state_physics_processing(_delta: float) -> void:
+	desired_speed = base_speed * boost_speed_multiplier
 
 
-func remove_boost() -> void:
-	if is_boosted:
-		desired_speed = base_speed
-		is_boosted = false
+func _on_not_boosted_state_physics_processing(_delta: float) -> void:
+	desired_speed = base_speed
 
 
-func stop_moving() -> void:
-	if is_moving:
-		desired_speed = 0
-		is_moving = false
-
-
-func start_moving() -> void:
-	if not is_moving:
-		desired_speed = base_speed
-		is_moving = true
+func _on_not_moving_state_physics_processing(_delta: float) -> void:
+	desired_speed = 0

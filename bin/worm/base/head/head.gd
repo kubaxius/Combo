@@ -13,6 +13,8 @@ var desired_movement_vector := Vector2.UP
 var gravity = 29.8
 var air_resistance = 0.01
 
+@onready var state_chart = $StateChart
+
 # -------------------------------- #
 #        Setters and getters       #
 # -------------------------------- #
@@ -26,8 +28,11 @@ func set_acceleration(val:float):
 
 
 func set_turning_speed(val:float):
-	print(val)
 	turning_speed = val
+
+
+func set_desired_movement_vector(val:Vector2):
+	desired_movement_vector = val
 
 
 # -------------------------------- #
@@ -39,11 +44,17 @@ func _ready() -> void:
 	if worm:
 		worm.desired_speed_changed.connect(set_desired_speed)
 		worm.turning_speed_changed.connect(set_turning_speed)
+		worm.desired_direction_changed.connect(set_desired_movement_vector)
 
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	_look_forward()
+	# TODO: use this to setup collision with enemies
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody2D:
+			c.get_collider().apply_central_impulse(-c.get_normal() * 100)
 
 # -------------------------------- #
 #          State methods           #
@@ -65,9 +76,9 @@ func _airborn_state_physics_processing(delta: float) -> void:
 
 func _on_ground_checker_comp_grounded_state_changed(grounded: bool, _last_ground: Node2D) -> void:
 	if grounded:
-		$PhysicsStateChart.send_event("segment_entered_ground")
+		state_chart.send_event("segment_entered_ground")
 	else:
-		$PhysicsStateChart.send_event("segment_exited_ground")
+		state_chart.send_event("segment_exited_ground")
 
 
 # -------------------------------- #
