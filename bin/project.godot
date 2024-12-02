@@ -33,9 +33,6 @@ enabled=PackedStringArray("res://addons/FileSystemView/plugin.cfg", "res://addon
 [global_group]
 
 worm=""
-needs_worm_path="Used by Worm node to pass reference to the WormPath2D."
-needs_worm_speed=""
-needs_worm_turning_speed=""
 trail_texture_generator_viewport=""
 
 [input]
@@ -81,6 +78,9 @@ toggle_debug={
 2d_render/layer_2="hole_mask"
 2d_physics/layer_1="worm"
 2d_physics/layer_2="ground"
+2d_physics/layer_3="people"
+2d_physics/layer_4="vehicles"
+2d_physics/layer_5="junk"
 
 [physics]
 
