@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=4 uid="uid://cxluvvv4avrb"]
 
+[ext_resource type="PackedScene" uid="uid://bxlelx0hpihla" path="res://hud/hud.tscn" id="1_fbudy"]
 [ext_resource type="PackedScene" uid="uid://dvq76e0f57j05" path="res://terrain/trail/trail_mask_gen.tscn" id="1_xuee5"]
 [ext_resource type="Texture2D" uid="uid://qqgpgfbxb4r7" path="res://textures/Tileset_pack/Grass_tileset.png" id="2_ph3mi"]
 [ext_resource type="PackedScene" uid="uid://dsqvt1sqlawyv" path="res://worm/base/worm.tscn" id="3_fko4x"]
 [ext_resource type="Script" uid="uid://bx5e17uuees5w" path="res://ground.gd" id="4_wp4o0"]
 [ext_resource type="Shader" uid="uid://cnp5wpadtx0xv" path="res://shaders/ground_mask.tres" id="5_cbffv"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="6_cbffv"]
 [ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="7_fbudy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6ota"]
@@ -146,6 +146,8 @@ size = Vector2(128, 128)
 [node name="Gameplay" type="Node2D"]
 position = Vector2(1, 0)
 
+[node name="Hud" parent="." instance=ExtResource("1_fbudy")]
+
 [node name="TrailGen" parent="." instance=ExtResource("1_xuee5")]
 size = Vector2i(2112, 1188)
 mask_size = Vector2i(2000, 2000)
@@ -178,18 +180,6 @@ tilegen_margin = Vector2i(2, 2)
 [node name="Worm" parent="." instance=ExtResource("3_fko4x")]
 position = Vector2(-750, 1281)
 real_boost_component = 20.0
-
-[node name="DebugMenu" type="CanvasLayer" parent="."]
-
-[node name="StateChartDebugger" parent="DebugMenu" instance=ExtResource("6_cbffv")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_bottom = 0.0
-offset_left = -552.0
-offset_bottom = 553.0
-grow_horizontal = 0
-grow_vertical = 1
-initial_node_to_watch = NodePath("../../Worm/SegmentsList/BasicWormSegment19")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(153, -134)

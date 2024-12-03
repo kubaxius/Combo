@@ -4,11 +4,9 @@ class_name Worm extends Node2D
 @export_custom(PROPERTY_HINT_RANGE, "1,200,1,suffix:km/h") var real_base_speed := 50.
 ## Expressed in km/h/s.
 @export_custom(PROPERTY_HINT_RANGE, "1,20,0.1,suffix:km/h/s") var real_boost_component := 20.
+@export_custom(PROPERTY_HINT_RANGE, "50,300,0.5,suffix:km/h") var real_max_speed := 150.
 @export_range(0.1, 1, 0.1) var acceleration := 0.5
 @export_range(1, 2, 0.1) var base_turning_speed := 1.
-@export_range(1, 10, 0.1) var boost_component:
-	get():
-		return Utils.kmph_to_pps(real_boost_component)
 
 @onready var head:WormHead = %Head
 @onready var worm_path:WormPath = %Path
@@ -18,11 +16,21 @@ class_name Worm extends Node2D
 var base_speed:float:
 	get():
 		return Utils.kmph_to_pps(real_base_speed)
+# The speed the worm will try to achieve. Boosting and stoping will change it.
 var desired_speed:float:
 	set(val):
+		val = clamp(val, 0, max_speed)
 		if desired_speed != val:
 			desired_speed = val
 			desired_speed_changed.emit(desired_speed)
+# in px/s
+var max_speed:float:
+	get():
+		return Utils.kmph_to_pps(real_max_speed)
+# in px/s/s
+var boost_component:float:
+	get():
+		return Utils.kmph_to_pps(real_boost_component)
 var turning_speed:float:
 	set(val):
 		turning_speed = val
@@ -31,6 +39,7 @@ var desired_direction:Vector2:
 	set(val):
 		desired_direction = val
 		desired_direction_changed.emit(desired_direction)
+
 
 
 var current_speed:float:
@@ -55,7 +64,6 @@ func _physics_process(_delta: float) -> void:
 	current_speed_changed.emit(current_speed)
 	if $FollowMouse.vector_to_mouse:
 		desired_direction = $FollowMouse.vector_to_mouse
-	#print(Utils.pps_to_kmph(desired_speed))
 
 
 # -------------------------------- #
