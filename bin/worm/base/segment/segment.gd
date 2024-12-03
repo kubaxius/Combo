@@ -63,12 +63,12 @@ func _on_ground_checker_grounded_state_changed(grounded: bool, _last_ground: Nod
 
 func _on_grounded_state_entered():
 	gravity_scale = 0
-	pull_power = 4.
+	pull_power = 1.
 
 
 func _on_airborn_state_entered():
-	gravity_scale = 1
-	pull_power = 1
+	#gravity_scale = 1
+	pull_power = 1.
 
 # -------------------------------- #
 #          Custom methods          #
