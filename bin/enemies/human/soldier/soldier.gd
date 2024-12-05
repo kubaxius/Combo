@@ -1,7 +1,11 @@
 extends CharacterBody2D
 
 var real_walking_speed = 5
+var walking_speed:
+	get():
+		return Utils.kmph_to_pps(real_walking_speed)
 
+@onready var idle_destination: float = global_position.x
 
 # -------------------------------- #
 #         Built-in methods         #
@@ -12,18 +16,21 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	move_and_slide()
 
+
 # -------------------------------- #
 #          State methods           #
 # -------------------------------- #
 
-func _on_idle_walking_state_entered() -> void:
+func _idle_walking_state_entered() -> void:
 	_set_new_idle_destination()
-	print("walking")
-	_idle_around()
+	_start_moving_to_idle_destination()
 
 
-func _on_idle_standing_state_entered() -> void:
-	print("standing")
+func _idle_walking_state_physics_processing(delta: float) -> void:
+	_check_if_idle_destination_reached()
+
+
+func _idle_standing_state_entered() -> void:
 	velocity.x = 0
 
 
@@ -31,25 +38,22 @@ func _on_idle_standing_state_entered() -> void:
 #          Custom methods          #
 # -------------------------------- #
 
-var destination: float = global_position.x
-func _idle_around():
-	if sign(destination) < 0:
-		if global_position.x <= destination:
+
+func _check_if_idle_destination_reached() -> void:
+	if sign(velocity.x) < 0:
+		if global_position.x <= idle_destination:
 			$StateChart.send_event("reached_destination")
 	else:
-		if global_position.x >= destination:
+		if global_position.x >= idle_destination:
 			$StateChart.send_event("reached_destination")
-	
-	var walking_speed = Utils.kmph_to_pps(real_walking_speed)
-	velocity.x = walking_speed * sign(destination - global_position.x)
 
 
 func _set_new_idle_destination() -> void:
-	var sign = Global.movement_rng.randi_range(-1, 1)
+	var sign = Utils.get_random_sign(Global.movement_rng)
 	var offset = Global.movement_rng.randi_range(50, 100)
-	destination += sign * offset
-	print(destination)
+	idle_destination += sign * offset
+	Debug.draw_debug_dot(Vector2(idle_destination, 0), Utils.get_random_color(), 5, true)
 
 
-func _move_distance():
-	pass
+func _start_moving_to_idle_destination() -> void:
+	velocity.x = walking_speed * sign(idle_destination - global_position.x)

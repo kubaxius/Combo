@@ -1,5 +1,6 @@
 [gd_scene load_steps=14 format=4 uid="uid://cxluvvv4avrb"]
 
+[ext_resource type="Script" uid="uid://bqsvglxlmj6y7" path="res://gameplay.gd" id="1_2ihbs"]
 [ext_resource type="PackedScene" uid="uid://bxlelx0hpihla" path="res://hud/hud.tscn" id="1_fbudy"]
 [ext_resource type="PackedScene" uid="uid://dvq76e0f57j05" path="res://terrain/trail/trail_mask_gen.tscn" id="1_xuee5"]
 [ext_resource type="Texture2D" uid="uid://qqgpgfbxb4r7" path="res://textures/Tileset_pack/Grass_tileset.png" id="2_ph3mi"]
@@ -7,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bx5e17uuees5w" path="res://ground.gd" id="4_wp4o0"]
 [ext_resource type="Shader" uid="uid://cnp5wpadtx0xv" path="res://shaders/ground_mask.tres" id="5_cbffv"]
 [ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="7_fbudy"]
-[ext_resource type="PackedScene" uid="uid://b8vnvbdgsafsb" path="res://enemies/human/soldier/soldier.tscn" id="8_0m7cd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6ota"]
 texture = ExtResource("2_ph3mi")
@@ -146,11 +146,9 @@ size = Vector2(128, 128)
 
 [node name="Gameplay" type="Node2D"]
 position = Vector2(1, 0)
+script = ExtResource("1_2ihbs")
 
 [node name="Hud" parent="." instance=ExtResource("1_fbudy")]
-
-[node name="StateChartDebugger" parent="Hud/Debug" index="0"]
-initial_node_to_watch = NodePath("../../../Soldier")
 
 [node name="TrailGen" parent="." instance=ExtResource("1_xuee5")]
 size = Vector2i(2112, 1188)
@@ -196,9 +194,6 @@ texture = ExtResource("7_fbudy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_0m7cd")
-
-[node name="Soldier" parent="." instance=ExtResource("8_0m7cd")]
-position = Vector2(335, -61)
 
 [editable path="Hud"]
 [editable path="Worm"]
