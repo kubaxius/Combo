@@ -43,6 +43,7 @@ folder_colors={
 
 worm=""
 trail_texture_generator_viewport=""
+eatable="Worm can eat this in single bite."
 
 [input]
 
@@ -90,6 +91,7 @@ toggle_debug={
 2d_physics/layer_3="people"
 2d_physics/layer_4="vehicles"
 2d_physics/layer_5="junk"
+2d_physics/layer_6="worm_mouth"
 
 [physics]
 

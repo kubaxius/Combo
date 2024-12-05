@@ -68,7 +68,9 @@ func _on_ground_checker_grounded_state_changed(grounded: bool, _last_ground: Nod
 		state_chart.send_event("segment_exited_ground")
 
 
-
+func _on_mouth_body_entered(body: Node2D) -> void:
+	if body.is_in_group("eatable") and body.has_method("got_eaten"):
+		body.got_eaten()
 
 
 # -------------------------------- #

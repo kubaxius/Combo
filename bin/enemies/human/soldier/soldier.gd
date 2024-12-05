@@ -57,3 +57,7 @@ func _set_new_idle_destination() -> void:
 
 func _start_moving_to_idle_destination() -> void:
 	velocity.x = walking_speed * sign(idle_destination - global_position.x)
+
+
+func got_eaten():
+	queue_free()

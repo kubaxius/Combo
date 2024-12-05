@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cxluvvv4avrb"]
+[gd_scene load_steps=15 format=4 uid="uid://cxluvvv4avrb"]
 
 [ext_resource type="Script" uid="uid://bqsvglxlmj6y7" path="res://gameplay.gd" id="1_2ihbs"]
 [ext_resource type="PackedScene" uid="uid://bxlelx0hpihla" path="res://hud/hud.tscn" id="1_fbudy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bx5e17uuees5w" path="res://ground.gd" id="4_wp4o0"]
 [ext_resource type="Shader" uid="uid://cnp5wpadtx0xv" path="res://shaders/ground_mask.tres" id="5_cbffv"]
 [ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="7_fbudy"]
+[ext_resource type="PackedScene" uid="uid://b8vnvbdgsafsb" path="res://enemies/human/soldier/soldier.tscn" id="8_0m7cd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6ota"]
 texture = ExtResource("2_ph3mi")
@@ -194,6 +195,46 @@ texture = ExtResource("7_fbudy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_0m7cd")
+
+[node name="Soldier" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier2" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier3" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier4" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier5" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier6" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier7" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier8" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier9" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier10" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier11" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier12" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier13" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier14" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier15" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier16" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier17" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier18" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier19" parent="." instance=ExtResource("8_0m7cd")]
+
+[node name="Soldier20" parent="." instance=ExtResource("8_0m7cd")]
 
 [editable path="Hud"]
 [editable path="Worm"]
