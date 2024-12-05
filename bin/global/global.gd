@@ -8,4 +8,5 @@ var movement_rng = RandomNumberGenerator.new()
 # -------------------------------- #
 
 func _ready() -> void:
+	randomize()
 	movement_rng.randomize()
