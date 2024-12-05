@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cadrral3ga0dq"]
 
-[ext_resource type="Script" uid="uid://7ratmbcdaifx" path="res://utils/debug_pointer.gd" id="1_6dsrh"]
+[ext_resource type="Script" uid="uid://7ratmbcdaifx" path="res://debug/debug_pointer.gd" id="1_6dsrh"]
 
 [node name="DebugPointer" type="Marker2D"]
 modulate = Color(1, 0, 1, 1)

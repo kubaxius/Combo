@@ -17,7 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://global.gd"
+Global="*res://global/global.gd"
+Debug="*res://global/debug.gd"
 
 [display]
 
@@ -33,7 +34,9 @@ enabled=PackedStringArray("res://addons/FileSystemView/plugin.cfg", "res://addon
 [file_customization]
 
 folder_colors={
-"res://addons/": "purple"
+"res://addons/": "purple",
+"res://debug/": "yellow",
+"res://global/": "teal"
 }
 
 [global_group]

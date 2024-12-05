@@ -11,8 +11,8 @@ script/source = "extends Control
 
 
 func _ready() -> void:
-	Global.debug_mode_changed.connect(_debug_mode_changed)
-	visible = Global.debug_mode
+	Debug.debug_mode_changed.connect(_debug_mode_changed)
+	visible = Debug.debug_mode
 
 
 func _debug_mode_changed(mode:bool):
