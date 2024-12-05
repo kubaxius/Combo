@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvnm8ji2q31rn"]
+
+[ext_resource type="Script" uid="uid://2ep80vylrvay" path="res://addons/2d_shapes/shapes/Ellipse.gd" id="1_gt4dy"]
+[ext_resource type="Script" uid="uid://c7ynytfav8cdi" path="res://debug/debug_dot.gd" id="1_w6hoc"]
+
+[node name="DebugDot" type="Marker2D"]
+script = ExtResource("1_w6hoc")
+
+[node name="Ellipse" type="Node2D" parent="."]
+script = ExtResource("1_gt4dy")
+size = Vector2(20, 20)
+metadata/_custom_type_script = ExtResource("1_gt4dy")
+
+[node name="RemoveTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RemoveTimer" to="." method="_remove"]

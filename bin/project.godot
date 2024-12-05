@@ -29,7 +29,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/FileSystemView/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/bottom_panel_shortcuts/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/FileSystemView/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/bottom_panel_shortcuts/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [file_customization]
 
