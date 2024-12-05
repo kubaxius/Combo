@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8vnvbdgsafsb"]
+
+[ext_resource type="Script" uid="uid://64n3ivho8pr6" path="res://enemies/human/soldier/soldier.gd" id="1_x1lvu"]
+[ext_resource type="Texture2D" uid="uid://brkrqmqi6cgxq" path="res://enemies/assets/soldier.png" id="2_hhxba"]
+[ext_resource type="Script" uid="uid://car5i8e3rlaxi" path="res://addons/godot_state_charts/state_chart.gd" id="3_1amvy"]
+[ext_resource type="Script" uid="uid://djulsun506c0b" path="res://addons/godot_state_charts/parallel_state.gd" id="4_0p7st"]
+[ext_resource type="Script" uid="uid://6rnr5ee3s4j3" path="res://addons/godot_state_charts/compound_state.gd" id="5_wga1v"]
+[ext_resource type="Script" uid="uid://cp0gcn2oc6f1v" path="res://addons/godot_state_charts/atomic_state.gd" id="6_24wrp"]
+[ext_resource type="Script" uid="uid://brbkwqgqhymfi" path="res://addons/godot_state_charts/transition.gd" id="7_mwyl3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k8ge"]
+height = 48.0
+
+[node name="Soldier" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_x1lvu")
+
+[node name="Soldier" type="Sprite2D" parent="."]
+texture = ExtResource("2_hhxba")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_4k8ge")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_1amvy")
+metadata/_custom_type_script = ExtResource("3_1amvy")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_0p7st")
+
+[node name="Awareness" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_wga1v")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root/Awareness"]
+script = ExtResource("5_wga1v")
+initial_state = NodePath("Walking")
+
+[node name="Walking" type="Node" parent="StateChart/Root/Awareness/Idle"]
+script = ExtResource("6_24wrp")
+
+[node name="ToStanding" type="Node" parent="StateChart/Root/Awareness/Idle/Walking"]
+script = ExtResource("7_mwyl3")
+to = NodePath("../../Standing")
+event = &"reached_destination"
+delay_in_seconds = "0.0"
+
+[node name="Standing" type="Node" parent="StateChart/Root/Awareness/Idle"]
+script = ExtResource("6_24wrp")
+
+[node name="ToWalking" type="Node" parent="StateChart/Root/Awareness/Idle/Standing"]
+script = ExtResource("7_mwyl3")
+to = NodePath("../../Walking")
+delay_in_seconds = "4.0"
+
+[node name="Agressive" type="Node" parent="StateChart/Root/Awareness"]
+script = ExtResource("6_24wrp")
+
+[node name="ToPanic" type="Node" parent="StateChart/Root/Awareness/Agressive"]
+script = ExtResource("7_mwyl3")
+to = NodePath("../../Panic")
+event = &"got_scared"
+delay_in_seconds = "0.0"
+
+[node name="ToAware" type="Node" parent="StateChart/Root/Awareness/Agressive"]
+script = ExtResource("7_mwyl3")
+to = NodePath("../../Aware")
+event = &"enemy_got_away"
+delay_in_seconds = "0.0"
+
+[node name="Aware" type="Node" parent="StateChart/Root/Awareness"]
+script = ExtResource("6_24wrp")
+
+[node name="ToAgressive" type="Node" parent="StateChart/Root/Awareness/Aware"]
+script = ExtResource("7_mwyl3")
+to = NodePath("../../Agressive")
+event = &"detected_enemy"
+delay_in_seconds = "0.0"
+
+[node name="Panic" type="Node" parent="StateChart/Root/Awareness"]
+script = ExtResource("6_24wrp")
+
+[node name="Grounded" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_wga1v")
+initial_state = NodePath("Grounded")
+
+[node name="Grounded" type="Node" parent="StateChart/Root/Grounded"]
+script = ExtResource("6_24wrp")
+
+[connection signal="state_entered" from="StateChart/Root/Awareness/Idle/Walking" to="." method="_on_idle_walking_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Awareness/Idle/Standing" to="." method="_on_idle_standing_state_entered"]

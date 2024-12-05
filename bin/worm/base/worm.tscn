@@ -151,6 +151,8 @@ delay_in_seconds = "0.0"
 
 [connection signal="child_order_changed" from="SegmentsList" to="SegmentsList" method="_on_child_order_changed"]
 [connection signal="segments_changed" from="SegmentsList" to="Path" method="_on_segments_changed"]
+[connection signal="entered_ground" from="Head" to="." method="_on_head_entered_ground"]
+[connection signal="exited_ground" from="Head" to="." method="_on_head_exited_ground"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Boost/Boosted" to="." method="_on_boosted_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Boost/NotBoosted" to="." method="_on_not_boosted_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/NotMoving" to="." method="_on_not_moving_state_physics_processing"]

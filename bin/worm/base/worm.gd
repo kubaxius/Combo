@@ -11,12 +11,14 @@ class_name Worm extends Node2D
 @onready var head:WormHead = %Head
 @onready var worm_path:WormPath = %Path
 @onready var segments_list:WormSegmentsList = %SegmentsList
+@onready var state_chart:StateChart = $StateChart
 
 # in px/s
 var base_speed:float:
 	get():
 		return Utils.kmph_to_pps(real_base_speed)
 # The speed the worm will try to achieve. Boosting and stoping will change it.
+# Won't exceed max_speed.
 var desired_speed:float:
 	set(val):
 		val = clamp(val, 0, max_speed)
@@ -40,11 +42,10 @@ var desired_direction:Vector2:
 		desired_direction = val
 		desired_direction_changed.emit(desired_direction)
 
-
-
 var current_speed:float:
 	get():
 		return head.velocity.length()
+
 
 signal desired_speed_changed(new_value:float)
 signal turning_speed_changed(new_value:float)
@@ -64,6 +65,18 @@ func _physics_process(_delta: float) -> void:
 	current_speed_changed.emit(current_speed)
 	if $FollowMouse.vector_to_mouse:
 		desired_direction = $FollowMouse.vector_to_mouse
+
+
+# -------------------------------- #
+#     Signal-connected methods     #
+# -------------------------------- #
+
+func _on_head_entered_ground() -> void:
+	pass
+
+
+func _on_head_exited_ground() -> void:
+	state_chart.send_event("boost_off")
 
 
 # -------------------------------- #

@@ -30,6 +30,12 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/FileSystemView/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/bottom_panel_shortcuts/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "purple"
+}
+
 [global_group]
 
 worm=""

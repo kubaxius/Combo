@@ -4,9 +4,6 @@ class_name WormHead extends CharacterBody2D
 var desired_speed:float: set = set_desired_speed
 var acceleration:float = 2.0
 var turning_speed:float = 2.0
-
-## set by components
-#TODO: make it set by signals instead
 var desired_movement_vector := Vector2.UP
 
 ## in m/s
@@ -14,6 +11,9 @@ var gravity = 29.8
 var air_resistance = 0.01
 
 @onready var state_chart = $StateChart
+
+signal entered_ground
+signal exited_ground
 
 # -------------------------------- #
 #        Setters and getters       #
@@ -68,9 +68,21 @@ func _on_ground_checker_grounded_state_changed(grounded: bool, _last_ground: Nod
 		state_chart.send_event("segment_exited_ground")
 
 
+
+
+
 # -------------------------------- #
 #          State methods           #
 # -------------------------------- #
+
+
+func _entered_grounded_state() -> void:
+	entered_ground.emit()
+
+
+func _entered_airborn_state() -> void:
+	exited_ground.emit()
+
 
 func _grounded_state_physics_processing(delta: float) -> void:
 	_move_and_turn(delta)

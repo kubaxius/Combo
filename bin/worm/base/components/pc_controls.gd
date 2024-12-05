@@ -14,7 +14,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("stop_moving"):
 		state_chart.send_event("stop_moving")
-		print("dupaaa")
 	
 	if event.is_action_released("stop_moving"):
 		state_chart.send_event("start_moving")
