@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://fhj6mrdsvb7h"]
+
+[ext_resource type="PackedScene" uid="uid://cadrral3ga0dq" path="res://debug/debug_pointer.tscn" id="1_hxtul"]
+[ext_resource type="PackedScene" uid="uid://dsqvt1sqlawyv" path="res://worm/base/worm.tscn" id="2_6ljjx"]
+[ext_resource type="PackedScene" uid="uid://bxlelx0hpihla" path="res://hud/hud.tscn" id="3_6ljjx"]
+[ext_resource type="Texture2D" uid="uid://dl703mtexf7k4" path="res://scenes/dock.png" id="4_pt7hd"]
+
+[sub_resource type="Curve2D" id="Curve2D_pt7hd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -102, 26, -103.503, 3.3898, 103.503, -3.3898, 81, 48, -78.8868, -0.126358, 78.8868, 0.126358, 1692, 49, 0, 0, 0, 0, 1820, 52)
+}
+point_count = 4
+
+[sub_resource type="GDScript" id="GDScript_6ljjx"]
+script/source = "extends PathFollow2D
+
+signal finished
+
+func _physics_process(delta: float) -> void:
+	if progress_ratio >= 1:
+		set_physics_process(false)
+		finished.emit()
+		return
+	progress_ratio += .2 * delta
+"
+
+[node name="WormEditor" type="Node2D"]
+
+[node name="Dock" type="Sprite2D" parent="."]
+texture = ExtResource("4_pt7hd")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(71.5505, 159)
+scale = Vector2(0.966181, 1)
+curve = SubResource("Curve2D_pt7hd")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-102, 26)
+rotation = 0.119644
+loop = false
+script = SubResource("GDScript_6ljjx")
+
+[node name="DebugPointer" parent="Path2D/PathFollow2D" instance=ExtResource("1_hxtul")]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(2, 2)
+
+[node name="Worm" parent="." instance=ExtResource("2_6ljjx")]
+position = Vector2(-597, 172)
+node_to_follow = NodePath("../Path2D/PathFollow2D")
+
+[node name="Controls" parent="Worm/StateChart/ParallelState" index="2"]
+initial_state = NodePath("FollowNode")
+
+[node name="Hud" parent="." instance=ExtResource("3_6ljjx")]
+visible = false
+
+[node name="StateChartDebugger" parent="Hud/Debug" index="0"]
+initial_node_to_watch = NodePath("../../../Worm/StateChart")
+
+[editable path="Worm"]
+[editable path="Hud"]

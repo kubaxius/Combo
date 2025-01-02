@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Combo"
-run/main_scene="res://gameplay.tscn"
+run/main_scene="res://scenes/gameplay.tscn"
 config/features=PackedStringArray("4.4")
 config/icon="res://icon.svg"
 

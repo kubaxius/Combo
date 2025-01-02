@@ -80,6 +80,50 @@ script = ExtResource("3_q35mp")
 
 [node name="BasicWormSegment28" parent="SegmentsList" instance=ExtResource("3_puycw")]
 
+[node name="BasicWormSegment29" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment30" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment31" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment32" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment33" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment34" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment35" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment36" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment37" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment38" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment39" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment40" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment41" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment42" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment43" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment44" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment45" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment46" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment47" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment48" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment49" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
+[node name="BasicWormSegment50" parent="SegmentsList" instance=ExtResource("3_puycw")]
+
 [node name="Head" parent="." instance=ExtResource("2_7haj8")]
 unique_name_in_owner = true
 
@@ -149,10 +193,50 @@ to = NodePath("../../Moving")
 event = &"start_moving"
 delay_in_seconds = "0.0"
 
+[node name="Controls" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("9_yjgjt")
+initial_state = NodePath("FollowMouse")
+
+[node name="FollowMouse" type="Node" parent="StateChart/ParallelState/Controls"]
+script = ExtResource("10_837at")
+
+[node name="ToFollowNode" type="Node" parent="StateChart/ParallelState/Controls/FollowMouse"]
+script = ExtResource("11_837at")
+to = NodePath("../../FollowNode")
+event = &"follow_node"
+delay_in_seconds = "0.0"
+
+[node name="ToInactive" type="Node" parent="StateChart/ParallelState/Controls/FollowMouse"]
+script = ExtResource("11_837at")
+to = NodePath("../../Inactive")
+event = &"deactivate"
+delay_in_seconds = "0.0"
+
+[node name="FollowNode" type="Node" parent="StateChart/ParallelState/Controls"]
+script = ExtResource("10_837at")
+
+[node name="ToFollowMouse" type="Node" parent="StateChart/ParallelState/Controls/FollowNode"]
+script = ExtResource("11_837at")
+to = NodePath("../../FollowMouse")
+event = &"follow_mouse"
+delay_in_seconds = "0.0"
+
+[node name="ToInactive" type="Node" parent="StateChart/ParallelState/Controls/FollowNode"]
+script = ExtResource("11_837at")
+to = NodePath("../../Inactive")
+event = &"deactivate"
+delay_in_seconds = "0.0"
+
+[node name="Inactive" type="Node" parent="StateChart/ParallelState/Controls"]
+script = ExtResource("10_837at")
+
 [connection signal="child_order_changed" from="SegmentsList" to="SegmentsList" method="_on_child_order_changed"]
 [connection signal="segments_changed" from="SegmentsList" to="Path" method="_on_segments_changed"]
 [connection signal="entered_ground" from="Head" to="." method="_on_head_entered_ground"]
 [connection signal="exited_ground" from="Head" to="." method="_on_head_exited_ground"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Boost/Boosted" to="." method="_on_boosted_state_physics_processing"]
-[connection signal="state_physics_processing" from="StateChart/ParallelState/Boost/NotBoosted" to="." method="_on_not_boosted_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/ParallelState/Boost/NotBoosted" to="." method="_on_not_boosted_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/NotMoving" to="." method="_on_not_moving_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/Controls/FollowMouse" to="." method="_on_follow_mouse_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/Controls/FollowNode" to="." method="_on_follow_node_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/ParallelState/Controls/Inactive" to="." method="on_inactive_state_entered"]

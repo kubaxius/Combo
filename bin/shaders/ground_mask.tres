@@ -23,17 +23,17 @@ red = texture(mask, uv).r;"
 input_name = "screen_pixel_size"
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_pbaar"]
-size = Vector2(640, 580)
+size = Vector2(640, 581)
 title = "Crop mask to center"
 attached_nodes = PackedInt32Array(10)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_fq10c"]
-size = Vector2(244, 118)
+size = Vector2(244, 122)
 title = "Red to transparent"
 attached_nodes = PackedInt32Array(15)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_eic27"]
-size = Vector2(244, 118)
+size = Vector2(244, 122)
 title = "TrailGen mask"
 attached_nodes = PackedInt32Array(2)
 

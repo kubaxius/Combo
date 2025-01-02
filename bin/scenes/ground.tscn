@@ -1,17 +1,12 @@
-[gd_scene load_steps=15 format=4 uid="uid://cxluvvv4avrb"]
+[gd_scene load_steps=9 format=4 uid="uid://bsn2hwpxx6gcs"]
 
-[ext_resource type="Script" uid="uid://bqsvglxlmj6y7" path="res://gameplay.gd" id="1_2ihbs"]
-[ext_resource type="PackedScene" uid="uid://bxlelx0hpihla" path="res://hud/hud.tscn" id="1_fbudy"]
-[ext_resource type="PackedScene" uid="uid://dvq76e0f57j05" path="res://terrain/trail/trail_mask_gen.tscn" id="1_xuee5"]
-[ext_resource type="Texture2D" uid="uid://qqgpgfbxb4r7" path="res://textures/Tileset_pack/Grass_tileset.png" id="2_ph3mi"]
-[ext_resource type="PackedScene" uid="uid://dsqvt1sqlawyv" path="res://worm/base/worm.tscn" id="3_fko4x"]
-[ext_resource type="Script" uid="uid://bx5e17uuees5w" path="res://ground.gd" id="4_wp4o0"]
-[ext_resource type="Shader" uid="uid://cnp5wpadtx0xv" path="res://shaders/ground_mask.tres" id="5_cbffv"]
-[ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="7_fbudy"]
-[ext_resource type="PackedScene" uid="uid://b8vnvbdgsafsb" path="res://enemies/human/soldier/soldier.tscn" id="8_0m7cd"]
+[ext_resource type="PackedScene" uid="uid://dvq76e0f57j05" path="res://terrain/trail/trail_mask_gen.tscn" id="1_w5yvf"]
+[ext_resource type="Texture2D" uid="uid://qqgpgfbxb4r7" path="res://textures/Tileset_pack/Grass_tileset.png" id="2_1ywih"]
+[ext_resource type="Script" uid="uid://bx5e17uuees5w" path="res://scenes/ground.gd" id="3_ct7o8"]
+[ext_resource type="Shader" uid="uid://cnp5wpadtx0xv" path="res://shaders/ground_mask.tres" id="4_vjnaj"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6ota"]
-texture = ExtResource("2_ph3mi")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hokwi"]
+texture = ExtResource("2_1ywih")
 texture_region_size = Vector2i(32, 32)
 9:1/0 = 0
 9:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -128,30 +123,23 @@ texture_region_size = Vector2i(32, 32)
 8:0/0/texture_origin = Vector2i(0, 16)
 8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
-[sub_resource type="TileSet" id="TileSet_j4qnd"]
+[sub_resource type="TileSet" id="TileSet_6ra5r"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
-sources/0 = SubResource("TileSetAtlasSource_n6ota")
+sources/0 = SubResource("TileSetAtlasSource_hokwi")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_smepj"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_hbo4f"]
 viewport_path = NodePath(".")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0m7cd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vwr8"]
 resource_local_to_scene = true
-shader = ExtResource("5_cbffv")
-shader_parameter/MaskTexture = SubResource("ViewportTexture_smepj")
+shader = ExtResource("4_vjnaj")
+shader_parameter/MaskTexture = SubResource("ViewportTexture_hbo4f")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0m7cd"]
-size = Vector2(128, 128)
+[node name="Ground" type="Node2D"]
 
-[node name="Gameplay" type="Node2D"]
-position = Vector2(1, 0)
-script = ExtResource("1_2ihbs")
-
-[node name="Hud" parent="." instance=ExtResource("1_fbudy")]
-
-[node name="TrailGen" parent="." instance=ExtResource("1_xuee5")]
+[node name="TrailGen" parent="." instance=ExtResource("1_w5yvf")]
 size = Vector2i(2112, 1188)
 mask_size = Vector2i(2000, 2000)
 mask_scaled_up_size = Vector2i(8000, 8000)
@@ -164,77 +152,18 @@ light_mask = 2
 visibility_layer = 3
 position = Vector2(0, 20)
 tile_map_data = PackedByteArray("AAABAAEAAAABAAIAAAABAAIAAAABAAIAAAABAAMAAAABAAIAAAABAAQAAAABAAIAAAABAAUAAAABAAIAAAABAAYAAAABAAIAAAACAAEAAAABAAIAAAACAAIAAAABAAIAAAACAAMAAAABAAIAAAACAAQAAAABAAIAAAACAAUAAAABAAIAAAACAAYAAAABAAIAAAADAAEAAAABAAIAAAADAAIAAAABAAIAAAADAAMAAAABAAIAAAADAAQAAAABAAIAAAADAAUAAAABAAIAAAADAAYAAAABAAIAAAAEAAIAAAABAAIAAAAEAAMAAAABAAIAAAAEAAQAAAABAAIAAAAEAAUAAAABAAIAAAAEAAYAAAABAAIAAAAFAAEAAAABAAIAAAAFAAIAAAABAAIAAAAFAAMAAAABAAIAAAAFAAQAAAABAAIAAAAFAAUAAAABAAIAAAAFAAYAAAABAAIAAAAGAAEAAAABAAIAAAAGAAIAAAABAAIAAAAGAAMAAAABAAIAAAAGAAQAAAABAAIAAAAGAAUAAAABAAIAAAAGAAYAAAABAAIAAAAHAAEAAAABAAIAAAAHAAIAAAABAAIAAAAHAAMAAAABAAIAAAAHAAQAAAABAAIAAAAHAAUAAAABAAIAAAAHAAYAAAABAAIAAAAIAAEAAAABAAIAAAAIAAIAAAABAAIAAAAIAAMAAAABAAIAAAAIAAQAAAABAAIAAAAIAAUAAAABAAIAAAAIAAYAAAABAAIAAAAJAAEAAAABAAIAAAAJAAIAAAABAAIAAAAJAAMAAAABAAIAAAAJAAQAAAABAAIAAAAJAAUAAAABAAIAAAAJAAYAAAABAAIAAAAKAAEAAAABAAIAAAAKAAIAAAABAAIAAAAKAAMAAAABAAIAAAAKAAQAAAABAAIAAAAKAAUAAAABAAIAAAAKAAYAAAABAAIAAAALAAEAAAABAAIAAAALAAIAAAABAAIAAAALAAMAAAABAAIAAAALAAQAAAABAAIAAAALAAUAAAABAAIAAAALAAYAAAABAAIAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAALAAAAAAABAAAAAAAEAAEAAAABAAIAAAAAAAAAAAABAAAAAAA=")
-tile_set = SubResource("TileSet_j4qnd")
+tile_set = SubResource("TileSet_6ra5r")
 collision_enabled = false
 collision_visibility_mode = 2
-script = ExtResource("4_wp4o0")
+script = ExtResource("3_ct7o8")
 tilegen_margin = Vector2i(2, 2)
 
 [node name="Ground" type="TileMapLayer" parent="."]
 light_mask = 2
 visibility_layer = 3
-material = SubResource("ShaderMaterial_0m7cd")
+material = SubResource("ShaderMaterial_5vwr8")
 tile_map_data = PackedByteArray("AAABAAEAAAABAAIAAAABAAIAAAABAAIAAAABAAMAAAABAAIAAAABAAQAAAABAAIAAAABAAUAAAABAAIAAAABAAYAAAABAAIAAAACAAEAAAABAAIAAAACAAIAAAABAAIAAAACAAMAAAABAAIAAAACAAQAAAABAAIAAAACAAUAAAABAAIAAAACAAYAAAABAAIAAAADAAEAAAABAAIAAAADAAIAAAABAAIAAAADAAMAAAABAAIAAAADAAQAAAABAAIAAAADAAUAAAABAAIAAAADAAYAAAABAAIAAAAEAAIAAAABAAIAAAAEAAMAAAABAAIAAAAEAAQAAAABAAIAAAAEAAUAAAABAAIAAAAEAAYAAAABAAIAAAAFAAEAAAABAAIAAAAFAAIAAAABAAIAAAAFAAMAAAABAAIAAAAFAAQAAAABAAIAAAAFAAUAAAABAAIAAAAFAAYAAAABAAIAAAAGAAEAAAABAAIAAAAGAAIAAAABAAIAAAAGAAMAAAABAAIAAAAGAAQAAAABAAIAAAAGAAUAAAABAAIAAAAGAAYAAAABAAIAAAAHAAEAAAABAAIAAAAHAAIAAAABAAIAAAAHAAMAAAABAAIAAAAHAAQAAAABAAIAAAAHAAUAAAABAAIAAAAHAAYAAAABAAIAAAAIAAEAAAABAAIAAAAIAAIAAAABAAIAAAAIAAMAAAABAAIAAAAIAAQAAAABAAIAAAAIAAUAAAABAAIAAAAIAAYAAAABAAIAAAAJAAEAAAABAAIAAAAJAAIAAAABAAIAAAAJAAMAAAABAAIAAAAJAAQAAAABAAIAAAAJAAUAAAABAAIAAAAJAAYAAAABAAIAAAAKAAEAAAABAAIAAAAKAAIAAAABAAIAAAAKAAMAAAABAAIAAAAKAAQAAAABAAIAAAAKAAUAAAABAAIAAAAKAAYAAAABAAIAAAALAAEAAAABAAIAAAALAAIAAAABAAIAAAALAAMAAAABAAIAAAALAAQAAAABAAIAAAALAAUAAAABAAIAAAALAAYAAAABAAIAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAALAAAAAAABAAAAAAAEAAEAAAABAAIAAAAAAAAAAAABAAAAAAA=")
-tile_set = SubResource("TileSet_j4qnd")
+tile_set = SubResource("TileSet_6ra5r")
 collision_visibility_mode = 2
-script = ExtResource("4_wp4o0")
+script = ExtResource("3_ct7o8")
 tilegen_margin = Vector2i(2, 2)
-
-[node name="Worm" parent="." instance=ExtResource("3_fko4x")]
-position = Vector2(265, 259)
-real_boost_component = 20.0
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(153, -134)
-collision_layer = 4
-collision_mask = 3
-
-[node name="Icon" type="Sprite2D" parent="RigidBody2D"]
-texture = ExtResource("7_fbudy")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_0m7cd")
-
-[node name="Soldier" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier2" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier3" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier4" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier5" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier6" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier7" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier8" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier9" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier10" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier11" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier12" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier13" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier14" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier15" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier16" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier17" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier18" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier19" parent="." instance=ExtResource("8_0m7cd")]
-
-[node name="Soldier20" parent="." instance=ExtResource("8_0m7cd")]
-
-[editable path="Hud"]
-[editable path="Worm"]

@@ -4,25 +4,24 @@ class_name LeaveTrailComp extends Node
 
 @export var texture: Texture2D
 
-@onready var trail_viewport: TrailMaskGen = get_tree().get_first_node_in_group("trail_texture_generator_viewport")
-@onready var full_trail_viewport:SubViewport = trail_viewport.get_node("FullTrailMaskGen")
-
-## Only enable if required nodes exist.
-@onready var active = trail_viewport and full_trail_viewport
-
 @onready var parent:Node2D = get_parent()
 
 @onready var sprite := Sprite2D.new()
 @onready var parallax := Parallax2D.new()
 
+@onready var trail_viewport: TrailMaskGen = get_tree().get_first_node_in_group("trail_texture_generator_viewport")
+var full_trail_viewport:SubViewport
+
 var red_shader:VisualShader = preload("res://shaders/color_to_red.tres")
 
 func _ready() -> void:
-	if active:
+	if trail_viewport:
+		full_trail_viewport = trail_viewport.get_node("FullTrailMaskGen")
+	if trail_viewport and full_trail_viewport:
 		_setup_sprite()
 		_setup_parallax()
 	
-	set_physics_process(active)
+	set_physics_process(trail_viewport and full_trail_viewport)
 
 
 func _physics_process(_delta: float) -> void:
