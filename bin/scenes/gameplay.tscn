@@ -20,6 +20,7 @@ script = ExtResource("1_101mb")
 
 [node name="Worm" parent="." instance=ExtResource("7_s5y6v")]
 position = Vector2(265, 259)
+rotation = 1.64327
 real_boost_component = 20.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]

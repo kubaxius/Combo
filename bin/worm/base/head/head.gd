@@ -101,7 +101,7 @@ func _airborn_state_physics_processing(delta: float) -> void:
 # -------------------------------- #
  
 func _look_forward() -> void:
-	rotation = velocity.angle() + PI/2.
+	global_rotation = velocity.angle() + PI/2.
 
 
 func _apply_gravity(delta: float) -> void:

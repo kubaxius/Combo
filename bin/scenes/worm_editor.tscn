@@ -32,6 +32,7 @@ centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+enabled = false
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(71.5505, 159)
@@ -49,7 +50,8 @@ modulate = Color(1, 0, 0, 1)
 scale = Vector2(2, 2)
 
 [node name="Worm" parent="." instance=ExtResource("2_6ljjx")]
-position = Vector2(-597, 172)
+position = Vector2(-970, 1074)
+rotation = 1.5708
 node_to_follow = NodePath("../Path2D/PathFollow2D")
 
 [node name="Controls" parent="Worm/StateChart/ParallelState" index="2"]
