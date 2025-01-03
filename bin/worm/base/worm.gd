@@ -60,8 +60,8 @@ signal desired_direction_changed(new_value:Vector2)
 # -------------------------------- #
 
 func _ready() -> void:
-	if node_to_follow:
-		get_node(node_to_follow).finished.connect(_docked)
+	#if node_to_follow:
+		#get_node(node_to_follow).finished.connect(_docked)
 	desired_speed = base_speed
 	turning_speed = base_turning_speed
 
@@ -100,7 +100,7 @@ func _on_follow_node_state_physics_processing(_delta: float) -> void:
 	var node:Node2D = get_node(node_to_follow)
 	desired_direction = head.global_position.direction_to(node.global_position)
 	var dist = head.global_position.distance_to(node.global_position)
-	desired_speed = dist - 20
+	desired_speed = base_speed
 	turning_speed = 2.
 
 

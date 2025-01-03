@@ -84,46 +84,6 @@ script = ExtResource("3_q35mp")
 
 [node name="BasicWormSegment30" parent="SegmentsList" instance=ExtResource("3_puycw")]
 
-[node name="BasicWormSegment31" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment32" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment33" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment34" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment35" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment36" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment37" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment38" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment39" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment40" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment41" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment42" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment43" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment44" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment45" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment46" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment47" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment48" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment49" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
-[node name="BasicWormSegment50" parent="SegmentsList" instance=ExtResource("3_puycw")]
-
 [node name="Head" parent="." instance=ExtResource("2_7haj8")]
 unique_name_in_owner = true
 

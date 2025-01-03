@@ -16,6 +16,10 @@ signal path_changed
 #         Built-in methods         #
 # -------------------------------- #
 
+func _ready() -> void:
+	_generate_starting_path()
+
+
 func _physics_process(_delta: float) -> void:
 	_update_path()
 
@@ -63,3 +67,10 @@ func _add_point():
 
 func _remove_point():
 	curve.remove_point(0)
+
+
+func _generate_starting_path():
+	var number_of_points = ceil(float(max_length)/float(point_distance))
+	
+	for point_id in number_of_points:
+		curve.add_point(Vector2i(0, point_id*point_distance), Vector2.ZERO, Vector2.ZERO, 0)
