@@ -14,7 +14,7 @@ anchor_mode = 0
 enabled = false
 
 [node name="Worm" parent="." instance=ExtResource("2_6ljjx")]
-position = Vector2(-970, 1074)
+position = Vector2(-781, 181)
 rotation = 1.5708
 node_to_follow = NodePath("../HeadStop")
 

@@ -99,9 +99,10 @@ func _airborn_state_physics_processing(delta: float) -> void:
 # -------------------------------- #
 #          Custom methods          #
 # -------------------------------- #
- 
+
 func _look_forward() -> void:
-	global_rotation = velocity.angle() + PI/2.
+	if velocity != Vector2.ZERO:
+		global_rotation = velocity.angle() + PI/2.
 
 
 func _apply_gravity(delta: float) -> void:
@@ -115,7 +116,7 @@ func _apply_air_resistance(delta: float) -> void:
 func _move_and_turn(delta) -> void:
 	# fix the edgecase where velocity is 0
 	if desired_speed > 0.0001 and velocity.length() == 0:
-		velocity = Vector2.UP
+		velocity = Vector2.UP.rotated(global_rotation)
 	
 	# accelerate worm towards desired velocity
 	velocity = lerp(velocity.length(), desired_speed, acceleration * delta) * velocity.normalized()
