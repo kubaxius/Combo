@@ -26,6 +26,7 @@ func _set_current_speed(val:float) -> void:
 # -------------------------------- #
  
 func _ready() -> void:
+	input_pickable = false
 	_update_pixel_position_in_worm()
 	freeze = true
 	position.y = pixel_position_in_worm
@@ -36,10 +37,6 @@ func _ready() -> void:
 	worm.current_speed_changed.connect(_set_current_speed)
 	var segments_list:WormSegmentsList = get_parent()
 	segments_list.segments_changed.connect(_on_segments_changed)
-
-
-func _physics_process(_delta: float) -> void:
-	_pull_to_path_follower()
 
 
 # -------------------------------- #
@@ -57,8 +54,12 @@ func _on_ground_checker_grounded_state_changed(grounded: bool, _last_ground: Nod
 		state_chart.send_event("segment_exited_ground")
 
 
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	print_debug(event)
+
+
 # -------------------------------- #
-#     Signal-connected methods     #
+#          State methods           #
 # -------------------------------- #
 
 func _on_grounded_state_entered():
@@ -69,6 +70,20 @@ func _on_grounded_state_entered():
 func _on_airborn_state_entered():
 	#gravity_scale = 1
 	pull_power = 1.
+
+
+func _on_worm_path_state_physics_processing(_delta: float) -> void:
+	_pull_to_point(path_follower.global_position)
+
+
+func _on_docked_state_entered() -> void:
+	input_pickable = true
+
+
+var dock_path: DockPath
+func _on_docked_state_physics_processing(_delta: float) -> void:
+	_pull_to_point(dock_path.get_closest_point(global_position))
+
 
 # -------------------------------- #
 #          Custom methods          #
@@ -90,6 +105,11 @@ func _update_pixel_position_in_worm() -> void:
 	pixel_position_in_worm = pos
 
 
-func _pull_to_path_follower():
-	var force = path_follower.global_position - global_position
+func _pull_to_point(point:Vector2) -> void:
+	var force = point - global_position
 	apply_central_force(force * 100000 * pull_power)
+
+
+func docked(dock:Path2D):
+	dock_path = dock
+	$StateChart.send_event("docked")

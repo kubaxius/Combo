@@ -40,3 +40,7 @@ func get_segment_at_position(index:int):
 func get_length():
 	var last_segment:WormSegment = get_child(-1)
 	return last_segment.pixel_position_in_worm
+
+
+func get_segments() -> Array[Node]:
+	return get_children()

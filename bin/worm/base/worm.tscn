@@ -168,7 +168,7 @@ delay_in_seconds = "0.0"
 
 [node name="ToInactive" type="Node" parent="StateChart/ParallelState/Controls/FollowMouse"]
 script = ExtResource("11_837at")
-to = NodePath("../../Inactive")
+to = NodePath("../../Docked")
 event = &"deactivate"
 delay_in_seconds = "0.0"
 
@@ -181,13 +181,13 @@ to = NodePath("../../FollowMouse")
 event = &"follow_mouse"
 delay_in_seconds = "0.0"
 
-[node name="ToInactive" type="Node" parent="StateChart/ParallelState/Controls/FollowNode"]
+[node name="ToDocked" type="Node" parent="StateChart/ParallelState/Controls/FollowNode"]
 script = ExtResource("11_837at")
-to = NodePath("../../Inactive")
-event = &"deactivate"
+to = NodePath("../../Docked")
+event = &"dock"
 delay_in_seconds = "0.0"
 
-[node name="Inactive" type="Node" parent="StateChart/ParallelState/Controls"]
+[node name="Docked" type="Node" parent="StateChart/ParallelState/Controls"]
 script = ExtResource("10_837at")
 
 [connection signal="child_order_changed" from="SegmentsList" to="SegmentsList" method="_on_child_order_changed"]
@@ -199,4 +199,4 @@ script = ExtResource("10_837at")
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/NotMoving" to="." method="_on_not_moving_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Controls/FollowMouse" to="." method="_on_follow_mouse_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Controls/FollowNode" to="." method="_on_follow_node_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/ParallelState/Controls/Inactive" to="." method="on_inactive_state_entered"]
+[connection signal="state_entered" from="StateChart/ParallelState/Controls/Docked" to="." method="on_docked_state_entered"]

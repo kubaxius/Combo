@@ -18,26 +18,8 @@ func _physics_process(delta: float) -> void:
 
 
 # -------------------------------- #
-#          State methods           #
-# -------------------------------- #
-
-func _idle_walking_state_entered() -> void:
-	_set_new_idle_destination()
-	_start_moving_to_idle_destination()
-
-
-func _idle_walking_state_physics_processing(delta: float) -> void:
-	_check_if_idle_destination_reached()
-
-
-func _idle_standing_state_entered() -> void:
-	velocity.x = 0
-
-
-# -------------------------------- #
 #          Custom methods          #
 # -------------------------------- #
-
 
 func _check_if_idle_destination_reached() -> void:
 	if sign(velocity.x) < 0:

@@ -4,7 +4,7 @@ class_name PCControls extends Node
 @onready var worm:Worm = get_parent()
 @onready var state_chart:StateChart = $"../StateChart"
 
-
+# TODO: Make it only enabled when it's in "follow mouse" state
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("boost"):
 		state_chart.send_event("boost")

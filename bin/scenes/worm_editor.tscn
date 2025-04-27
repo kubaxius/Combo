@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://fhj6mrdsvb7h"]
+[gd_scene load_steps=6 format=3 uid="uid://fhj6mrdsvb7h"]
 
+[ext_resource type="Script" uid="uid://8htxykva2cwp" path="res://scenes/worm_editor.gd" id="1_6ljjx"]
 [ext_resource type="PackedScene" uid="uid://dsqvt1sqlawyv" path="res://worm/base/worm.tscn" id="2_6ljjx"]
+[ext_resource type="Script" uid="uid://dyyi78e2bustp" path="res://scenes/dock_path.gd" id="4_d06dj"]
 [ext_resource type="Texture2D" uid="uid://dl703mtexf7k4" path="res://scenes/dock.png" id="4_pt7hd"]
 
+[sub_resource type="Curve2D" id="Curve2D_hxtul"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 97, 186, 0, 0, 0, 0, 1784, 184)
+}
+point_count = 2
+
 [node name="WormEditor" type="Node2D"]
+script = ExtResource("1_6ljjx")
 
 [node name="Dock" type="Sprite2D" parent="."]
 texture = ExtResource("4_pt7hd")
@@ -11,10 +20,9 @@ centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-enabled = false
 
 [node name="Worm" parent="." instance=ExtResource("2_6ljjx")]
-position = Vector2(-781, 181)
+position = Vector2(-119, 186)
 rotation = 1.5708
 node_to_follow = NodePath("../HeadStop")
 
@@ -22,6 +30,10 @@ node_to_follow = NodePath("../HeadStop")
 initial_state = NodePath("FollowNode")
 
 [node name="HeadStop" type="Marker2D" parent="."]
-position = Vector2(1753, 186)
+position = Vector2(1654, 184)
+
+[node name="DockPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_hxtul")
+script = ExtResource("4_d06dj")
 
 [editable path="Worm"]

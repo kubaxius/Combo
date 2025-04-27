@@ -54,6 +54,7 @@ signal desired_speed_changed(new_value:float)
 signal turning_speed_changed(new_value:float)
 signal current_speed_changed(new_value:float)
 signal desired_direction_changed(new_value:Vector2)
+signal destination_reached
 
 # -------------------------------- #
 #         Built-in methods         #
@@ -87,8 +88,9 @@ func _on_head_exited_ground() -> void:
 # -------------------------------- #
 
 
-func on_inactive_state_entered():
+func on_docked_state_entered():
 	desired_speed = 0
+	turning_speed = 0
 
 
 func _on_follow_mouse_state_physics_processing(_delta: float) -> void:
@@ -100,8 +102,10 @@ func _on_follow_node_state_physics_processing(_delta: float) -> void:
 	var node:Node2D = get_node(node_to_follow)
 	desired_direction = head.global_position.direction_to(node.global_position)
 	var dist = head.global_position.distance_to(node.global_position)
-	desired_speed = base_speed
+	desired_speed = min(base_speed, dist)
 	turning_speed = 2.
+	if dist <= 10:
+		destination_reached.emit()
 
 
 func _on_boosted_state_physics_processing(delta: float) -> void:
@@ -121,5 +125,7 @@ func _on_not_moving_state_physics_processing(_delta: float) -> void:
 # -------------------------------- #
 
 
-func _docked():
-	state_chart.send_event("deactivate")
+func docked(dock:Path2D):
+	state_chart.send_event("dock")
+	for segment:WormSegment in segments_list.get_segments():
+		segment.docked(dock)

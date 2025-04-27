@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Global="*res://global/global.gd"
 Debug="*res://global/debug.gd"
+BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 
 [display]
 
@@ -29,7 +31,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/FileSystemView/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/bottom_panel_shortcuts/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/FileSystemView/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/bottom_panel_shortcuts/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [file_customization]
 
@@ -92,6 +94,7 @@ toggle_debug={
 2d_physics/layer_4="vehicles"
 2d_physics/layer_5="junk"
 2d_physics/layer_6="worm_mouth"
+2d_physics/layer_7="mouse"
 
 [physics]
 
