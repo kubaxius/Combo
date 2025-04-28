@@ -7,6 +7,8 @@ var walking_speed:
 
 @onready var idle_destination: float = global_position.x
 
+var seen_player = false
+
 # -------------------------------- #
 #         Built-in methods         #
 # -------------------------------- #
