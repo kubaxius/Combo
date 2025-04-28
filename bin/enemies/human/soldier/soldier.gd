@@ -7,7 +7,7 @@ var walking_speed:
 
 @onready var idle_destination: float = global_position.x
 
-var seen_player = false
+var player_detected = false
 
 # -------------------------------- #
 #         Built-in methods         #
@@ -17,6 +17,14 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	move_and_slide()
+
+
+# -------------------------------- #
+#     Signal-connected methods     #
+# -------------------------------- #
+
+func _on_player_detected():
+	player_detected = true
 
 
 # -------------------------------- #

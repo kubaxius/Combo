@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://dccopawm3uan3"]
+
+[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="1_g44n4"]
+[ext_resource type="Script" uid="uid://dtqbi0judkaf7" path="res://enemies/AI/is_player_spotted.gd" id="2_ljvmo"]
+[ext_resource type="Script" uid="uid://cbnbvj8prv63i" path="res://addons/beehave/nodes/leaves/condition.gd" id="3_isnmm"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="4_3x5ch"]
+[ext_resource type="Script" uid="uid://cv74jjdrwevpr" path="res://addons/beehave/nodes/leaves/action.gd" id="5_ljvmo"]
+
+[node name="EnemyAI" type="Node"]
+script = ExtResource("1_g44n4")
+metadata/_custom_type_script = ExtResource("1_g44n4")
+
+[node name="PlayerDetected" type="Node" parent="."]
+script = ExtResource("1_g44n4")
+metadata/_custom_type_script = ExtResource("1_g44n4")
+
+[node name="IsPlayerSpotted" type="Node" parent="PlayerDetected"]
+script = ExtResource("2_ljvmo")
+metadata/_custom_type_script = ExtResource("3_isnmm")
+
+[node name="Attack" type="Node" parent="PlayerDetected"]
+script = ExtResource("4_3x5ch")
+metadata/_custom_type_script = ExtResource("4_3x5ch")
+
+[node name="IsPlayerVisible" type="Node" parent="PlayerDetected/Attack"]
+script = ExtResource("3_isnmm")
+metadata/_custom_type_script = ExtResource("3_isnmm")
+
+[node name="Attack" type="Node" parent="PlayerDetected/Attack"]
+script = ExtResource("5_ljvmo")
+metadata/_custom_type_script = ExtResource("5_ljvmo")
+
+[node name="Prepare" type="Node" parent="PlayerDetected"]
+script = ExtResource("4_3x5ch")
+metadata/_custom_type_script = ExtResource("4_3x5ch")
+
+[node name="Reload" type="Node" parent="PlayerDetected/Prepare"]
+script = ExtResource("5_ljvmo")
+metadata/_custom_type_script = ExtResource("5_ljvmo")
+
+[node name="Patrol" type="Node" parent="PlayerDetected/Prepare"]
+script = ExtResource("5_ljvmo")
+metadata/_custom_type_script = ExtResource("5_ljvmo")
+
+[node name="IdleSequence" type="Node" parent="."]
+script = ExtResource("4_3x5ch")
+metadata/_custom_type_script = ExtResource("4_3x5ch")
+
+[node name="ChooseDestination" type="Node" parent="IdleSequence"]
+script = ExtResource("5_ljvmo")
+metadata/_custom_type_script = ExtResource("5_ljvmo")
+
+[node name="Walk" type="Node" parent="IdleSequence"]
+script = ExtResource("5_ljvmo")
+metadata/_custom_type_script = ExtResource("5_ljvmo")

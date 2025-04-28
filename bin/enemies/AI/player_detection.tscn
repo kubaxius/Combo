@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c02b3w0reta87"]
+
+[ext_resource type="Script" uid="uid://busv1lm3p78fa" path="res://enemies/AI/player_detection.gd" id="1_6s1m5"]
+[ext_resource type="Script" uid="uid://dbphx47nluqir" path="res://enemies/AI/player_detection_area.gd" id="1_fhumn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ipmao"]
+radius = 300.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1lvu"]
+radius = 150.0
+
+[node name="PlayerDetection" type="Node2D"]
+script = ExtResource("1_6s1m5")
+
+[node name="OverGroundDetectionArea" type="Area2D" parent="."]
+script = ExtResource("1_fhumn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OverGroundDetectionArea"]
+shape = SubResource("CircleShape2D_ipmao")
+debug_color = Color(0.78443, 0.433702, 5.77569e-07, 0.42)
+
+[node name="UnderGroundDetectionArea" type="Area2D" parent="."]
+script = ExtResource("1_fhumn")
+underground_detector = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnderGroundDetectionArea"]
+shape = SubResource("CircleShape2D_x1lvu")
+debug_color = Color(0.764668, 0.449006, 7.70092e-07, 0.42)
+
+[connection signal="body_entered" from="OverGroundDetectionArea" to="OverGroundDetectionArea" method="_on_body_entered"]
+[connection signal="body_exited" from="OverGroundDetectionArea" to="OverGroundDetectionArea" method="_on_body_exited"]
+[connection signal="player_entered" from="OverGroundDetectionArea" to="." method="_on_player_entered"]
+[connection signal="player_entered" from="OverGroundDetectionArea" to="." method="_on_overground_player_entered"]
+[connection signal="player_exited" from="OverGroundDetectionArea" to="." method="_on_overground_player_exited"]
+[connection signal="body_entered" from="UnderGroundDetectionArea" to="UnderGroundDetectionArea" method="_on_body_entered"]
+[connection signal="body_exited" from="UnderGroundDetectionArea" to="UnderGroundDetectionArea" method="_on_body_exited"]
+[connection signal="player_entered" from="UnderGroundDetectionArea" to="." method="_on_player_entered"]
+[connection signal="player_entered" from="UnderGroundDetectionArea" to="." method="_on_underground_player_entered"]
+[connection signal="player_exited" from="UnderGroundDetectionArea" to="." method="_on_underground_player_exited"]

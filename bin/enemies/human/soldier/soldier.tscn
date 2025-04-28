@@ -1,20 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8vnvbdgsafsb"]
+[gd_scene load_steps=6 format=3 uid="uid://b8vnvbdgsafsb"]
 
 [ext_resource type="Script" uid="uid://64n3ivho8pr6" path="res://enemies/human/soldier/soldier.gd" id="1_x1lvu"]
 [ext_resource type="Texture2D" uid="uid://brkrqmqi6cgxq" path="res://enemies/assets/soldier.png" id="2_hhxba"]
-[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="3_ipmao"]
-[ext_resource type="Script" uid="uid://dtqbi0judkaf7" path="res://enemies/AI/is_player_spotted.gd" id="4_x1lvu"]
-[ext_resource type="Script" uid="uid://cbnbvj8prv63i" path="res://addons/beehave/nodes/leaves/condition.gd" id="5_hhxba"]
-[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="6_1amvy"]
+[ext_resource type="PackedScene" uid="uid://dccopawm3uan3" path="res://enemies/AI/enemy_ai.tscn" id="3_a7flp"]
+[ext_resource type="Script" uid="uid://busv1lm3p78fa" path="res://enemies/AI/player_detection.gd" id="4_c4e0d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k8ge"]
 height = 48.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ipmao"]
-radius = 300.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_x1lvu"]
-radius = 150.0
 
 [node name="Soldier" type="CharacterBody2D" groups=["eatable"]]
 position = Vector2(1, -24)
@@ -28,44 +20,8 @@ texture = ExtResource("2_hhxba")
 [node name="MainCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_4k8ge")
 
+[node name="EnemyAI" parent="." instance=ExtResource("3_a7flp")]
+
 [node name="PlayerDetection" type="Node2D" parent="."]
-
-[node name="OverGroundDetectionArea" type="Area2D" parent="PlayerDetection"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection/OverGroundDetectionArea"]
-shape = SubResource("CircleShape2D_ipmao")
-debug_color = Color(0.78443, 0.433702, 5.77569e-07, 0.42)
-
-[node name="UnderGroundDetectionArea" type="Area2D" parent="PlayerDetection"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection/UnderGroundDetectionArea"]
-shape = SubResource("CircleShape2D_x1lvu")
-debug_color = Color(0.764668, 0.449006, 7.70092e-07, 0.42)
-
-[node name="EnemyAI" type="Node" parent="."]
-script = ExtResource("3_ipmao")
-metadata/_custom_type_script = ExtResource("3_ipmao")
-
-[node name="PlayerSpotted" type="Node" parent="EnemyAI"]
-script = ExtResource("3_ipmao")
-metadata/_custom_type_script = ExtResource("3_ipmao")
-
-[node name="IsPlayerSpotted" type="Node" parent="EnemyAI/PlayerSpotted"]
-script = ExtResource("4_x1lvu")
-metadata/_custom_type_script = ExtResource("5_hhxba")
-
-[node name="Attack" type="Node" parent="EnemyAI/PlayerSpotted"]
-script = ExtResource("6_1amvy")
-metadata/_custom_type_script = ExtResource("6_1amvy")
-
-[node name="IsEnemyVisible" type="Node" parent="EnemyAI/PlayerSpotted/Attack"]
-script = ExtResource("5_hhxba")
-metadata/_custom_type_script = ExtResource("5_hhxba")
-
-[node name="Prepare" type="Node" parent="EnemyAI/PlayerSpotted"]
-script = ExtResource("6_1amvy")
-metadata/_custom_type_script = ExtResource("6_1amvy")
-
-[node name="IdleSequence" type="Node" parent="EnemyAI"]
-script = ExtResource("6_1amvy")
-metadata/_custom_type_script = ExtResource("6_1amvy")
+script = ExtResource("4_c4e0d")
+metadata/_custom_type_script = ExtResource("4_c4e0d")

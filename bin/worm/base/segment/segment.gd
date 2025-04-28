@@ -12,6 +12,10 @@ var pixel_position_in_worm:int
 var path_follower:WormSegmentPathFollower
 var pull_power = 2.
 
+var is_in_ground:
+	get:
+		return $StateChart/ParallelState/InGround/Grounded.active
+
 
 # -------------------------------- #
 #        Setters and getters       #
@@ -26,6 +30,7 @@ func _set_current_speed(val:float) -> void:
 # -------------------------------- #
  
 func _ready() -> void:
+	add_to_group("player")
 	input_pickable = false
 	_update_pixel_position_in_worm()
 	freeze = true

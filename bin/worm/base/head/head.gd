@@ -1,5 +1,7 @@
 class_name WormHead extends CharacterBody2D
 
+@onready var state_chart = $StateChart
+
 ## set by worm
 var desired_speed:float: set = set_desired_speed
 var acceleration:float = 2.0
@@ -10,7 +12,10 @@ var desired_movement_vector := Vector2.UP
 var gravity = 29.8
 var air_resistance = 0.01
 
-@onready var state_chart = $StateChart
+
+var is_in_ground:
+	get:
+		return $StateChart/ParallelState/InGround/Grounded.active
 
 signal entered_ground
 signal exited_ground
@@ -40,6 +45,8 @@ func set_desired_movement_vector(val:Vector2):
 # -------------------------------- # 
 
 func _ready() -> void:
+	add_to_group("player")
+	
 	var worm:Worm = Utils.get_parent_from_group(self, "worm")
 	if worm:
 		worm.desired_speed_changed.connect(set_desired_speed)
