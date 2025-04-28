@@ -1,0 +1,1 @@
+Heavy vehicle. You can't easly it it, but deal enough damage and it will explode.

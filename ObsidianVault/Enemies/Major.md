@@ -1,0 +1,1 @@
+He's wearing a berett, and shoots you with a pistol. After you disappear without killing him, he will get his Walkie-Talkie and instantly raise the Havoc Tier to 2.
