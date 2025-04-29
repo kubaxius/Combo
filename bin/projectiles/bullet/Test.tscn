@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4tt6l73laex7"]
+
+[ext_resource type="PackedScene" uid="uid://c161jwduat8bm" path="res://projectiles/bullet/bullet.tscn" id="1_k6k8y"]
+
+[node name="Test" type="Node2D"]
+
+[node name="Bullet" parent="." instance=ExtResource("1_k6k8y")]
+position = Vector2(206, 240)
+lifetime = 20
+real_speed = 435

@@ -38,7 +38,8 @@ enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/Fil
 folder_colors={
 "res://addons/": "purple",
 "res://debug/": "yellow",
-"res://global/": "teal"
+"res://global/": "blue",
+"res://utils/": "green"
 }
 
 [global_group]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhkh5g1lv2era"]
+
+[ext_resource type="Script" uid="uid://cb1bry627yxpv" path="res://projectiles/trail/projectile_trail.gd" id="1_q160r"]
+
+[sub_resource type="Curve" id="Curve_q160r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_q160r"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.775862, 0.948276)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 0.792438, 0.466859, 1)
+
+[node name="ProjectileTrail" type="Line2D"]
+top_level = true
+width = 3.0
+width_curve = SubResource("Curve_q160r")
+gradient = SubResource("Gradient_q160r")
+script = ExtResource("1_q160r")

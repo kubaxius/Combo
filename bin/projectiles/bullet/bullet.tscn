@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c161jwduat8bm"]
+
+[ext_resource type="Script" uid="uid://x4mo88mdmuqv" path="res://projectiles/bullet/bullet.gd" id="1_sww0f"]
+[ext_resource type="PackedScene" uid="uid://dhkh5g1lv2era" path="res://projectiles/trail/projectile_trail.tscn" id="3_g1w5t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7077v"]
+size = Vector2(12, 6)
+
+[node name="Bullet" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_sww0f")
+real_speed = 400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7077v")
+
+[node name="RemoveTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ProjectileTrail" parent="." instance=ExtResource("3_g1w5t")]
+
+[connection signal="timeout" from="RemoveTimer" to="." method="_remove"]

@@ -4,12 +4,12 @@ extends Enemy
 
 @onready var idle_destination: float = global_position.x
 
-var time = 0.
+var tick = 0.
 func _physics_process(delta: float) -> void:
-	time += delta
-	if time > 1:
+	tick += delta
+	if tick > 0.05:
 		shoot()
-		time = 0
+		tick = 0
 
 # -------------------------------- #
 #          Custom methods          #
@@ -34,7 +34,7 @@ func _set_new_idle_destination() -> void:
 func _start_moving_to_idle_destination() -> void:
 	velocity.x = speed * sign(idle_destination - global_position.x)
 
-var bullet = preload("res://enemies/bullet/bullet.tscn")
+var bullet = preload("res://projectiles/bullet/bullet.tscn")
 func shoot():
 	var target = get_closest_visible_player()
 	if not target:
@@ -44,4 +44,9 @@ func shoot():
 	var bullet_inst: Bullet = bullet.instantiate()
 	var direction = -target.global_position.angle_to(global_position) - PI/2
 	bullet_inst.setup(direction, 400, 4)
+	bullet_inst.global_position = global_position
 	get_parent().add_child(bullet_inst)
+
+
+func burst():
+	pass
