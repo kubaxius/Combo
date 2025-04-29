@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8vnvbdgsafsb"]
+[gd_scene load_steps=5 format=3 uid="uid://b8vnvbdgsafsb"]
 
 [ext_resource type="Script" uid="uid://64n3ivho8pr6" path="res://enemies/human/soldier/soldier.gd" id="1_x1lvu"]
 [ext_resource type="Texture2D" uid="uid://brkrqmqi6cgxq" path="res://enemies/assets/soldier.png" id="2_hhxba"]
 [ext_resource type="PackedScene" uid="uid://dccopawm3uan3" path="res://enemies/AI/enemy_ai.tscn" id="3_a7flp"]
-[ext_resource type="Script" uid="uid://busv1lm3p78fa" path="res://enemies/AI/player_detection.gd" id="4_c4e0d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k8ge"]
 height = 48.0
@@ -21,7 +20,3 @@ texture = ExtResource("2_hhxba")
 shape = SubResource("CapsuleShape2D_4k8ge")
 
 [node name="EnemyAI" parent="." instance=ExtResource("3_a7flp")]
-
-[node name="PlayerDetection" type="Node2D" parent="."]
-script = ExtResource("4_c4e0d")
-metadata/_custom_type_script = ExtResource("4_c4e0d")

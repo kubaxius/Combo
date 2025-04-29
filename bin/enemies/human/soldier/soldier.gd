@@ -1,30 +1,8 @@
-extends CharacterBody2D
+extends Enemy
 
-var real_walking_speed = 5
-var walking_speed:
-	get():
-		return Utils.kmph_to_pps(real_walking_speed)
+
 
 @onready var idle_destination: float = global_position.x
-
-var player_detected = false
-
-# -------------------------------- #
-#         Built-in methods         #
-# -------------------------------- #
-
-func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	move_and_slide()
-
-
-# -------------------------------- #
-#     Signal-connected methods     #
-# -------------------------------- #
-
-func _on_player_detected():
-	player_detected = true
 
 
 # -------------------------------- #
@@ -44,12 +22,8 @@ func _set_new_idle_destination() -> void:
 	var sign = Utils.get_random_sign(Global.movement_rng)
 	var offset = Global.movement_rng.randi_range(50, 100)
 	idle_destination += sign * offset
-	Debug.draw_debug_dot(Vector2(idle_destination, 0), Utils.get_random_color(), 5, true)
+	Debug.draw_debug_dot(Vector2(idle_destination, 0), 5, true)
 
 
 func _start_moving_to_idle_destination() -> void:
-	velocity.x = walking_speed * sign(idle_destination - global_position.x)
-
-
-func got_eaten():
-	queue_free()
+	velocity.x = speed * sign(idle_destination - global_position.x)

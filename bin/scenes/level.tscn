@@ -37,43 +37,5 @@ shape = SubResource("RectangleShape2D_0m7cd")
 
 [node name="Soldier" parent="." instance=ExtResource("6_t1rx8")]
 
-[node name="Soldier2" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier3" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier4" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier5" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier6" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier7" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier8" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier9" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier10" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier11" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier12" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier13" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier14" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier15" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier16" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier17" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier18" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier19" parent="." instance=ExtResource("6_t1rx8")]
-
-[node name="Soldier20" parent="." instance=ExtResource("6_t1rx8")]
-
 [editable path="Hud"]
 [editable path="Worm"]

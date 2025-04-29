@@ -28,7 +28,7 @@ func _set_current_speed(val:float) -> void:
 # -------------------------------- #
 #         Built-in methods         #
 # -------------------------------- #
- 
+
 func _ready() -> void:
 	add_to_group("player")
 	input_pickable = false

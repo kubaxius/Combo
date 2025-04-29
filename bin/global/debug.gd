@@ -24,7 +24,7 @@ func _unhandled_input(event: InputEvent) -> void:
 #          Custom methods          #
 # -------------------------------- #
 
-func draw_debug_dot(pos: Vector2, color: Color = Utils.get_random_color(), lifetime: float = 0, fade = false) -> DebugDot:
+func draw_debug_dot(pos: Vector2, lifetime: float = 5, fade = false, color: Color = Utils.get_random_color()) -> DebugDot:
 	if not debug_mode:
 		return
 	var debug_dot:DebugDot = debug_dot_res.instantiate()
