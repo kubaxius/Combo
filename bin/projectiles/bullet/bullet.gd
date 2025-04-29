@@ -43,7 +43,8 @@ func _remove():
 #          Custom methods          #
 # -------------------------------- #
 
-func setup(p_rotation: float, p_real_speed: int, p_lifetime: float):
+func setup(spawn_point: Vector2, p_rotation: float, p_real_speed: int, p_lifetime: float):
+	global_position = spawn_point
 	rotation = p_rotation
 	lifetime = p_lifetime
 	#_setup_particle_trail()
