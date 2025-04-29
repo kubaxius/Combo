@@ -13,10 +13,10 @@
             "state": {
               "type": "mk-space",
               "state": {
-                "path": "Enemies"
+                "path": "Worm"
               },
               "icon": "lucide-file",
-              "title": "Enemies"
+              "title": "Worm"
             }
           }
         ]
@@ -73,7 +73,7 @@
             }
           },
           {
-            "id": "76bcb53793e618c9",
+            "id": "dab05c99019796be",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -201,16 +201,20 @@
       "wikipedia-search:Open Article": false
     }
   },
-  "active": "09f2a36d81c4dc78",
+  "active": "870994775288da7d",
   "lastOpenFiles": [
+    "Worm/Worm.md",
+    "Worm/space/def.json",
+    "Worm/space",
+    "Worm",
     "Enemies/Enemies.md",
+    "Untitled.md",
     "Enemies/Major.md",
     "Mechanics/Havoc Level.md",
     "Mechanics/Mechanics.md",
     "Mechanics/space/def.json",
     "Mechanics/space",
     "Mechanics",
-    "Untitled.md",
     "Welcome.md",
     "Enemies/Tank.md",
     "Enemies/Anti Aircraft Cannon.md",
@@ -219,9 +223,6 @@
     "Enemies/space/context.mdb",
     "Enemies/space/",
     "Enemies/space",
-    "space/waypoints.json",
-    "space",
-    "Tagi",
-    "Enemies"
+    "space/waypoints.json"
   ]
 }

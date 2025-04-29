@@ -1,0 +1,1 @@
+Worm consists of head and segments. Head is responsible for all movement, and controls. Segments follow it, but they are children of Segments Node. Segments Node is responsible of collecting all data about segments, and sharing it with the segments themselves and the rest of the scene.
