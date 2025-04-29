@@ -97,6 +97,7 @@ toggle_debug={
 2d_physics/layer_5="junk"
 2d_physics/layer_6="worm_mouth"
 2d_physics/layer_7="mouse"
+2d_physics/layer_8="projectiles"
 
 [physics]
 
