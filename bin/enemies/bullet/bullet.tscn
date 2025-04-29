@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://c161jwduat8bm"]
 
 [ext_resource type="Script" uid="uid://x4mo88mdmuqv" path="res://enemies/bullet/bullet.gd" id="1_sww0f"]
-[ext_resource type="Script" uid="uid://c0x7qqowecrmd" path="res://addons/2d_shapes/shapes/Rectangle.gd" id="2_cw4e0"]
+[ext_resource type="Texture2D" uid="uid://cghxg3l6mmlut" path="res://enemies/bullet/bullet.png" id="2_cw4e0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7077v"]
-size = Vector2(8, 3)
+size = Vector2(12, 6)
 
 [sub_resource type="Gradient" id="Gradient_cw4e0"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -14,26 +14,33 @@ gradient = SubResource("Gradient_cw4e0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cw4e0"]
 particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
-scale_min = 16.63
-scale_max = 16.63
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.83
+scale_max = 3.83
 color_ramp = SubResource("GradientTexture1D_7077v")
 
 [node name="Bullet" type="CharacterBody2D"]
-position = Vector2(124, 68)
 motion_mode = 1
 script = ExtResource("1_sww0f")
-
-[node name="Rectangle" type="Node2D" parent="."]
-script = ExtResource("2_cw4e0")
-size = Vector2(40, 10)
-corner_radius = 0.0
-fill_color = Color(0.86, 0.70348, 0.1892, 1)
-metadata/_custom_type_script = ExtResource("2_cw4e0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7077v")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cw4e0")
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.1
+one_shot = true
+visibility_rect = Rect2(-500, -500, 1000, 1000)
 trail_enabled = true
+trail_sections = 12
+trail_section_subdivisions = 8
 process_material = SubResource("ParticleProcessMaterial_cw4e0")
+
+[node name="RemoveTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RemoveTimer" to="." method="_remove"]

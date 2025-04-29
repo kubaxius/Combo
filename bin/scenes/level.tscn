@@ -24,7 +24,7 @@ rotation = 1.64327
 real_boost_component = 20.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(153, -134)
+position = Vector2(-197, -150)
 collision_layer = 4
 collision_mask = 3
 

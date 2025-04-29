@@ -44,7 +44,7 @@ func _check_if_player_visible(player: Node2D):
 	return true
 
 
-func get_closest_visible_player():
+func get_closest_visible_player() -> Node2D:
 	var players = get_tree().get_nodes_in_group("player")
 	players.sort_custom(_sort_by_distance)
 	
@@ -53,7 +53,7 @@ func get_closest_visible_player():
 		if visible:
 			return player
 	
-	return false
+	return null
 
 
 func got_eaten():
