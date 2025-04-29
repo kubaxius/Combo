@@ -1,8 +1,10 @@
-extends Enemy
+class_name Soldier extends Enemy
 
 
 
 @onready var idle_destination: float = global_position.x
+
+
 
 var tick = 0.
 func _physics_process(delta: float) -> void:
