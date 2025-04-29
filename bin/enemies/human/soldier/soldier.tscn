@@ -12,6 +12,7 @@ position = Vector2(1, -24)
 collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_x1lvu")
+shot_spread = 0.4
 
 [node name="Soldier" type="Sprite2D" parent="."]
 texture = ExtResource("2_hhxba")
