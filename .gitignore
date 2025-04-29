@@ -21,3 +21,7 @@ bin/addons/*
 !bin/addons/gd-plug
 !bin/addons/gd-plug-ui
 !bin/addons/godot-rapier2d
+ObsidianVault/.makemd/fileCache.mdc
+ObsidianVault/.makemd/superstate.mdc
+ObsidianVault/.obsidian/plugins/make-md/Spaces.mdb
+ObsidianVault/.obsidian/workspace.json
