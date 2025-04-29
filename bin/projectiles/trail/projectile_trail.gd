@@ -15,16 +15,17 @@ var wild_speed := 0.
 var point_age := []
 
 
+# -------------------------------- #
+#         Built-in methods         #
+# -------------------------------- #
+
 func _ready() -> void:
+	# add first point at the spawn position
 	ov_add_point(get_parent().global_position)
 	
-	if lifetime < 0.000001:
-		return
-	var tween := get_tree().create_tween()
-	tween\
-	.tween_property(self, "modulate:a", 0., lifetime)\
-	.set_trans(Tween.TRANS_CIRC)\
-	.set_ease(Tween.EASE_OUT)
+	if lifetime > 0.000001:
+		create_lifetime_tween()
+	
 
 
 func _process(delta: float) -> void:
@@ -32,8 +33,35 @@ func _process(delta: float) -> void:
 		tick += delta
 		return
 	
-	var point_indexes_to_remove = []
+	
 	ov_add_point(get_parent().global_position)
+	update_points(delta)
+	
+
+
+# -------------------------------- #
+#          Custom methods          #
+# -------------------------------- #
+
+func ov_add_point(pos: Vector2, index: int = -1):
+	# check distance from the last point
+	if get_point_count() > 0 and pos.distance_to(points[-1]) < min_spacing:
+		return
+	
+	point_age.append(0.)
+	add_point(pos, index)
+
+
+func create_lifetime_tween():
+	var tween := get_tree().create_tween()
+	tween\
+	.tween_property(self, "modulate:a", 0., lifetime)\
+	.set_trans(Tween.TRANS_CIRC)\
+	.set_ease(Tween.EASE_OUT)
+
+
+func update_points(delta: float):
+	var point_indexes_to_remove = []
 	for p in range(get_point_count()):
 		point_age[p] += delta
 		
@@ -49,10 +77,3 @@ func _process(delta: float) -> void:
 	for id in range(point_indexes_to_remove.size() -1, -1, -1):
 		remove_point(id)
 		point_age.remove_at(id)
-
-func ov_add_point(pos: Vector2, index: int = -1):
-	if get_point_count() > 0 and pos.distance_to(points[-1]) < min_spacing:
-		return
-	
-	point_age.append(0.)
-	add_point(pos, index)
