@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgyi7eeibidbf"]
-
-[ext_resource type="Script" path="res://worm/base/segment/components/path_follower.gd" id="1_wstcl"]
-
-[node name="PathFollowerComponent" type="AnimatableBody2D"]
-script = ExtResource("1_wstcl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

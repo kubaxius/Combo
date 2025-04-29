@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdd8jseei1hnt"]
-
-[ext_resource type="Script" path="res://worm_old/movement_by_joints/part.gd" id="1_tjjei"]
-
-[node name="Part" type="Node2D"]
-script = ExtResource("1_tjjei")
-segment_spacing = 31
-
-[node name="Segments" type="Node2D" parent="."]
