@@ -60,7 +60,7 @@ func _on_ground_checker_grounded_state_changed(grounded: bool, _last_ground: Nod
 
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	print_debug(event)
+	pass#print_debug(event)
 
 
 # -------------------------------- #

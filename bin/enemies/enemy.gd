@@ -1,15 +1,24 @@
 class_name Enemy extends CharacterBody2D
 
-
-@export_range(0, 100) var real_speed := 5
+@export_range(0, 2000, 5) var sight := 1000
+@export_custom(PROPERTY_HINT_RANGE, "1,100,1,suffix:km/h") var real_speed := 5
 var speed:
 	get():
 		return Utils.kmph_to_pps(real_speed)
 
+signal player_spotted(location: Vector2)
 
 # -------------------------------- #
 #         Built-in methods         #
 # -------------------------------- #
+
+func _ready() -> void:
+	if not get_tree().get_root().has_node("Level"):
+		return
+	
+	var level:Level = get_tree().get_root().get_node("Level")
+	player_spotted.connect(level._on_player_spotted)
+
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -32,9 +41,12 @@ func _sort_by_distance(a:Node2D, b:Node2D):
 
 func _check_if_player_visible(player: Node2D):
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
+	var ray_from = global_position
+	var ray_to = global_position.direction_to(player.global_position) * sight
+	var query = PhysicsRayQueryParameters2D.create(ray_from, ray_to)
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
+	
 	
 	if not result:
 		return false
@@ -48,12 +60,20 @@ func get_closest_visible_player() -> Node2D:
 	var players = get_tree().get_nodes_in_group("player")
 	players.sort_custom(_sort_by_distance)
 	
-	for player in players:
-		var visible = _check_if_player_visible(player)
-		if visible:
+	for player:Node2D in players:
+		var player_visible = _check_if_player_visible(player)
+		if player_visible:
+			player_spotted.emit(player.global_position)
 			return player
 	
 	return null
+
+
+func is_player_visible() -> bool:
+	var player = get_closest_visible_player()
+	if player:
+		return true
+	return false
 
 
 func got_eaten():

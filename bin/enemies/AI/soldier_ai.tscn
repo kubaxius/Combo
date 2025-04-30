@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://dccopawm3uan3"]
+
+[ext_resource type="Script" uid="uid://d20g578nwn8cs" path="res://enemies/AI/soldier_ai.gd" id="1_6pc8k"]
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="2_bluje"]
+[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="3_thg5c"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="4_fj2re"]
+[ext_resource type="Script" uid="uid://dtqbi0judkaf7" path="res://enemies/AI/is_player_spotted.gd" id="5_hmtlj"]
+[ext_resource type="Script" uid="uid://cbnbvj8prv63i" path="res://addons/beehave/nodes/leaves/condition.gd" id="6_cfxin"]
+[ext_resource type="Script" uid="uid://bsk58vv68t8x4" path="res://enemies/AI/is_player_visible.gd" id="7_5rhrl"]
+[ext_resource type="Script" uid="uid://dovrk8qrs7tdy" path="res://enemies/AI/attack.gd" id="8_llllc"]
+[ext_resource type="Script" uid="uid://cv74jjdrwevpr" path="res://addons/beehave/nodes/leaves/action.gd" id="9_u0bmd"]
+[ext_resource type="Script" uid="uid://dvnmhlldp23hg" path="res://addons/beehave/nodes/composites/selector_random.gd" id="10_tsqjr"]
+
+[node name="SoldierAI" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("1_6pc8k")
+blackboard = NodePath("@Node@33078")
+actor = NodePath("")
+metadata/_custom_type_script = ExtResource("2_bluje")
+
+[node name="MainState" type="Node" parent="."]
+script = ExtResource("3_thg5c")
+metadata/_custom_type_script = ExtResource("3_thg5c")
+
+[node name="PlayerSpotted" type="Node" parent="MainState"]
+script = ExtResource("4_fj2re")
+metadata/_custom_type_script = ExtResource("4_fj2re")
+
+[node name="IsPlayerSpotted" type="Node" parent="MainState/PlayerSpotted"]
+script = ExtResource("5_hmtlj")
+metadata/_custom_type_script = ExtResource("6_cfxin")
+
+[node name="PlayerSpotted" type="Node" parent="MainState/PlayerSpotted"]
+script = ExtResource("3_thg5c")
+metadata/_custom_type_script = ExtResource("3_thg5c")
+
+[node name="Attack" type="Node" parent="MainState/PlayerSpotted/PlayerSpotted"]
+script = ExtResource("4_fj2re")
+metadata/_custom_type_script = ExtResource("4_fj2re")
+
+[node name="IsPlayerVisible" type="Node" parent="MainState/PlayerSpotted/PlayerSpotted/Attack"]
+script = ExtResource("7_5rhrl")
+metadata/_custom_type_script = ExtResource("6_cfxin")
+
+[node name="Attack" type="Node" parent="MainState/PlayerSpotted/PlayerSpotted/Attack"]
+script = ExtResource("8_llllc")
+metadata/_custom_type_script = ExtResource("9_u0bmd")
+
+[node name="Prepare" type="Node" parent="MainState/PlayerSpotted/PlayerSpotted"]
+script = ExtResource("10_tsqjr")
+metadata/_custom_type_script = ExtResource("10_tsqjr")
+
+[node name="Reload" type="Node" parent="MainState/PlayerSpotted/PlayerSpotted/Prepare"]
+script = ExtResource("9_u0bmd")
+metadata/_custom_type_script = ExtResource("9_u0bmd")
+
+[node name="Patrol" type="Node" parent="MainState/PlayerSpotted/PlayerSpotted/Prepare"]
+script = ExtResource("9_u0bmd")
+metadata/_custom_type_script = ExtResource("9_u0bmd")
+
+[node name="IdleSelector" type="Node" parent="MainState"]
+script = ExtResource("10_tsqjr")
+metadata/_custom_type_script = ExtResource("10_tsqjr")
+
+[node name="WalkAround" type="Node" parent="MainState/IdleSelector"]
+script = ExtResource("9_u0bmd")
+metadata/_custom_type_script = ExtResource("9_u0bmd")
+
+[node name="Stand" type="Node" parent="MainState/IdleSelector"]
+script = ExtResource("9_u0bmd")
+metadata/_custom_type_script = ExtResource("9_u0bmd")

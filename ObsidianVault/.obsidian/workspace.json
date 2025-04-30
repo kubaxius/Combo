@@ -11,12 +11,14 @@
             "id": "199de49e5ccaf8e1",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "Worm"
+                "file": "Enemies/Soldier.md",
+                "mode": "source",
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "Worm"
+              "title": "Soldier"
             }
           }
         ]
@@ -201,7 +203,7 @@
       "wikipedia-search:Open Article": false
     }
   },
-  "active": "870994775288da7d",
+  "active": "199de49e5ccaf8e1",
   "lastOpenFiles": [
     "Worm/Worm.md",
     "Worm/space/def.json",
@@ -219,7 +221,7 @@
     "Enemies/Tank.md",
     "Enemies/Anti Aircraft Cannon.md",
     "Enemies/Jumper.md",
-    "Enemies/Common Soldier.md",
+    "Enemies/Soldier.md",
     "Enemies/space/context.mdb",
     "Enemies/space/",
     "Enemies/space",

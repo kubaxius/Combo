@@ -47,7 +47,6 @@ func setup(spawn_point: Vector2, p_rotation: float, p_real_speed: int, p_lifetim
 	global_position = spawn_point
 	rotation = p_rotation
 	lifetime = p_lifetime
-	#_setup_particle_trail()
 
 
 func collide(collision: KinematicCollision2D):

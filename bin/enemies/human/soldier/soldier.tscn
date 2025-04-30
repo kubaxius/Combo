@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://64n3ivho8pr6" path="res://enemies/human/soldier/soldier.gd" id="1_x1lvu"]
 [ext_resource type="Texture2D" uid="uid://brkrqmqi6cgxq" path="res://enemies/assets/soldier.png" id="2_hhxba"]
-[ext_resource type="PackedScene" uid="uid://dccopawm3uan3" path="res://enemies/AI/enemy_ai.tscn" id="3_a7flp"]
+[ext_resource type="PackedScene" uid="uid://dccopawm3uan3" path="res://enemies/AI/soldier_ai.tscn" id="3_a7flp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k8ge"]
 height = 48.0
@@ -12,7 +12,6 @@ position = Vector2(1, -24)
 collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_x1lvu")
-shot_spread = 0.4
 
 [node name="Soldier" type="Sprite2D" parent="."]
 texture = ExtResource("2_hhxba")
@@ -20,4 +19,6 @@ texture = ExtResource("2_hhxba")
 [node name="MainCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_4k8ge")
 
-[node name="EnemyAI" parent="." instance=ExtResource("3_a7flp")]
+[node name="EnemyAI" parent="." node_paths=PackedStringArray("blackboard") instance=ExtResource("3_a7flp")]
+actor_node_path = NodePath("..")
+blackboard = NodePath("@Node@35013")

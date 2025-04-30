@@ -13,5 +13,6 @@ func _plugging():
 	plug("OrigamiDev-Pete/TODO_Manager")
 	plug("arkology/ShaderV")
 	plug("TechnocatDev/2d-shapes")
-	plug("bitbrain/beehave")
+	plug("bitbrain/beehave", {"include": ["addons/beehave/"]})
+	plug("MikeSchulze/gdUnit4")
 	# Rapier2D is compiled, so it can't be installed like this.
