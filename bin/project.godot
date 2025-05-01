@@ -48,6 +48,7 @@ worm=""
 trail_texture_generator_viewport=""
 eatable="Worm can eat this in single bite."
 player="Enemies will react to this node and attack it. Has to be a collision body to work."
+scary="Weak enemies will run from this."
 
 [input]
 
