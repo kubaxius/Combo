@@ -9,7 +9,7 @@ script = ExtResource("1_w6hoc")
 [node name="Ellipse" type="Node2D" parent="."]
 script = ExtResource("1_gt4dy")
 size = Vector2(20, 20)
-metadata/_custom_type_script = ExtResource("1_gt4dy")
+metadata/_custom_type_script = "uid://2ep80vylrvay"
 
 [node name="RemoveTimer" type="Timer" parent="."]
 one_shot = true

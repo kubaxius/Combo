@@ -26,6 +26,15 @@ position = Vector2(-119, 186)
 rotation = 1.5708
 node_to_follow = NodePath("../HeadStop")
 
+[node name="FollowMouse" parent="Worm" index="4"]
+metadata/_custom_type_script = "uid://ckg6s6fhru2uv"
+
+[node name="StateChart" parent="Worm" index="5"]
+metadata/_custom_type_script = "uid://car5i8e3rlaxi"
+
+[node name="ParallelState" parent="Worm/StateChart" index="0"]
+metadata/_custom_type_script = "uid://djulsun506c0b"
+
 [node name="Controls" parent="Worm/StateChart/ParallelState" index="2"]
 initial_state = NodePath("FollowNode")
 

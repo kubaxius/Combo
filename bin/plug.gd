@@ -15,4 +15,6 @@ func _plugging():
 	plug("TechnocatDev/2d-shapes")
 	plug("bitbrain/beehave", {"include": ["addons/beehave/"]})
 	plug("MikeSchulze/gdUnit4")
+	
+	# plug("pixelpen-dev/pixelpen", {"include": ["project/addons/net.yarvis.pixel_pen/"]})
 	# Rapier2D is compiled, so it can't be installed like this.

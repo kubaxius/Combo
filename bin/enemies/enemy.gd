@@ -1,10 +1,12 @@
 class_name Enemy extends CharacterBody2D
 
-@export_range(0, 2000, 5) var sight := 1000
+@export_range(0, 2000, 5) var sight := 2000
 @export_custom(PROPERTY_HINT_RANGE, "1,100,1,suffix:km/h") var real_speed := 5
 var speed:
 	get():
 		return Utils.kmph_to_pps(real_speed)
+
+@export_range(0, 10, 0.1) var running_speed_mult := 2.
 
 signal player_spotted(location: Vector2)
 
@@ -39,33 +41,36 @@ func _sort_by_distance(a:Node2D, b:Node2D):
 	return false
 
 
-func _check_if_player_visible(player: Node2D):
+func is_node_visible(node: Node2D):
 	var space_state = get_world_2d().direct_space_state
 	var ray_from = global_position
-	var ray_to = global_position.direction_to(player.global_position) * sight
+	var ray_to = global_position.direction_to(node.global_position) * sight
 	var query = PhysicsRayQueryParameters2D.create(ray_from, ray_to)
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
 	
-	
 	if not result:
 		return false
-	if not player == result.collider:
+	if not node == result.collider:
 		return false
 	
 	return true
 
-
+# TODO: I think when worm is too far away, the ground blocks closest worm part,
+# which blocks the next one, which blocks the next one, and that goes all the way.
+# Try excluding all enemies from the raycast, and returning the enemy as a valid
+# target if there is no collision, or something like this.
 func get_closest_visible_player() -> Node2D:
 	var players = get_tree().get_nodes_in_group("player")
 	players.sort_custom(_sort_by_distance)
 	
 	for player:Node2D in players:
-		var player_visible = _check_if_player_visible(player)
+		var player_visible = is_node_visible(player)
 		if player_visible:
 			player_spotted.emit(player.global_position)
+			#player.modulate = Color.RED
 			return player
-	
+		#player.modulate = Color.WHITE
 	return null
 
 
@@ -77,4 +82,4 @@ func is_player_visible() -> bool:
 
 
 func got_eaten():
-	queue_free()
+	pass#queue_free()

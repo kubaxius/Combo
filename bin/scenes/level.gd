@@ -4,7 +4,7 @@ var player_spotted = false
 
 
 func _ready() -> void:
-	Debug.debug_mode = true
+	Debug.debug_mode = false
 
 
 @warning_ignore("unused_parameter")

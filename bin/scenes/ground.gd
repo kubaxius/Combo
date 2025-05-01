@@ -1,4 +1,4 @@
-extends TileMapLayer
+class_name Ground extends TileMapLayer
 
 @export var tilegen_margin: Vector2i
 

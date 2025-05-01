@@ -27,7 +27,8 @@ BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
-window/stretch/scale_mode="integer"
+window/stretch/mode="viewport"
+window/size/mode.editor=0
 
 [editor_plugins]
 
@@ -108,4 +109,4 @@ toggle_debug={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.198211, 0.300549, 0.548427, 1)
+environment/defaults/default_clear_color=Color(0.491474, 0.608518, 0.868374, 1)

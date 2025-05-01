@@ -24,7 +24,7 @@ real_boost_component = 9.9
 unique_name_in_owner = true
 script = ExtResource("3_q35mp")
 
-[node name="BasicWormSegment" parent="SegmentsList" groups=["scary"] instance=ExtResource("3_puycw")]
+[node name="BasicWormSegment" parent="SegmentsList" instance=ExtResource("3_puycw")]
 
 [node name="BasicWormSegment2" parent="SegmentsList" instance=ExtResource("3_puycw")]
 
