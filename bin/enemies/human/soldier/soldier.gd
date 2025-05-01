@@ -16,11 +16,12 @@ var bursted_count := 0
 
 var tick := 0.
 func _physics_process(delta: float) -> void:
+	move_and_slide()
 	if tick > 0.2:
-		var target = get_closest_visible_player()
-		if not target:
+		var target_player = get_closest_visible_player()
+		if not target_player:
 			return
-		shoot(target)
+		shoot(target_player.global_position)
 		tick = 0.
 	tick += delta
 
@@ -38,9 +39,9 @@ func _check_if_idle_destination_reached() -> void:
 
 
 func _set_new_idle_destination() -> void:
-	var sign = Utils.get_random_sign(Global.movement_rng)
+	var sgn = Utils.get_random_sign(Global.movement_rng)
 	var offset = Global.movement_rng.randi_range(50, 100)
-	idle_destination += sign * offset
+	idle_destination += sgn * offset
 	Debug.draw_debug_dot(Vector2(idle_destination, 0), 5, true)
 
 
@@ -49,9 +50,9 @@ func _start_moving_to_idle_destination() -> void:
 
 
 var bullet = preload("res://projectiles/bullet/bullet.tscn")
-func shoot(target: Node2D):
+func shoot(target: Vector2):
 	var bullet_inst: Bullet = bullet.instantiate()
-	var direction = -target.global_position.angle_to(global_position) - PI/2
+	var direction = Vector2.RIGHT.angle_to(target - global_position)
 	var direction_deviation = randf_range(-shot_spread, shot_spread)
 	bullet_inst.setup(global_position, direction + direction_deviation, 400, 4)
 	get_parent().add_child(bullet_inst)
@@ -62,5 +63,4 @@ func burst():
 	if not target:
 		return
 	
-	var tween = get_tree().create_tween()
 	
