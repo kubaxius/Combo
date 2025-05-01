@@ -7,10 +7,7 @@ func _ready() -> void:
 	Debug.debug_mode = true
 
 
-func _physics_process(delta: float) -> void:
-	pass
-
-
+@warning_ignore("unused_parameter")
 func _on_player_spotted(loc: Vector2):
 	if player_spotted:
 		return

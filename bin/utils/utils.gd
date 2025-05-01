@@ -30,10 +30,10 @@ static func get_named_parent(node:Node, group_name:String) -> Node:
 # -------------------------------- #
 
 static func get_random_sign(rng:RandomNumberGenerator) -> int:
-	var sign = rng.randi_range(0, 1)
-	if sign == 0:
-		sign = -1
-	return sign
+	var sgn = rng.randi_range(0, 1)
+	if sgn == 0:
+		sgn = -1
+	return sgn
 
 
 static func get_random_color() -> Color:

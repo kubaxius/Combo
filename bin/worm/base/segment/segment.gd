@@ -59,6 +59,7 @@ func _on_ground_checker_grounded_state_changed(grounded: bool, _last_ground: Nod
 		state_chart.send_event("segment_exited_ground")
 
 
+@warning_ignore("unused_parameter")
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	pass#print_debug(event)
 

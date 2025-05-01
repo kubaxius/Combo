@@ -43,6 +43,7 @@ func _remove():
 #          Custom methods          #
 # -------------------------------- #
 
+@warning_ignore("unused_parameter")
 func setup(spawn_point: Vector2, p_rotation: float, p_real_speed: int, p_lifetime: float):
 	global_position = spawn_point
 	rotation = p_rotation
@@ -57,5 +58,6 @@ func collide(collision: KinematicCollision2D):
 	speed = 0
 
 
+@warning_ignore("unused_parameter")
 func deal_damage(player: Node2D):
 	print("dealt " + str(damage) + " damage")
