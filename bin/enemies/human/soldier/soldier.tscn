@@ -1,24 +1,154 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8vnvbdgsafsb"]
+[gd_scene load_steps=19 format=3 uid="uid://b8vnvbdgsafsb"]
 
 [ext_resource type="Script" uid="uid://64n3ivho8pr6" path="res://enemies/human/soldier/soldier.gd" id="1_x1lvu"]
-[ext_resource type="Texture2D" uid="uid://brkrqmqi6cgxq" path="res://enemies/assets/soldier.png" id="2_hhxba"]
+[ext_resource type="Texture2D" uid="uid://c52gk8tpqw5rb" path="res://enemies/human/soldier/spritesheet.png" id="2_a7flp"]
 [ext_resource type="PackedScene" uid="uid://dccopawm3uan3" path="res://enemies/AI/soldier_ai.tscn" id="3_a7flp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k8ge"]
 height = 48.0
+
+[sub_resource type="Animation" id="Animation_ipmao"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoldierSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hhmaw"]
+resource_name = "stand"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoldierSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_a7flp"]
+resource_name = "walk_left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoldierSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.49),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_c4e0d"]
+resource_name = "walk_right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoldierSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_x1lvu"]
+resource_name = "burst"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x1lvu"]
+_data = {
+&"RESET": SubResource("Animation_ipmao"),
+&"burst": SubResource("Animation_x1lvu"),
+&"stand": SubResource("Animation_hhmaw"),
+&"walk_left": SubResource("Animation_a7flp"),
+&"walk_right": SubResource("Animation_c4e0d")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hhxba"]
+animation = &"walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1amvy"]
+animation = &"walk_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_wga1v"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_hhxba")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_1amvy")
+blend_point_1/pos = -1.0
+value_label = "x"
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a7flp"]
+animation = &"stand"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hhmaw"]
+advance_mode = 2
+advance_expression = "velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a7flp"]
+advance_mode = 2
+advance_expression = "!velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c4e0d"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_24wrp"]
+states/Start/position = Vector2(169, 100)
+states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wga1v")
+states/Walk/position = Vector2(348, 30)
+states/stand/node = SubResource("AnimationNodeAnimation_a7flp")
+states/stand/position = Vector2(348, 137)
+transitions = ["stand", "Walk", SubResource("AnimationNodeStateMachineTransition_hhmaw"), "Walk", "stand", SubResource("AnimationNodeStateMachineTransition_a7flp"), "Start", "stand", SubResource("AnimationNodeStateMachineTransition_c4e0d")]
+graph_offset = Vector2(-130, -90)
 
 [node name="Soldier" type="CharacterBody2D" groups=["eatable"]]
 position = Vector2(1, -24)
 collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_x1lvu")
+shot_spread = null
+shots_per_burst = null
+sight = null
+real_speed = null
 
-[node name="Soldier" type="Sprite2D" parent="."]
-texture = ExtResource("2_hhxba")
+[node name="SoldierSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_a7flp")
+hframes = 2
+vframes = 3
 
 [node name="MainCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_4k8ge")
 
 [node name="EnemyAI" parent="." node_paths=PackedStringArray("blackboard") instance=ExtResource("3_a7flp")]
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@35013")
+blackboard = NodePath("@Node@57901")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x1lvu")
+}
+autoplay = "stand"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_24wrp")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Walk/blend_position = -0.487644
