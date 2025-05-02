@@ -41,6 +41,24 @@ func _sort_by_distance(a:Node2D, b:Node2D):
 	return false
 
 
+## Casts a ray in the specified direction and returns first player it hits.
+## Otherwise returns null.
+func get_closest_player_in_line(pos: Vector2):
+	var space_state = get_world_2d().direct_space_state
+	var ray_from = global_position
+	var ray_to = global_position.direction_to(pos) * sight
+	var query = PhysicsRayQueryParameters2D.create(ray_from, ray_to)
+	query.exclude = [self]
+	var result := space_state.intersect_ray(query)
+	
+	if not result:
+		return null
+	if not result.collider.is_in_group("player"):
+		return false
+	
+	return result.collider
+
+
 func is_node_visible(node: Node2D):
 	var space_state = get_world_2d().direct_space_state
 	var ray_from = global_position
@@ -56,6 +74,7 @@ func is_node_visible(node: Node2D):
 	
 	return true
 
+
 # TODO: I think when worm is too far away, the ground blocks closest worm part,
 # which blocks the next one, which blocks the next one, and that goes all the way.
 # Try excluding all enemies from the raycast, and returning the enemy as a valid
@@ -65,8 +84,8 @@ func get_closest_visible_player() -> Node2D:
 	players.sort_custom(_sort_by_distance)
 	
 	for player:Node2D in players:
-		var player_visible = is_node_visible(player)
-		if player_visible:
+		var visible_player_in_line = get_closest_player_in_line(player.global_position)
+		if visible_player_in_line:
 			player_spotted.emit(player.global_position)
 			#player.modulate = Color.RED
 			return player

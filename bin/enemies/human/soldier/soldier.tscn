@@ -171,10 +171,9 @@ vframes = 3
 [node name="MainCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_4k8ge")
 
-[node name="EnemyAI" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_a7flp")]
+[node name="EnemyAI" parent="." node_paths=PackedStringArray("blackboard") instance=ExtResource("3_a7flp")]
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@64411")
-actor = NodePath("..")
+blackboard = NodePath("@Node@28634")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
