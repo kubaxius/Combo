@@ -1,12 +1,12 @@
 [gd_scene load_steps=14 format=3 uid="uid://dsqvt1sqlawyv"]
 
-[ext_resource type="Script" uid="uid://cmaolrnwa4ykp" path="res://worm/base/worm.gd" id="1_bdlk6"]
-[ext_resource type="PackedScene" uid="uid://camjvgx5kvtmh" path="res://worm/heads/basic_head.tscn" id="2_7haj8"]
-[ext_resource type="PackedScene" uid="uid://60b4o56c3hdd" path="res://worm/segments/basic_segment.tscn" id="3_puycw"]
-[ext_resource type="Script" uid="uid://bl52pjxf7ysd5" path="res://worm/base/segments.gd" id="3_q35mp"]
-[ext_resource type="Script" uid="uid://basltku41sxt1" path="res://worm/base/worm_path.gd" id="5_2gpbu"]
-[ext_resource type="Script" uid="uid://drmfg37hppgt1" path="res://worm/base/components/pc_controls.gd" id="6_onaht"]
-[ext_resource type="Script" uid="uid://ckg6s6fhru2uv" path="res://worm/base/follow_mouse.gd" id="7_hn83r"]
+[ext_resource type="Script" uid="uid://cmaolrnwa4ykp" path="res://worm_old/base/worm.gd" id="1_bdlk6"]
+[ext_resource type="PackedScene" uid="uid://camjvgx5kvtmh" path="res://worm_old/heads/basic_head.tscn" id="2_7haj8"]
+[ext_resource type="PackedScene" uid="uid://60b4o56c3hdd" path="res://worm_old/segments/basic_segment.tscn" id="3_puycw"]
+[ext_resource type="Script" uid="uid://bl52pjxf7ysd5" path="res://worm_old/base/segments.gd" id="3_q35mp"]
+[ext_resource type="Script" uid="uid://basltku41sxt1" path="res://worm_old/base/worm_path.gd" id="5_2gpbu"]
+[ext_resource type="Script" uid="uid://drmfg37hppgt1" path="res://worm_old/base/components/pc_controls.gd" id="6_onaht"]
+[ext_resource type="Script" uid="uid://ckg6s6fhru2uv" path="res://worm_old/base/follow_mouse.gd" id="7_hn83r"]
 [ext_resource type="Script" uid="uid://car5i8e3rlaxi" path="res://addons/godot_state_charts/state_chart.gd" id="7_yqsnl"]
 [ext_resource type="Script" uid="uid://djulsun506c0b" path="res://addons/godot_state_charts/parallel_state.gd" id="8_5yju7"]
 [ext_resource type="Script" uid="uid://6rnr5ee3s4j3" path="res://addons/godot_state_charts/compound_state.gd" id="9_yjgjt"]
@@ -99,15 +99,15 @@ script = ExtResource("6_onaht")
 [node name="FollowMouse" type="Node2D" parent="."]
 script = ExtResource("7_hn83r")
 direction_from = NodePath("../Head")
-metadata/_custom_type_script = ExtResource("7_hn83r")
+metadata/_custom_type_script = "uid://ckg6s6fhru2uv"
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("7_yqsnl")
-metadata/_custom_type_script = ExtResource("7_yqsnl")
+metadata/_custom_type_script = "uid://car5i8e3rlaxi"
 
 [node name="ParallelState" type="Node" parent="StateChart"]
 script = ExtResource("8_5yju7")
-metadata/_custom_type_script = ExtResource("8_5yju7")
+metadata/_custom_type_script = "uid://djulsun506c0b"
 
 [node name="Boost" type="Node" parent="StateChart/ParallelState"]
 script = ExtResource("9_yjgjt")

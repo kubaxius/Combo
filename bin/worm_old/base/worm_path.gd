@@ -5,7 +5,7 @@ class_name WormPath extends Path2D
 @export_node_path("WormHead") var worm_head_path
 @onready var worm_head = get_node(worm_head_path)
 
-var path_follower_res = preload("res://worm/base/segment/path_follower.tscn")
+var path_follower_res = preload("res://worm_old/base/segment/path_follower.tscn")
 
 var max_length:int
 
