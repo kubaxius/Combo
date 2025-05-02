@@ -23,8 +23,6 @@ func _physics_process(delta: float) -> void:
 	choose_target()
 	super(delta)
 
-	
-
 
 # -------------------------------- #
 #          Custom methods          #
@@ -79,3 +77,7 @@ func is_mag_empty() -> bool:
 	if bullets_in_mag == 0:
 		return true
 	return false
+
+
+func reload() -> void:
+	bullets_in_mag = mag_capacity

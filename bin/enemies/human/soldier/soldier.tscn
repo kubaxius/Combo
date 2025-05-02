@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://b8vnvbdgsafsb"]
+[gd_scene load_steps=30 format=3 uid="uid://b8vnvbdgsafsb"]
 
 [ext_resource type="Script" uid="uid://64n3ivho8pr6" path="res://enemies/human/soldier/soldier.gd" id="1_x1lvu"]
 [ext_resource type="Texture2D" uid="uid://c52gk8tpqw5rb" path="res://enemies/human/soldier/spritesheet.png" id="2_a7flp"]
 [ext_resource type="PackedScene" uid="uid://dccopawm3uan3" path="res://enemies/AI/soldier_ai.tscn" id="3_a7flp"]
 [ext_resource type="Script" uid="uid://dee731rekev1e" path="res://enemies/human/soldier/animation_tree.gd" id="4_c4e0d"]
+[ext_resource type="Script" uid="uid://dwfvn6e5bss5n" path="res://components/pushable.gd" id="5_hhmaw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k8ge"]
 height = 48.0
@@ -21,6 +22,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_x1lvu"]
@@ -44,6 +57,35 @@ tracks/0/keys = {
 "args": [],
 "method": &"shoot_target"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_hhxba"]
+resource_name = "reload"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"reload"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(8.57419, 1),
+"update": 0,
+"values": [Color(1, 0.356863, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_hhmaw"]
@@ -98,6 +140,7 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_ipmao"),
 &"burst": SubResource("Animation_x1lvu"),
+&"reload": SubResource("Animation_hhxba"),
 &"stand": SubResource("Animation_hhmaw"),
 &"walk_left": SubResource("Animation_a7flp"),
 &"walk_right": SubResource("Animation_c4e0d")
@@ -119,6 +162,9 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c4e0d"]
 animation = &"burst"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hhmaw"]
+animation = &"reload"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a7flp"]
 animation = &"stand"
@@ -144,23 +190,34 @@ advance_mode = 2
 advance_mode = 2
 advance_expression = "velocity"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1amvy"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0p7st"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wga1v"]
+advance_mode = 2
+advance_condition = &"velocity"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_24wrp"]
-states/Start/position = Vector2(157, 137)
+states/Start/position = Vector2(348, 297)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wga1v")
-states/Walk/position = Vector2(348, 30)
+states/Walk/position = Vector2(348, -17)
 states/burst/node = SubResource("AnimationNodeAnimation_c4e0d")
-states/burst/position = Vector2(537, 83)
+states/burst/position = Vector2(552, 137)
+states/reload/node = SubResource("AnimationNodeAnimation_hhmaw")
+states/reload/position = Vector2(156, 137)
 states/stand/node = SubResource("AnimationNodeAnimation_a7flp")
 states/stand/position = Vector2(348, 137)
-transitions = ["stand", "Walk", SubResource("AnimationNodeStateMachineTransition_hhmaw"), "Walk", "stand", SubResource("AnimationNodeStateMachineTransition_a7flp"), "Start", "stand", SubResource("AnimationNodeStateMachineTransition_c4e0d"), "stand", "burst", SubResource("AnimationNodeStateMachineTransition_ipmao"), "burst", "stand", SubResource("AnimationNodeStateMachineTransition_x1lvu"), "burst", "Walk", SubResource("AnimationNodeStateMachineTransition_hhxba")]
-graph_offset = Vector2(-154, -41)
+transitions = ["stand", "Walk", SubResource("AnimationNodeStateMachineTransition_hhmaw"), "Walk", "stand", SubResource("AnimationNodeStateMachineTransition_a7flp"), "Start", "stand", SubResource("AnimationNodeStateMachineTransition_c4e0d"), "stand", "burst", SubResource("AnimationNodeStateMachineTransition_ipmao"), "burst", "stand", SubResource("AnimationNodeStateMachineTransition_x1lvu"), "burst", "Walk", SubResource("AnimationNodeStateMachineTransition_hhxba"), "stand", "reload", SubResource("AnimationNodeStateMachineTransition_1amvy"), "reload", "stand", SubResource("AnimationNodeStateMachineTransition_0p7st"), "reload", "Walk", SubResource("AnimationNodeStateMachineTransition_wga1v")]
+graph_offset = Vector2(-227, -140)
 
 [node name="Soldier" type="CharacterBody2D" groups=["eatable"]]
-position = Vector2(1, -24)
+position = Vector2(0, -24)
 collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_x1lvu")
-mag_capacity = -1
 running_speed_mult = 4.0
 
 [node name="SoldierSprite" type="Sprite2D" parent="."]
@@ -171,9 +228,10 @@ vframes = 3
 [node name="MainCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_4k8ge")
 
-[node name="EnemyAI" parent="." node_paths=PackedStringArray("blackboard") instance=ExtResource("3_a7flp")]
+[node name="EnemyAI" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_a7flp")]
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@28634")
+blackboard = NodePath("@Node@35337")
+actor = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -184,5 +242,9 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_24wrp")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/velocity = false
 parameters/Walk/blend_position = -0.103789
 script = ExtResource("4_c4e0d")
+
+[node name="PushableComp" type="Node" parent="."]
+script = ExtResource("5_hhmaw")

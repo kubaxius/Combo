@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dccopawm3uan3"]
+[gd_scene load_steps=14 format=3 uid="uid://dccopawm3uan3"]
 
 [ext_resource type="Script" uid="uid://d20g578nwn8cs" path="res://enemies/AI/soldier_ai.gd" id="1_6pc8k"]
 [ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="3_thg5c"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cbnbvj8prv63i" path="res://addons/beehave/nodes/leaves/condition.gd" id="6_cfxin"]
 [ext_resource type="Script" uid="uid://bsk58vv68t8x4" path="res://enemies/AI/is_player_visible.gd" id="7_5rhrl"]
 [ext_resource type="Script" uid="uid://cgm84k7lllifa" path="res://enemies/AI/is_scary_too_close.gd" id="7_bluje"]
+[ext_resource type="Script" uid="uid://bnpd2obdb3br3" path="res://enemies/AI/reload.gd" id="8_fj2re"]
 [ext_resource type="Script" uid="uid://dovrk8qrs7tdy" path="res://enemies/AI/attack.gd" id="8_llllc"]
 [ext_resource type="Script" uid="uid://cmn7vrbqtnjey" path="res://enemies/AI/retreat.gd" id="8_thg5c"]
 [ext_resource type="Script" uid="uid://cv74jjdrwevpr" path="res://addons/beehave/nodes/leaves/action.gd" id="9_u0bmd"]
@@ -16,7 +17,7 @@
 [node name="SoldierAI" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_6pc8k")
 blackboard = NodePath("@Node@21977")
-actor = NodePath("..")
+actor = NodePath("")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
 [node name="MainState" type="Node" parent="."]
@@ -56,7 +57,7 @@ script = ExtResource("10_fj2re")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
 [node name="Reload" type="Node" parent="MainState/PlayerSpotted/PlayerSpotted/Reload"]
-script = ExtResource("9_u0bmd")
+script = ExtResource("8_fj2re")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
 [node name="Attack" type="Node" parent="MainState/PlayerSpotted/PlayerSpotted"]
