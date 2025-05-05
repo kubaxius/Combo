@@ -1,5 +1,5 @@
 @icon("res://components/component_icon.svg")
-class_name LeaveTrailComp extends Node
+class_name LeaveTrailComponent extends Node
 ## This component makes that it's parent traces a transparent trail in the ground.
 ##
 ## It is mainly used by the worm segments, but it can also be applied to
