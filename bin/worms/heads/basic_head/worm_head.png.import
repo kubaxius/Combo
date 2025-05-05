@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bncyhw4v2cw1u"
-path="res://.godot/imported/worm_head.png-fc2c9c42ea0a5d2651e3ade7cf4cd851.ctex"
+path="res://.godot/imported/worm_head.png-d6c831c4841ef3bfa324cf173b6c4b38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://worm_old/assets/worm_head.png"
-dest_files=["res://.godot/imported/worm_head.png-fc2c9c42ea0a5d2651e3ade7cf4cd851.ctex"]
+source_file="res://worms/heads/basic_head/worm_head.png"
+dest_files=["res://.godot/imported/worm_head.png-d6c831c4841ef3bfa324cf173b6c4b38.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://camjvgx5kvtmh"]
 
 [ext_resource type="Script" uid="uid://lsuqgvu148ih" path="res://worm_old/base/head/head.gd" id="1_asjjq"]
-[ext_resource type="Texture2D" uid="uid://bncyhw4v2cw1u" path="res://worm_old/assets/worm_head.png" id="3_lnd62"]
+[ext_resource type="Texture2D" uid="uid://bncyhw4v2cw1u" path="res://worms/heads/basic_head/worm_head.png" id="3_lnd62"]
 [ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="4_bnwxt"]
 [ext_resource type="Script" uid="uid://car5i8e3rlaxi" path="res://addons/godot_state_charts/state_chart.gd" id="5_jg30f"]
 [ext_resource type="Script" uid="uid://w1w66en5t7v1" path="res://worm_old/base/components/ground_checker.gd" id="5_xreio"]

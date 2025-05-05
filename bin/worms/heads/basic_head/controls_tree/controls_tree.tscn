@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpmarjdg1486y"]
+
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_laf2x"]
+[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_ja1kr"]
+[ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="3_ijyeq"]
+[ext_resource type="Script" uid="uid://hnpfgni0iljf" path="res://worms/heads/basic_head/controls_tree/is_stop_button_pressed.gd" id="4_u5qvs"]
+[ext_resource type="Script" uid="uid://cdcoyvh4c7q0s" path="res://worms/heads/basic_head/controls_tree/stop_moving.gd" id="5_hismy"]
+[ext_resource type="Script" uid="uid://cuo1dqye7hhiy" path="res://worms/heads/basic_head/controls_tree/set_desired_facing_vector.gd" id="6_ja1kr"]
+[ext_resource type="Script" uid="uid://bpd1ggh7mlg48" path="res://worms/heads/basic_head/controls_tree/set_desired_forward_velocity.gd" id="7_ja1kr"]
+
+[node name="ControlsTree" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("1_laf2x")
+blackboard = NodePath("@Node@22035")
+actor = NodePath("")
+metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+
+[node name="ChooseMovementMode" type="Node" parent="."]
+script = ExtResource("2_ja1kr")
+metadata/_custom_type_script = "uid://cw22yurt5l74k"
+
+[node name="StopMoving" type="Node" parent="ChooseMovementMode"]
+script = ExtResource("3_ijyeq")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="IsStopButtonPressed" type="Node" parent="ChooseMovementMode/StopMoving"]
+script = ExtResource("4_u5qvs")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="StopMoving" type="Node" parent="ChooseMovementMode/StopMoving"]
+script = ExtResource("5_hismy")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="Move" type="Node" parent="ChooseMovementMode"]
+script = ExtResource("3_ijyeq")
+metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
+
+[node name="SetDesiredFacingVector" type="Node" parent="ChooseMovementMode/Move"]
+script = ExtResource("6_ja1kr")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="SetDesiredSpeed" type="Node" parent="ChooseMovementMode/Move"]
+script = ExtResource("7_ja1kr")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"

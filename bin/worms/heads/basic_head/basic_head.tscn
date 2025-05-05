@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://r0tky88eb2g2"]
+
+[ext_resource type="Texture2D" uid="uid://bncyhw4v2cw1u" path="res://worms/heads/basic_head/worm_head.png" id="1_h1tge"]
+[ext_resource type="Script" uid="uid://dlddtkktf3u1n" path="res://worms/heads/basic_head/basic_head.gd" id="1_jdf43"]
+[ext_resource type="PackedScene" uid="uid://cpmarjdg1486y" path="res://worms/heads/basic_head/controls_tree/controls_tree.tscn" id="3_1pd0a"]
+[ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="4_bnkco"]
+
+[sub_resource type="Curve" id="Curve_bnkco"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.3542, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdf43"]
+radius = 41.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1pd0a"]
+height = 82.0
+
+[node name="Head" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_jdf43")
+acceleration_curve = SubResource("Curve_bnkco")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = 1.57079
+texture = ExtResource("1_h1tge")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jdf43")
+
+[node name="Mouth" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Mouth"]
+position = Vector2(33, 0)
+rotation = 3.14159
+shape = SubResource("CapsuleShape2D_1pd0a")
+debug_color = Color(0.943617, 0.105564, 0.532145, 0.42)
+
+[node name="ControlsTree" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_1pd0a")]
+blackboard = NodePath("@Node@74358")
+actor = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="LeaveTrailComponent" type="Node" parent="."]
+script = ExtResource("4_bnkco")
+texture = ExtResource("1_h1tge")
+metadata/_custom_type_script = "uid://c23msscfhcgae"
