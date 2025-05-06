@@ -1,13 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://r0tky88eb2g2"]
+[gd_scene load_steps=10 format=3 uid="uid://r0tky88eb2g2"]
 
 [ext_resource type="Texture2D" uid="uid://bncyhw4v2cw1u" path="res://worms/heads/basic_head/worm_head.png" id="1_h1tge"]
 [ext_resource type="Script" uid="uid://dlddtkktf3u1n" path="res://worms/heads/basic_head/basic_head.gd" id="1_jdf43"]
 [ext_resource type="PackedScene" uid="uid://cpmarjdg1486y" path="res://worms/heads/basic_head/controls_tree/controls_tree.tscn" id="3_1pd0a"]
 [ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="4_bnkco"]
+[ext_resource type="Script" uid="uid://c38r1tlllit7v" path="res://components/is_in_ground.gd" id="5_exv2o"]
 
 [sub_resource type="Curve" id="Curve_bnkco"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.3542, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_exv2o"]
+_limits = [0.0, 1.0, 0.0, 400.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(10.3704, 1), 0.0, 0.0, 0, 0, Vector2(120, 0.478102), -0.00232913, -0.00232913, 0, 0, Vector2(400, 0.0416058), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdf43"]
 radius = 41.0
@@ -19,6 +25,9 @@ height = 82.0
 motion_mode = 1
 script = ExtResource("1_jdf43")
 acceleration_curve = SubResource("Curve_bnkco")
+turning_speed_curve = SubResource("Curve_exv2o")
+turning_speed_multiplier_while_airborn = 0.3
+real_gravity = 19.9
 
 [node name="Sprite" type="Sprite2D" parent="."]
 rotation = 1.57079
@@ -36,7 +45,7 @@ shape = SubResource("CapsuleShape2D_1pd0a")
 debug_color = Color(0.943617, 0.105564, 0.532145, 0.42)
 
 [node name="ControlsTree" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_1pd0a")]
-blackboard = NodePath("@Node@74358")
+blackboard = NodePath("@Node@45603")
 actor = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -45,3 +54,9 @@ actor = NodePath("..")
 script = ExtResource("4_bnkco")
 texture = ExtResource("1_h1tge")
 metadata/_custom_type_script = "uid://c23msscfhcgae"
+
+[node name="IsInGroundComponent" type="Marker2D" parent="."]
+script = ExtResource("5_exv2o")
+metadata/_custom_type_script = "uid://c38r1tlllit7v"
+
+[connection signal="ground_state_changed" from="IsInGroundComponent" to="." method="_on_grounded_state_changed"]

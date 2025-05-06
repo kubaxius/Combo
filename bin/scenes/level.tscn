@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxluvvv4avrb"]
+[gd_scene load_steps=7 format=3 uid="uid://cxluvvv4avrb"]
 
 [ext_resource type="Script" uid="uid://bqsvglxlmj6y7" path="res://scenes/level.gd" id="1_2r41h"]
 [ext_resource type="PackedScene" uid="uid://bsn2hwpxx6gcs" path="res://scenes/ground.tscn" id="2_klq6b"]
 [ext_resource type="PackedScene" uid="uid://bxlelx0hpihla" path="res://hud/hud.tscn" id="3_b121j"]
 [ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="5_olg7q"]
 [ext_resource type="PackedScene" uid="uid://r0tky88eb2g2" path="res://worms/heads/basic_head/basic_head.tscn" id="6_2r41h"]
-[ext_resource type="PackedScene" uid="uid://b8vnvbdgsafsb" path="res://enemies/human/soldier/soldier.tscn" id="6_t1rx8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0m7cd"]
 size = Vector2(128, 128)
@@ -31,9 +30,7 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_0m7cd")
 metadata/_edit_lock_ = true
 
-[node name="Soldier" parent="." instance=ExtResource("6_t1rx8")]
-position = Vector2(1, -27)
-
 [node name="Head" parent="." instance=ExtResource("6_2r41h")]
+position = Vector2(130, -107)
 
 [editable path="Hud"]

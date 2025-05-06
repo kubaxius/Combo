@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 script = ExtResource("3_ijyeq")
 metadata/_custom_type_script = "uid://dcojdhvj8qcw0"
 
-[node name="SetDesiredFacingVector" type="Node" parent="ChooseMovementMode/Move"]
+[node name="SetDesiredMovementDirection" type="Node" parent="ChooseMovementMode/Move"]
 script = ExtResource("6_ja1kr")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
