@@ -12,5 +12,5 @@ func _ready() -> void:
 
 
 func delay_enable():
-	var timer := get_tree().create_timer(0.3)
+	var timer := get_tree().create_timer(1.)
 	timer.timeout.connect(enable)

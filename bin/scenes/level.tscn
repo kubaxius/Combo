@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxluvvv4avrb"]
+[gd_scene load_steps=9 format=3 uid="uid://cxluvvv4avrb"]
 
 [ext_resource type="Script" uid="uid://bqsvglxlmj6y7" path="res://scenes/level.gd" id="1_2r41h"]
 [ext_resource type="PackedScene" uid="uid://b8vnvbdgsafsb" path="res://enemies/human/soldier/soldier.tscn" id="2_2r41h"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bxlelx0hpihla" path="res://hud/hud.tscn" id="3_b121j"]
 [ext_resource type="Texture2D" uid="uid://yffmvh1uh872" path="res://icon.svg" id="5_olg7q"]
 [ext_resource type="PackedScene" uid="uid://ctj5kuremwk38" path="res://worm/worm.tscn" id="5_ppgk2"]
+[ext_resource type="Script" uid="uid://cmdsiprs4n4dc" path="res://components/collision_reaction.gd" id="6_klq6b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0m7cd"]
 size = Vector2(128, 128)
@@ -24,7 +25,7 @@ position = Vector2(63, -55)
 initial_node_to_watch = NodePath("../../../BasicWorm")
 
 [node name="TestBody" type="RigidBody2D" parent="."]
-position = Vector2(-946, -206)
+position = Vector2(307, -286)
 collision_layer = 4
 collision_mask = 3
 
@@ -36,6 +37,10 @@ metadata/_edit_lock_ = true
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_0m7cd")
 metadata/_edit_lock_ = true
+
+[node name="CollisionReactionComponent" type="Node" parent="TestBody"]
+script = ExtResource("6_klq6b")
+metadata/_custom_type_script = "uid://cmdsiprs4n4dc"
 
 [node name="BasicWorm" parent="." instance=ExtResource("5_ppgk2")]
 position = Vector2(-922, 899)
