@@ -2,6 +2,7 @@ class_name WormSegmentPathFollower extends PathFollow2D
 
 var enabled := false
 var segment:WormSegment
+@onready var worm_controller:WormController = get_tree().get_nodes_in_group("worm_controller")[0]
 
 # -------------------------------- #
 #         Built-in methods         #
@@ -34,7 +35,7 @@ func _on_path_changed() -> void:
 var distance_traveled = 0
 func _move(delta):
 	progress = distance_traveled-segment.pixel_position_in_worm
-	distance_traveled += segment.current_speed*delta
+	distance_traveled += worm_controller.velocity.length()*delta
 
 
 func _reset_movement():

@@ -1,6 +1,6 @@
-class_name WormSegmentsList extends Node2D
+class_name WormSegmentsContainer extends Node2D
 
-signal segments_changed(segments_list:WormSegmentsList)
+signal segments_changed(segments_list:WormSegmentsContainer)
 
 
 # -------------------------------- #

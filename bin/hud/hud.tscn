@@ -72,6 +72,7 @@ offset_right = -75.0
 offset_bottom = -51.0
 grow_horizontal = 0
 grow_vertical = 0
+max_value = 300.0
 texture_under = ExtResource("2_w8tcp")
 texture_over = ExtResource("3_svhta")
 texture_progress = ExtResource("4_fjv1a")

@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctj5kuremwk38"]
+
+[ext_resource type="Script" uid="uid://osft22a8idjx" path="res://worm/worm_controller.gd" id="1_t086d"]
+[ext_resource type="PackedScene" uid="uid://r0tky88eb2g2" path="res://worm/heads/basic/basic_head.tscn" id="2_tafjd"]
+[ext_resource type="Script" uid="uid://bl52pjxf7ysd5" path="res://worm/segments_container.gd" id="3_5rlts"]
+[ext_resource type="PackedScene" uid="uid://60b4o56c3hdd" path="res://worm/segments/basic/basic_segment.tscn" id="4_wokbb"]
+[ext_resource type="Script" uid="uid://basltku41sxt1" path="res://worm/worm_path.gd" id="5_d3bla"]
+
+[sub_resource type="Curve2D" id="Curve2D_ewxo7"]
+
+[node name="Worm" type="Node2D" groups=["worm_controller"]]
+script = ExtResource("1_t086d")
+
+[node name="WormSegmentsList" type="Node2D" parent="."]
+script = ExtResource("3_5rlts")
+metadata/_custom_type_script = "uid://bl52pjxf7ysd5"
+
+[node name="BasicWormSegment" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment9" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment10" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment11" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment12" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment13" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment14" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment15" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment16" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment17" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment18" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment19" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment20" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment21" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment22" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment2" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment3" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment4" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment5" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment6" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment7" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="BasicWormSegment8" parent="WormSegmentsList" instance=ExtResource("4_wokbb")]
+
+[node name="Head" parent="." instance=ExtResource("2_tafjd")]
+unique_name_in_owner = true
+collision_mask = 92
+
+[node name="WormPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ewxo7")
+script = ExtResource("5_d3bla")
+worm_head_path = NodePath("../Head")
+metadata/_custom_type_script = "uid://basltku41sxt1"
+
+[connection signal="child_order_changed" from="WormSegmentsList" to="WormSegmentsList" method="_on_child_order_changed"]
+[connection signal="segments_changed" from="WormSegmentsList" to="WormPath" method="_on_segments_changed"]

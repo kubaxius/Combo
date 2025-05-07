@@ -5,24 +5,10 @@ class_name WormSegment extends RigidBody2D
 
 @onready var part_before:Node2D = get_parent().get_segment_at_position(get_index() - 1)
 
-@onready var state_chart = $StateChart
-
 var current_speed
 var pixel_position_in_worm:int
 var path_follower:WormSegmentPathFollower
 var pull_power = 2.
-
-var is_in_ground:
-	get:
-		return $StateChart/ParallelState/InGround/Grounded.active
-
-
-# -------------------------------- #
-#        Setters and getters       #
-# -------------------------------- #
- 
-func _set_current_speed(val:float) -> void:
-	current_speed = val
 
 
 # -------------------------------- #
@@ -30,18 +16,19 @@ func _set_current_speed(val:float) -> void:
 # -------------------------------- #
 
 func _ready() -> void:
-	add_to_group("player")
 	input_pickable = false
 	_update_pixel_position_in_worm()
 	freeze = true
-	position.y = pixel_position_in_worm
+	position.x = -pixel_position_in_worm
 	_connect_to_preceding()
 	freeze = false
 	
-	var worm:Worm = Utils.get_parent_from_group(self, "worm")
-	worm.current_speed_changed.connect(_set_current_speed)
-	var segments_list:WormSegmentsList = get_parent()
+	var segments_list:WormSegmentsContainer = get_parent()
 	segments_list.segments_changed.connect(_on_segments_changed)
+
+
+func _physics_process(delta: float) -> void:
+	_pull_to_point(path_follower.global_position)
 
 
 # -------------------------------- #
@@ -50,18 +37,6 @@ func _ready() -> void:
 
 func _on_segments_changed(_segments_list):
 	_update_pixel_position_in_worm()
-
-
-func _on_ground_checker_grounded_state_changed(grounded: bool, _last_ground: Node2D) -> void:
-	if grounded:
-		state_chart.send_event("segment_entered_ground")
-	else:
-		state_chart.send_event("segment_exited_ground")
-
-
-@warning_ignore("unused_parameter")
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	pass#print_debug(event)
 
 
 # -------------------------------- #
@@ -73,13 +48,9 @@ func _on_grounded_state_entered():
 	pull_power = 1.
 
 
-func _on_airborn_state_entered():
+func _on_airborne_state_entered():
 	#gravity_scale = 1
 	pull_power = 1.
-
-
-func _on_worm_path_state_physics_processing(_delta: float) -> void:
-	_pull_to_point(path_follower.global_position)
 
 
 func _on_docked_state_entered() -> void:
@@ -114,8 +85,3 @@ func _update_pixel_position_in_worm() -> void:
 func _pull_to_point(point:Vector2) -> void:
 	var force = point - global_position
 	apply_central_force(force * 100000 * pull_power)
-
-
-func docked(dock:Path2D):
-	dock_path = dock
-	$StateChart.send_event("docked")

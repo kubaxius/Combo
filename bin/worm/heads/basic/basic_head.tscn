@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://r0tky88eb2g2"]
 
-[ext_resource type="Texture2D" uid="uid://bncyhw4v2cw1u" path="res://worms/heads/basic_head/worm_head.png" id="1_h1tge"]
-[ext_resource type="Script" uid="uid://dlddtkktf3u1n" path="res://worms/heads/basic_head/basic_head.gd" id="1_jdf43"]
-[ext_resource type="PackedScene" uid="uid://cpmarjdg1486y" path="res://worms/heads/basic_head/controls_tree/controls_tree.tscn" id="3_1pd0a"]
+[ext_resource type="Script" uid="uid://dlddtkktf3u1n" path="res://worm/heads/basic/basic_head.gd" id="1_jdf43"]
+[ext_resource type="Texture2D" uid="uid://dq70k3f7x5jhm" path="res://worm/heads/basic/worm_head_basic.png" id="2_63p3v"]
+[ext_resource type="PackedScene" uid="uid://cpmarjdg1486y" path="res://worm/heads/head/controls_tree/controls_tree.tscn" id="3_1pd0a"]
 [ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="4_bnkco"]
-[ext_resource type="Script" uid="uid://c38r1tlllit7v" path="res://components/is_in_ground.gd" id="5_exv2o"]
+[ext_resource type="PackedScene" uid="uid://c5sks7km6iisr" path="res://worm/part/ground_checker.tscn" id="5_63p3v"]
 
 [sub_resource type="Curve" id="Curve_bnkco"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.3542, 0.0, 0, 0]
@@ -21,7 +21,7 @@ radius = 41.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1pd0a"]
 height = 82.0
 
-[node name="Head" type="CharacterBody2D"]
+[node name="Head" type="CharacterBody2D" groups=["player", "scary", "worm"]]
 motion_mode = 1
 script = ExtResource("1_jdf43")
 acceleration_curve = SubResource("Curve_bnkco")
@@ -30,8 +30,7 @@ turning_speed_multiplier_while_airborn = 0.3
 real_gravity = 19.9
 
 [node name="Sprite" type="Sprite2D" parent="."]
-rotation = 1.57079
-texture = ExtResource("1_h1tge")
+texture = ExtResource("2_63p3v")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jdf43")
@@ -45,18 +44,19 @@ shape = SubResource("CapsuleShape2D_1pd0a")
 debug_color = Color(0.943617, 0.105564, 0.532145, 0.42)
 
 [node name="ControlsTree" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_1pd0a")]
-blackboard = NodePath("@Node@45603")
+blackboard = NodePath("@Node@111840")
 actor = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="LeaveTrailComponent" type="Node" parent="."]
 script = ExtResource("4_bnkco")
-texture = ExtResource("1_h1tge")
+texture = ExtResource("2_63p3v")
 metadata/_custom_type_script = "uid://c23msscfhcgae"
 
-[node name="IsInGroundComponent" type="Marker2D" parent="."]
-script = ExtResource("5_exv2o")
-metadata/_custom_type_script = "uid://c38r1tlllit7v"
+[node name="GroundChecker" parent="." instance=ExtResource("5_63p3v")]
 
-[connection signal="ground_state_changed" from="IsInGroundComponent" to="." method="_on_grounded_state_changed"]
+[connection signal="state_physics_processing" from="GroundChecker/StateChart/MainState/Grounded" to="." method="_on_grounded_state_physics_processing"]
+[connection signal="state_physics_processing" from="GroundChecker/StateChart/MainState/Airborne" to="." method="_on_airborne_state_physics_processing"]
+
+[editable path="GroundChecker"]

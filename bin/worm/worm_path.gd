@@ -5,7 +5,7 @@ class_name WormPath extends Path2D
 @export_node_path("WormHead") var worm_head_path
 @onready var worm_head = get_node(worm_head_path)
 
-var path_follower_res = preload("res://worm_old/base/segment/path_follower.tscn")
+var path_follower_res = preload("res://worm/segments/segment/path_follower.tscn")
 
 var max_length:int
 
@@ -28,7 +28,15 @@ func _physics_process(_delta: float) -> void:
 #     Signal-connected methods     #
 # -------------------------------- #
 
-func _on_segments_changed(segments_list: WormSegmentsList) -> void:
+func _on_segments_changed(segments_list: WormSegmentsContainer) -> void:
+	_recreate_path_followers(segments_list)
+
+
+# -------------------------------- #
+#          Custom methods          #
+# -------------------------------- #
+
+func _recreate_path_followers(segments_list: WormSegmentsContainer):
 	_remove_all_followers()
 	for segment:WormSegment in segments_list.get_children():
 		var path_follower:WormSegmentPathFollower = path_follower_res.instantiate()
@@ -37,10 +45,6 @@ func _on_segments_changed(segments_list: WormSegmentsList) -> void:
 		add_child(path_follower)
 	max_length = segments_list.get_length() + length_padding
 
-
-# -------------------------------- #
-#          Custom methods          #
-# -------------------------------- #
 
 func _remove_all_followers():
 	for follower:WormSegmentPathFollower in get_children():
@@ -73,4 +77,4 @@ func _generate_starting_path():
 	var number_of_points = ceil(float(max_length)/float(point_distance))
 	
 	for point_id in number_of_points:
-		curve.add_point(Vector2i(0, point_id*point_distance), Vector2.ZERO, Vector2.ZERO, 0)
+		curve.add_point(Vector2i(-point_id*point_distance, 0), Vector2.ZERO, Vector2.ZERO, 0)
