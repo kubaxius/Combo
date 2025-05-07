@@ -6,9 +6,9 @@ class_name Bullet extends CharacterBody2D
 
 var speed:
 	get:
-		return Utils.kmph_to_pps(real_speed)
+		return MeasurementUtils.kmph_to_pps(real_speed)
 	set(val):
-		real_speed = Utils.pps_to_kmph(val)
+		real_speed = MeasurementUtils.pps_to_kmph(val)
 var damage := 5
 
 @onready var direction_vector = Vector2.RIGHT.rotated(global_rotation)

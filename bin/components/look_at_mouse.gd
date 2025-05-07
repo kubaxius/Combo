@@ -1,4 +1,4 @@
-@icon("res://components/component_icon_2d.svg")
+@icon("res://components/component2d/component_icon_2d.svg")
 class_name LookAtMouseComponent extends Node2D
 
 ## Angle from X axis. [br][br]

@@ -24,7 +24,7 @@ script/source = "extends TextureProgressBar
 
 
 func set_speed(current_speed:float):
-	value = Utils.pps_to_kmph(current_speed)
+	value = MeasurementUtils.pps_to_kmph(current_speed)
 "
 
 [node name="Hud" type="CanvasLayer"]

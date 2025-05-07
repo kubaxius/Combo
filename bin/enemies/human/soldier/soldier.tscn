@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://b8vnvbdgsafsb"]
+[gd_scene load_steps=31 format=3 uid="uid://b8vnvbdgsafsb"]
 
 [ext_resource type="Script" uid="uid://64n3ivho8pr6" path="res://enemies/human/soldier/soldier.gd" id="1_x1lvu"]
 [ext_resource type="Texture2D" uid="uid://c52gk8tpqw5rb" path="res://enemies/human/soldier/spritesheet.png" id="2_a7flp"]
 [ext_resource type="PackedScene" uid="uid://dccopawm3uan3" path="res://enemies/AI/soldier_ai.tscn" id="3_a7flp"]
 [ext_resource type="Script" uid="uid://dee731rekev1e" path="res://enemies/human/soldier/animation_tree.gd" id="4_c4e0d"]
 [ext_resource type="Script" uid="uid://dwfvn6e5bss5n" path="res://components/pushable.gd" id="5_hhmaw"]
+[ext_resource type="Script" uid="uid://cmdsiprs4n4dc" path="res://components/collision_reaction.gd" id="6_ipmao"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k8ge"]
 height = 48.0
@@ -230,7 +231,7 @@ shape = SubResource("CapsuleShape2D_4k8ge")
 
 [node name="EnemyAI" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_a7flp")]
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@21975")
+blackboard = NodePath("@Node@47189")
 actor = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -248,3 +249,7 @@ script = ExtResource("4_c4e0d")
 
 [node name="PushableComp" type="Node" parent="."]
 script = ExtResource("5_hhmaw")
+
+[node name="CollisionReactionComponent" type="Node" parent="."]
+script = ExtResource("6_ipmao")
+metadata/_custom_type_script = "uid://cmdsiprs4n4dc"

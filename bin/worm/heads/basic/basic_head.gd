@@ -16,17 +16,17 @@ class_name WormHead extends CharacterBody2D
 
 var gravity:
 	get():
-		return Utils.mps_to_pps(real_gravity)
+		return MeasurementUtils.mps_to_pps(real_gravity)
 
 var base_speed:
 	get():
-		return Utils.kmph_to_pps(real_base_speed)
+		return MeasurementUtils.kmph_to_pps(real_base_speed)
 var base_acceleration:
 	get():
-		return Utils.kmph_to_pps(real_base_acceleration)
+		return MeasurementUtils.kmph_to_pps(real_base_acceleration)
 var base_deceleration:
 	get():
-		return Utils.kmph_to_pps(real_base_deceleration)
+		return MeasurementUtils.kmph_to_pps(real_base_deceleration)
 
 var desired_speed := 0.
 var desired_movement_direction := Vector2.RIGHT
@@ -41,7 +41,6 @@ func _physics_process(_delta: float) -> void:
 	look_where_you_move()
 
 
-
 # -------------------------------- #
 #          State methods           #
 # -------------------------------- #
@@ -52,6 +51,7 @@ func _on_grounded_state_physics_processing(delta: float) -> void:
 
 func _on_airborne_state_physics_processing(delta: float) -> void:
 	recalculate_velocity(delta, false)
+	velocity = PhysicsUtils.apply_air_drag(velocity, delta)
 
 
 # -------------------------------- #
@@ -66,7 +66,9 @@ func accelerate(delta: float):
 	if velocity.length() <= 0:
 		velocity = Vector2.from_angle(global_rotation)
 	
-	var acceleration = acceleration_curve.sample(velocity.length() / desired_speed) * base_acceleration * delta
+	var acceleration = base_acceleration * delta * acceleration_curve\
+	.sample(MeasurementUtils.pps_to_kmph(velocity.length()))
+	
 	velocity = velocity.normalized() * (velocity.length() + acceleration)
 
 
@@ -82,7 +84,7 @@ func decelerate(delta: float):
 
 func get_new_velocity_angle(delta: float, grounded: bool) -> float:
 	var angle_step = delta * base_turning_speed * turning_speed_curve\
-		.sample(Utils.pps_to_kmph(velocity.length()))
+		.sample(MeasurementUtils.pps_to_kmph(velocity.length()))
 	
 	# TODO: Make it so that you can turn harder the more your desired angle
 	# is aligned with gravity Vector.

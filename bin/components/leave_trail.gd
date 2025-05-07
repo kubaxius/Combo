@@ -1,4 +1,4 @@
-@icon("res://components/component_icon.svg")
+@icon("res://components/component/component_icon.svg")
 class_name LeaveTrailComponent extends Node
 ## This component makes that it's parent traces a transparent trail in the ground.
 ##

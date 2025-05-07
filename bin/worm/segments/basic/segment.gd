@@ -27,7 +27,7 @@ func _ready() -> void:
 	segments_list.segments_changed.connect(_on_segments_changed)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_pull_to_point(path_follower.global_position)
 
 

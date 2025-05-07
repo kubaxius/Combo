@@ -4,7 +4,7 @@ class_name Enemy extends CharacterBody2D
 @export_custom(PROPERTY_HINT_RANGE, "1,100,1,suffix:km/h") var real_speed := 5
 var speed:
 	get():
-		return Utils.kmph_to_pps(real_speed)
+		return MeasurementUtils.kmph_to_pps(real_speed)
 
 @export_range(0, 10, 0.1) var running_speed_mult := 2.
 
