@@ -14,6 +14,9 @@ class_name WormHead extends CharacterBody2D
 @export_range(0, 1, 0.1) var turning_speed_multiplier_while_airborn := 0.2
 @export_custom(PROPERTY_HINT_RANGE, "1,50,0.1,suffix:m/s/s") var real_gravity := 9.8
 
+# TODO: Make mass increase the more segments there is. Also, make it harder
+# to accelerate and decelerate based on mass. 
+
 var gravity:
 	get():
 		return MeasurementUtils.mps_to_pps(real_gravity)

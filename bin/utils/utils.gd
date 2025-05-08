@@ -2,7 +2,7 @@ class_name Utils extends Node
 
 
 # -------------------------------- #
-#     Parent related functions     #
+#     Node related functions     #
 # -------------------------------- #
 
 static func get_parent_from_group(node:Node, group_name:StringName) -> Node:
@@ -23,6 +23,14 @@ static func get_named_parent(node:Node, group_name:String) -> Node:
 		return parent
 	
 	return get_named_parent(parent, group_name)
+
+
+## Returns only the first match
+static func get_child_of_type(node: Node, type: Variant, internal = false) -> Node:
+	for child: Node in node.get_children(internal):
+		if is_instance_of(child, type):
+			return child
+	return null
 
 
 # -------------------------------- #

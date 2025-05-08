@@ -1,11 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://b8vnvbdgsafsb"]
+[gd_scene load_steps=32 format=3 uid="uid://b8vnvbdgsafsb"]
 
 [ext_resource type="Script" uid="uid://64n3ivho8pr6" path="res://enemies/human/soldier/soldier.gd" id="1_x1lvu"]
 [ext_resource type="Texture2D" uid="uid://c52gk8tpqw5rb" path="res://enemies/human/soldier/spritesheet.png" id="2_a7flp"]
 [ext_resource type="PackedScene" uid="uid://dccopawm3uan3" path="res://enemies/AI/soldier_ai.tscn" id="3_a7flp"]
 [ext_resource type="Script" uid="uid://dee731rekev1e" path="res://enemies/human/soldier/animation_tree.gd" id="4_c4e0d"]
-[ext_resource type="Script" uid="uid://dwfvn6e5bss5n" path="res://components/pushable.gd" id="5_hhmaw"]
-[ext_resource type="Script" uid="uid://cmdsiprs4n4dc" path="res://components/collision_reaction.gd" id="6_ipmao"]
+[ext_resource type="Script" uid="uid://cy4d044grx74c" path="res://components/collision_reaction/collision_reaction_character.gd" id="5_hhmaw"]
+[ext_resource type="PackedScene" uid="uid://6h5xyykhquco" path="res://debug/velocity_line.tscn" id="6_ipmao"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k8ge"]
 height = 48.0
@@ -214,6 +214,22 @@ states/stand/position = Vector2(348, 137)
 transitions = ["stand", "Walk", SubResource("AnimationNodeStateMachineTransition_hhmaw"), "Walk", "stand", SubResource("AnimationNodeStateMachineTransition_a7flp"), "Start", "stand", SubResource("AnimationNodeStateMachineTransition_c4e0d"), "stand", "burst", SubResource("AnimationNodeStateMachineTransition_ipmao"), "burst", "stand", SubResource("AnimationNodeStateMachineTransition_x1lvu"), "burst", "Walk", SubResource("AnimationNodeStateMachineTransition_hhxba"), "stand", "reload", SubResource("AnimationNodeStateMachineTransition_1amvy"), "reload", "stand", SubResource("AnimationNodeStateMachineTransition_0p7st"), "reload", "Walk", SubResource("AnimationNodeStateMachineTransition_wga1v")]
 graph_offset = Vector2(-227, -140)
 
+[sub_resource type="GDScript" id="GDScript_hhmaw"]
+script/source = "class_name PushableComponent extends Node
+
+@onready var actor: CharacterBody2D = get_parent()
+
+# TODO
+func calculate():
+	var collision_count = get_parent().get_slide_collision_count()
+	
+	for i in range(0, collision_count):
+		var collision := actor.get_slide_collision(i)
+		if collision.get_collider():
+			if \"velocity\" in collision.get_collider():
+				print(collision.get_collider().velocity)
+"
+
 [node name="Soldier" type="CharacterBody2D" groups=["eatable"]]
 collision_layer = 4
 collision_mask = 35
@@ -231,9 +247,8 @@ position = Vector2(0, -24)
 shape = SubResource("CapsuleShape2D_4k8ge")
 
 [node name="EnemyAI" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_a7flp")]
-enabled = true
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@69060")
+blackboard = NodePath("@Node@29767")
 actor = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -250,8 +265,12 @@ parameters/Walk/blend_position = -0.103789
 script = ExtResource("4_c4e0d")
 
 [node name="PushableComp" type="Node" parent="."]
-script = ExtResource("5_hhmaw")
+script = SubResource("GDScript_hhmaw")
 
-[node name="CollisionReactionComponent" type="Node" parent="."]
-script = ExtResource("6_ipmao")
-metadata/_custom_type_script = "uid://cmdsiprs4n4dc"
+[node name="CollisionReaction" type="Node" parent="."]
+script = ExtResource("5_hhmaw")
+mass = 0.01
+metadata/_custom_type_script = "uid://cy4d044grx74c"
+
+[node name="VelocityLine" parent="." instance=ExtResource("6_ipmao")]
+head_width = 30.0

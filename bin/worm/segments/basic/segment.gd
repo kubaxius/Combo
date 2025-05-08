@@ -45,12 +45,12 @@ func _on_segments_changed(_segments_list):
 
 func _on_grounded_state_entered():
 	gravity_scale = 0
-	pull_power = 1.
+	#pull_power = 1.
 
 
 func _on_airborne_state_entered():
-	#gravity_scale = 1
-	pull_power = 1.
+	gravity_scale = 1
+	#pull_power = 1.
 
 
 func _on_docked_state_entered() -> void:
@@ -84,4 +84,4 @@ func _update_pixel_position_in_worm() -> void:
 
 func _pull_to_point(point:Vector2) -> void:
 	var force = point - global_position
-	apply_central_force(force * 100000 * pull_power)
+	apply_central_force(force * 10000 * pull_power)

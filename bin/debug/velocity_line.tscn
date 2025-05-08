@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://6h5xyykhquco"]
+
+[ext_resource type="Script" uid="uid://dcv0promgyjsb" path="res://debug/velocity_line.gd" id="1_1puni"]
+
+[node name="VelocityLine" type="Node2D"]
+script = ExtResource("1_1puni")
+head_length = 10.0
+head_width = 10.0
+stem_width = 1.0
+fill_color = Color(1, 0, 1, 1)
+metadata/_custom_type_script = "uid://bv6eykpb7ftsk"

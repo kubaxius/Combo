@@ -12,7 +12,7 @@ height = 80.0
 
 [node name="BasicWormSegment" type="RigidBody2D" groups=["player", "scary", "worm"]]
 collision_mask = 92
-mass = 200.0
+mass = 10.0
 gravity_scale = 0.0
 linear_damp = 40.0
 angular_damp = 100.0
