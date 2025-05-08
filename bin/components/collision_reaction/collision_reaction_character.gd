@@ -1,4 +1,4 @@
-@icon("res://components/collision_reaction/collision_reaction_character.svg")
+@icon("res://editor_icons/collision_reaction_character.svg")
 class_name CollisionReactionCharacter2DComponent extends CollisionReactionComponent
 
 

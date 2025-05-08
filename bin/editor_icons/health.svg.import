@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5u724710eden"
-path="res://.godot/imported/collision_reaction_character.svg-d88cf121b3aa75230e974f84900b3dd5.ctex"
+uid="uid://dsadihxwddku5"
+path="res://.godot/imported/health.svg-98ade113b927515cfa2e68ddae40861e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://components/collision_reaction/collision_reaction_character.svg"
-dest_files=["res://.godot/imported/collision_reaction_character.svg-d88cf121b3aa75230e974f84900b3dd5.ctex"]
+source_file="res://editor_icons/health.svg"
+dest_files=["res://.godot/imported/health.svg-98ade113b927515cfa2e68ddae40861e.ctex"]
 
 [params]
 

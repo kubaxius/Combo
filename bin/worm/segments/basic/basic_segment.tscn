@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://60b4o56c3hdd"]
+[gd_scene load_steps=8 format=3 uid="uid://60b4o56c3hdd"]
 
 [ext_resource type="Script" uid="uid://bvftcxlknehg" path="res://worm/segments/basic/segment.gd" id="1_40qbx"]
+[ext_resource type="Script" uid="uid://dqxrdsv7a5ukp" path="res://components/health.gd" id="2_1vb3f"]
+[ext_resource type="Script" uid="uid://emoqcwotkidw" path="res://components/collision_reaction/collision_reaction_rigid.gd" id="3_6n8jg"]
 [ext_resource type="Texture2D" uid="uid://cb03e2yo2qpqf" path="res://worm/segments/basic/worm_segment_basic.png" id="3_d510x"]
-[ext_resource type="Script" uid="uid://c38r1tlllit7v" path="res://components/is_in_ground.gd" id="4_1vb3f"]
 [ext_resource type="PackedScene" uid="uid://c5sks7km6iisr" path="res://worm/part/ground_checker.tscn" id="5_u11fe"]
 [ext_resource type="Script" uid="uid://c23msscfhcgae" path="res://components/leave_trail.gd" id="6_d6ev6"]
 
@@ -18,6 +19,15 @@ linear_damp = 40.0
 angular_damp = 100.0
 script = ExtResource("1_40qbx")
 
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_1vb3f")
+max_health = 1000
+metadata/_custom_type_script = "uid://dqxrdsv7a5ukp"
+
+[node name="CollisionReactionRigid2DComponent" type="Node" parent="."]
+script = ExtResource("3_6n8jg")
+metadata/_custom_type_script = "uid://emoqcwotkidw"
+
 [node name="LeaveTrail" type="Node2D" parent="."]
 script = ExtResource("6_d6ev6")
 texture = ExtResource("3_d510x")
@@ -27,10 +37,6 @@ texture = ExtResource("3_d510x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_r5knf")
-
-[node name="IsInGroundComponent" type="Marker2D" parent="."]
-script = ExtResource("4_1vb3f")
-metadata/_custom_type_script = "uid://c38r1tlllit7v"
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 position = Vector2(13, 0)

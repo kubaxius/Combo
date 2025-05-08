@@ -1,4 +1,4 @@
-@icon("res://components/collision_reaction/collision_reaction_rigid.svg")
+@icon("res://editor_icons/collision_reaction_rigid.svg")
 class_name CollisionReactionRigid2DComponent extends CollisionReactionComponent
 
 @onready var actor: RigidBody2D = $".."

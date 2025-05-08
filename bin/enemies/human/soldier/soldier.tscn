@@ -212,7 +212,7 @@ states/reload/position = Vector2(156, 137)
 states/stand/node = SubResource("AnimationNodeAnimation_a7flp")
 states/stand/position = Vector2(348, 137)
 transitions = ["stand", "Walk", SubResource("AnimationNodeStateMachineTransition_hhmaw"), "Walk", "stand", SubResource("AnimationNodeStateMachineTransition_a7flp"), "Start", "stand", SubResource("AnimationNodeStateMachineTransition_c4e0d"), "stand", "burst", SubResource("AnimationNodeStateMachineTransition_ipmao"), "burst", "stand", SubResource("AnimationNodeStateMachineTransition_x1lvu"), "burst", "Walk", SubResource("AnimationNodeStateMachineTransition_hhxba"), "stand", "reload", SubResource("AnimationNodeStateMachineTransition_1amvy"), "reload", "stand", SubResource("AnimationNodeStateMachineTransition_0p7st"), "reload", "Walk", SubResource("AnimationNodeStateMachineTransition_wga1v")]
-graph_offset = Vector2(-227, -140)
+graph_offset = Vector2(-205, -83)
 
 [sub_resource type="GDScript" id="GDScript_hhmaw"]
 script/source = "class_name PushableComponent extends Node
@@ -232,8 +232,9 @@ func calculate():
 
 [node name="Soldier" type="CharacterBody2D" groups=["eatable"]]
 collision_layer = 4
-collision_mask = 35
+collision_mask = 59
 script = ExtResource("1_x1lvu")
+shot_spread = 0.25
 running_speed_mult = 4.0
 
 [node name="SoldierSprite" type="Sprite2D" parent="."]
@@ -248,7 +249,7 @@ shape = SubResource("CapsuleShape2D_4k8ge")
 
 [node name="EnemyAI" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_a7flp")]
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@29767")
+blackboard = NodePath("@Node@30317")
 actor = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

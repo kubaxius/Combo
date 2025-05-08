@@ -43,7 +43,8 @@ func _remove():
 #          Custom methods          #
 # -------------------------------- #
 
-func setup(spawn_point: Vector2, direction: Vector2, spread:float = 0, p_real_speed: int = real_speed, p_lifetime: float = lifetime):
+func setup(spawn_point: Vector2, direction: Vector2, spread:float = 0,
+		   p_real_speed: int = real_speed, p_lifetime: float = lifetime):
 	real_speed = p_real_speed
 	global_position = spawn_point
 	rotation = direction.angle() + randf_range(-spread, spread)
@@ -58,6 +59,7 @@ func collide(collision: KinematicCollision2D):
 	speed = 0
 
 
-@warning_ignore("unused_parameter")
-func deal_damage(player: Node2D):
-	pass#print_debug("dealt " + str(damage) + " damage")
+func deal_damage(actor: Node2D):
+	var health_comp: HealthComponent = Utils.get_child_of_type(actor, HealthComponent)
+	if health_comp:
+		health_comp.damage(damage, self)
