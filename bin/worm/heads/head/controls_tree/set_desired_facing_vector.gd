@@ -1,5 +1,5 @@
 @tool
-class_name SetDesiredMovementDirection extends ActionLeaf
+extends ActionLeaf
 
 
 func tick(actor: Node, _blackboard: Blackboard):

@@ -1,10 +1,13 @@
-@icon("res://components/component2d/component_icon_2d.svg")
+@icon("res://editor_icons/component_icon_2d.svg")
 class_name IsInGroundComponent extends Marker2D
 
 ## If true, the component will check if it's in ground every frame, and will
 ## send a signal if the state changed. Otherwise, you will
 ## have to check manually, by invoking the is_in_ground() method.
-@export var reactive = true
+@export var reactive = true:
+	set(val):
+		reactive = val
+		set_physics_process(reactive)
 
 enum {GROUNDED, AIRBORN}
 

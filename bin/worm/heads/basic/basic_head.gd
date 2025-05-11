@@ -27,12 +27,28 @@ var base_speed:
 var base_acceleration:
 	get():
 		return MeasurementUtils.kmph_to_pps(real_base_acceleration)
-var base_deceleration:
+var deceleration:
 	get():
 		return MeasurementUtils.kmph_to_pps(real_base_deceleration)
 
 var desired_speed := 0.
 var desired_movement_direction := Vector2.RIGHT
+
+# If set and the controls are disabled, the head will try to move into 
+# this position in a straight line.
+var target: Vector2 = Vector2(0, 0)
+var target_max_acceptable_distance := 100
+
+var controls_disabled = false
+
+@onready var state_chart:StateChart = %StateChart
+
+# -------------------------------- #
+#         Built-in methods         #
+# -------------------------------- #
+
+func _ready() -> void:
+	set_initial_state()
 
 
 # -------------------------------- #
@@ -55,6 +71,10 @@ func _on_grounded_state_physics_processing(delta: float) -> void:
 func _on_airborne_state_physics_processing(delta: float) -> void:
 	recalculate_velocity(delta, false)
 	velocity = PhysicsUtils.apply_air_drag(velocity, delta)
+
+
+func _on_dock_scene_state_physics_processing(delta: float) -> void:
+	recalculate_velocity(delta, true)
 
 
 # -------------------------------- #
@@ -82,7 +102,7 @@ func decelerate(delta: float):
 	if velocity.length() < 5:
 		velocity = Vector2.ZERO
 	
-	velocity = velocity.normalized() * (velocity.length() - base_deceleration * delta)
+	velocity = velocity.normalized() * (velocity.length() - deceleration * delta)
 
 
 func get_new_velocity_angle(delta: float, grounded: bool) -> float:
@@ -122,3 +142,28 @@ func look_where_you_move():
 	if velocity.length() <= 0:
 		return
 	global_rotation = velocity.angle()
+
+
+func get_breaking_distance() -> float:
+	var current_speed = velocity.length()
+	if current_speed < 1:
+		return 0
+	
+	return (current_speed * current_speed) / (2 * deceleration)
+
+
+
+func set_initial_state():
+	var main_scene:Node2D = get_tree().current_scene
+	
+	if main_scene.is_in_group("dock_scene"):
+		%IsInGroundComponent.reactive = false
+		state_chart.call_deferred("send_event", "to_dock_scene")
+		return
+	
+	var in_ground:bool = %IsInGroundComponent.is_in_ground()
+	
+	if in_ground:
+		state_chart.send_event("entered_ground")
+	else:
+		state_chart.send_event("exited_ground")

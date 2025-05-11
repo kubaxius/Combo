@@ -1,5 +1,5 @@
 @tool
-class_name SetDesiredSpeed extends ActionLeaf
+extends ActionLeaf
 
 
 func tick(actor: Node, _blackboard: Blackboard):

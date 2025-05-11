@@ -76,7 +76,7 @@ func _connect_to_preceding():
 
 func _update_pixel_position_in_worm() -> void:
 	if get_index() == 0:
-		pixel_position_in_worm = spacing
+		pixel_position_in_worm = spacing + 10
 		return
 	var pos = part_before.pixel_position_in_worm + spacing
 	pixel_position_in_worm = pos

@@ -1,5 +1,5 @@
 @tool
-class_name IsStopButtonPressed extends ConditionLeaf
+extends ConditionLeaf
 
 
 func tick(_actor: Node, _blackboard: Blackboard):

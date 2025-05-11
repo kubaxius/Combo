@@ -56,6 +56,7 @@ eatable="Worm can eat this in single bite."
 player="Enemies will react to this node and attack it. Has to be a collision body to work."
 scary="Weak enemies will run from this."
 worm_controller="This is a node that holds all the important information about the worm, so it can be displayed on the screen. It also is responsible for managing worm death, when it looses enough HP."
+dock_scene="In these scenes the Worm will enter the Docking routine."
 
 [input]
 

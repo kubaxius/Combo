@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://fhj6mrdsvb7h"]
+[gd_scene load_steps=5 format=3 uid="uid://fhj6mrdsvb7h"]
 
 [ext_resource type="Script" uid="uid://8htxykva2cwp" path="res://scenes/worm_editor.gd" id="1_6ljjx"]
 [ext_resource type="PackedScene" uid="uid://ctj5kuremwk38" path="res://worm/worm.tscn" id="2_6ljjx"]
+[ext_resource type="Script" uid="uid://c4f5rhverpqk7" path="res://scenes/worm_head_stop.gd" id="3_pt7hd"]
 [ext_resource type="Texture2D" uid="uid://dl703mtexf7k4" path="res://scenes/dock.png" id="4_pt7hd"]
 
-[node name="WormEditor" type="Node2D"]
+[node name="WormEditor" type="Node2D" groups=["dock_scene"]]
 script = ExtResource("1_6ljjx")
 
 [node name="Dock" type="Sprite2D" parent="."]
@@ -16,5 +17,9 @@ anchor_mode = 0
 
 [node name="HeadStop" type="Marker2D" parent="."]
 position = Vector2(1654, 184)
+script = ExtResource("3_pt7hd")
 
 [node name="Worm" parent="." instance=ExtResource("2_6ljjx")]
+position = Vector2(-304, 182)
+
+[editable path="Worm"]

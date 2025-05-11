@@ -1,7 +1,8 @@
 @tool
-extends ActionLeaf
+extends ConditionLeaf
 
 
 func tick(actor: Node, _blackboard: Blackboard):
-	actor.desired_speed = 0
+	if actor.controls_disabled:
+		return FAILURE
 	return SUCCESS

@@ -1,19 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5sks7km6iisr"]
+[gd_scene load_steps=7 format=3 uid="uid://c5sks7km6iisr"]
 
+[ext_resource type="Script" uid="uid://coimh4l72pgbo" path="res://worm/part/ground_checker.gd" id="1_mspas"]
 [ext_resource type="Script" uid="uid://c38r1tlllit7v" path="res://components/is_in_ground.gd" id="1_u608q"]
-[ext_resource type="Script" uid="uid://dhknet801qr00" path="res://worm/part/ground_checker_state_chart.gd" id="2_mspas"]
 [ext_resource type="Script" uid="uid://6rnr5ee3s4j3" path="res://addons/godot_state_charts/compound_state.gd" id="3_1i4as"]
+[ext_resource type="Script" uid="uid://car5i8e3rlaxi" path="res://addons/godot_state_charts/state_chart.gd" id="3_mspas"]
 [ext_resource type="Script" uid="uid://cp0gcn2oc6f1v" path="res://addons/godot_state_charts/atomic_state.gd" id="4_irxbh"]
 [ext_resource type="Script" uid="uid://brbkwqgqhymfi" path="res://addons/godot_state_charts/transition.gd" id="5_1et1t"]
 
 [node name="GroundChecker" type="Node2D"]
+script = ExtResource("1_mspas")
 
 [node name="IsInGroundComponent" type="Marker2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_u608q")
 metadata/_custom_type_script = "uid://c38r1tlllit7v"
 
 [node name="StateChart" type="Node" parent="."]
-script = ExtResource("2_mspas")
+script = ExtResource("3_mspas")
 metadata/_custom_type_script = "uid://car5i8e3rlaxi"
 
 [node name="MainState" type="Node" parent="StateChart"]
@@ -29,6 +32,12 @@ to = NodePath("../../Airborne")
 event = &"exited_ground"
 delay_in_seconds = "0.0"
 
+[node name="ToDisabled" type="Node" parent="StateChart/MainState/Grounded"]
+script = ExtResource("5_1et1t")
+to = NodePath("../../Disabled")
+event = &"disable"
+delay_in_seconds = "0.0"
+
 [node name="Airborne" type="Node" parent="StateChart/MainState"]
 script = ExtResource("4_irxbh")
 
@@ -38,5 +47,26 @@ to = NodePath("../../Grounded")
 event = &"entered_ground"
 delay_in_seconds = "0.0"
 
-[connection signal="ground_entered" from="IsInGroundComponent" to="StateChart" method="_on_ground_entered"]
-[connection signal="ground_exited" from="IsInGroundComponent" to="StateChart" method="_on_ground_exited"]
+[node name="ToDisabled" type="Node" parent="StateChart/MainState/Airborne"]
+script = ExtResource("5_1et1t")
+to = NodePath("../../Disabled")
+event = &"disable"
+delay_in_seconds = "0.0"
+
+[node name="Disabled" type="Node" parent="StateChart/MainState"]
+script = ExtResource("4_irxbh")
+
+[node name="ToGrounded" type="Node" parent="StateChart/MainState/Disabled"]
+script = ExtResource("5_1et1t")
+to = NodePath("../../Grounded")
+event = &"entered_ground"
+delay_in_seconds = "0.0"
+
+[node name="ToAirborne" type="Node" parent="StateChart/MainState/Disabled"]
+script = ExtResource("5_1et1t")
+to = NodePath("../../Airborne")
+event = &"exited_ground"
+delay_in_seconds = "0.0"
+
+[connection signal="ground_entered" from="IsInGroundComponent" to="." method="_on_ground_entered"]
+[connection signal="ground_exited" from="IsInGroundComponent" to="." method="_on_ground_exited"]
