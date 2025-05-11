@@ -17,18 +17,8 @@ var pull_power = 2.
 
 func _ready() -> void:
 	input_pickable = false
-	_update_pixel_position_in_worm()
-	freeze = true
-	position.x = -pixel_position_in_worm
-	_connect_to_preceding()
-	freeze = false
-	
-	var segments_list:WormSegmentsContainer = get_parent()
-	segments_list.segments_changed.connect(_on_segments_changed)
-
-
-func _physics_process(_delta: float) -> void:
-	_pull_to_point(path_follower.global_position)
+	_setup_signals()
+	_position_and_connect()
 
 
 # -------------------------------- #
@@ -39,32 +29,83 @@ func _on_segments_changed(_segments_list):
 	_update_pixel_position_in_worm()
 
 
+func _on_dock_entered():
+	$PartStateChart.send_event("entered_dock")
+
+
+func _on_dock_exited():
+	$PartStateChart.send_event("exited_dock")
+
+
+func _on_mouse_entered():
+	modulate = Color.CHARTREUSE
+
+
+func _on_mouse_exited():
+	modulate = Color.WHITE
+
+
 # -------------------------------- #
 #          State methods           #
 # -------------------------------- #
 
-func _on_grounded_state_entered():
+# GroundedState #
+
+func _on_grounded_state_entered() -> void:
 	gravity_scale = 0
-	#pull_power = 1.
+	pull_power = 2.
 
 
-func _on_airborne_state_entered():
+func _on_grounded_state_physics_processing(_delta: float) -> void:
+	_pull_to_point(path_follower.global_position)
+
+# AirborneState #
+
+func _on_airborne_state_entered() -> void:
 	gravity_scale = 1
-	#pull_power = 1.
+	pull_power = 0.5
 
+
+func _on_airborne_state_physics_processing(_delta: float) -> void:
+	_pull_to_point(path_follower.global_position)
+
+# DockedState #
 
 func _on_docked_state_entered() -> void:
 	input_pickable = true
 
 
-var dock_path: DockPath
+@onready var dock_path:Curve2D = $"..".dock_path
 func _on_docked_state_physics_processing(_delta: float) -> void:
+	if not dock_path:
+		_pull_to_point(path_follower.global_position)
+		return
 	_pull_to_point(dock_path.get_closest_point(global_position))
 
+
+func _on_docked_state_exited() -> void:
+	input_pickable = false
 
 # -------------------------------- #
 #          Custom methods          #
 # -------------------------------- #
+
+func _setup_signals():
+	var segments_list:WormSegmentsContainer = $'..'
+	var worm:WormController = $'../..'
+	worm.docked.connect(_on_dock_entered)
+	worm.left_dock.connect(_on_dock_exited)
+	segments_list.segments_changed.connect(_on_segments_changed)
+
+
+func _position_and_connect():
+	input_pickable = false
+	_update_pixel_position_in_worm()
+	freeze = true
+	position.x = -pixel_position_in_worm
+	_connect_to_preceding()
+	freeze = false
+
 
 func _connect_to_preceding():
 	# if no preceding part, exit

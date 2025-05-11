@@ -15,7 +15,7 @@ class_name WormHead extends CharacterBody2D
 @export_custom(PROPERTY_HINT_RANGE, "1,50,0.1,suffix:m/s/s") var real_gravity := 9.8
 
 # TODO: Make mass increase the more segments there is. Also, make it harder
-# to accelerate and decelerate based on mass. 
+# to _accelerate and _decelerate based on mass. 
 
 var gravity:
 	get():
@@ -38,17 +38,13 @@ var desired_movement_direction := Vector2.RIGHT
 # this position in a straight line.
 var target: Vector2 = Vector2(0, 0)
 var target_max_acceptable_distance := 100
+# This is emitted from the ControlsTree, at least for now.
+@warning_ignore("unused_signal")
+signal target_reached(target: Vector2)
 
 var controls_disabled = false
 
-@onready var state_chart:StateChart = %StateChart
-
-# -------------------------------- #
-#         Built-in methods         #
-# -------------------------------- #
-
-func _ready() -> void:
-	set_initial_state()
+@onready var state_chart:StateChart = $PartStateChart
 
 
 # -------------------------------- #
@@ -57,7 +53,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
-	look_where_you_move()
+	_look_where_you_move()
 
 
 # -------------------------------- #
@@ -65,23 +61,19 @@ func _physics_process(_delta: float) -> void:
 # -------------------------------- #
 
 func _on_grounded_state_physics_processing(delta: float) -> void:
-	recalculate_velocity(delta, true)
+	_recalculate_velocity(delta, true)
 
 
 func _on_airborne_state_physics_processing(delta: float) -> void:
-	recalculate_velocity(delta, false)
+	_recalculate_velocity(delta, false)
 	velocity = PhysicsUtils.apply_air_drag(velocity, delta)
-
-
-func _on_dock_scene_state_physics_processing(delta: float) -> void:
-	recalculate_velocity(delta, true)
 
 
 # -------------------------------- #
 #          Custom methods          #
 # -------------------------------- #
 
-func accelerate(delta: float):
+func _accelerate(delta: float):
 	
 	if velocity.length() >= desired_speed:
 		return
@@ -95,7 +87,7 @@ func accelerate(delta: float):
 	velocity = velocity.normalized() * (velocity.length() + acceleration)
 
 
-func decelerate(delta: float):
+func _decelerate(delta: float):
 	if velocity.length() < desired_speed:
 		return
 	
@@ -105,7 +97,7 @@ func decelerate(delta: float):
 	velocity = velocity.normalized() * (velocity.length() - deceleration * delta)
 
 
-func get_new_velocity_angle(delta: float, grounded: bool) -> float:
+func _get_new_velocity_angle(delta: float, grounded: bool) -> float:
 	var angle_step = delta * base_turning_speed * turning_speed_curve\
 		.sample(MeasurementUtils.pps_to_kmph(velocity.length()))
 	
@@ -122,23 +114,23 @@ func get_new_velocity_angle(delta: float, grounded: bool) -> float:
 	return new_angle
 
 
-func recalculate_velocity(delta: float, grounded: bool):
-	accelerate(delta)
-	decelerate(delta)
+func _recalculate_velocity(delta: float, grounded: bool):
+	_accelerate(delta)
+	_decelerate(delta)
 	
-	var new_angle = get_new_velocity_angle(delta, grounded)
+	var new_angle = _get_new_velocity_angle(delta, grounded)
 	
 	velocity = Vector2.from_angle(new_angle) * velocity.length()
 	
 	if not grounded:
-		apply_gravity(delta)
+		_apply_gravity(delta)
 
 
-func apply_gravity(delta: float):
+func _apply_gravity(delta: float):
 	velocity += Vector2.DOWN * gravity * delta
 
 
-func look_where_you_move():
+func _look_where_you_move():
 	if velocity.length() <= 0:
 		return
 	global_rotation = velocity.angle()
@@ -150,20 +142,3 @@ func get_breaking_distance() -> float:
 		return 0
 	
 	return (current_speed * current_speed) / (2 * deceleration)
-
-
-
-func set_initial_state():
-	var main_scene:Node2D = get_tree().current_scene
-	
-	if main_scene.is_in_group("dock_scene"):
-		%IsInGroundComponent.reactive = false
-		state_chart.call_deferred("send_event", "to_dock_scene")
-		return
-	
-	var in_ground:bool = %IsInGroundComponent.is_in_ground()
-	
-	if in_ground:
-		state_chart.send_event("entered_ground")
-	else:
-		state_chart.send_event("exited_ground")

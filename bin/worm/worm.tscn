@@ -11,53 +11,30 @@
 [node name="Worm" type="Node2D" groups=["worm_controller"]]
 script = ExtResource("1_t086d")
 
-[node name="WormSegmentsContainer" type="Node2D" parent="."]
+[node name="SegmentsContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_wokbb")
 metadata/_custom_type_script = "uid://bl52pjxf7ysd5"
 
-[node name="BasicWormSegment" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
-[node name="BasicWormSegment9" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment2" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
-[node name="BasicWormSegment10" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment3" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
-[node name="BasicWormSegment11" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment4" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
-[node name="BasicWormSegment12" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment5" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
-[node name="BasicWormSegment13" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment6" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
-[node name="BasicWormSegment14" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment7" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
-[node name="BasicWormSegment15" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment8" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
-[node name="BasicWormSegment16" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment9" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
-[node name="BasicWormSegment17" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment18" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment19" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment20" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment21" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment22" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment2" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment3" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment4" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment5" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment6" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment7" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
-
-[node name="BasicWormSegment8" parent="WormSegmentsContainer" instance=ExtResource("4_wokbb")]
+[node name="BasicWormSegment10" parent="SegmentsContainer" instance=ExtResource("4_wokbb")]
 
 [node name="Head" parent="." instance=ExtResource("2_tafjd")]
 unique_name_in_owner = true
@@ -69,5 +46,5 @@ script = ExtResource("5_houbu")
 worm_head_path = NodePath("../Head")
 metadata/_custom_type_script = "uid://basltku41sxt1"
 
-[connection signal="child_order_changed" from="WormSegmentsContainer" to="WormSegmentsContainer" method="_on_child_order_changed"]
-[connection signal="segments_changed" from="WormSegmentsContainer" to="WormPath" method="_on_segments_changed"]
+[connection signal="child_order_changed" from="SegmentsContainer" to="SegmentsContainer" method="_on_child_order_changed"]
+[connection signal="segments_changed" from="SegmentsContainer" to="WormPath" method="_on_segments_changed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpmarjdg1486y"]
+[gd_scene load_steps=15 format=3 uid="uid://cpmarjdg1486y"]
 
 [ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_laf2x"]
 [ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_ja1kr"]
@@ -9,14 +9,15 @@
 [ext_resource type="Script" uid="uid://cdcoyvh4c7q0s" path="res://worm/heads/head/controls_tree/stop_moving.gd" id="5_hismy"]
 [ext_resource type="Script" uid="uid://cuo1dqye7hhiy" path="res://worm/heads/head/controls_tree/set_desired_facing_vector.gd" id="6_ja1kr"]
 [ext_resource type="Script" uid="uid://bpd1ggh7mlg48" path="res://worm/heads/head/controls_tree/set_desired_speed.gd" id="7_ja1kr"]
+[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="9_jt0vc"]
 [ext_resource type="Script" uid="uid://be22ve7ea61f7" path="res://worm/heads/head/controls_tree/is_target_reached.gd" id="9_ul175"]
-[ext_resource type="Script" uid="uid://ceskg3ctp8ek6" path="res://worm/heads/head/controls_tree/accelerate_towards_target.gd" id="11_ftuvd"]
 [ext_resource type="Script" uid="uid://b1bvygu6pf61d" path="res://worm/heads/head/controls_tree/move_towards_target.gd" id="12_jiigk"]
 [ext_resource type="Script" uid="uid://dgbd6jc4iggl5" path="res://worm/heads/head/controls_tree/slow_down_to_stop.gd" id="13_jiigk"]
+[ext_resource type="Script" uid="uid://cisqw5d48sbc4" path="res://worm/heads/head/controls_tree/announce_target_reached.gd" id="14_jt0vc"]
 
 [node name="ControlsTree" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_laf2x")
-blackboard = NodePath("@Node@85096")
+blackboard = NodePath("@Node@22022")
 actor = NodePath("")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
@@ -60,26 +61,26 @@ metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 script = ExtResource("7_ja1kr")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="FollowTarget" type="Node" parent="ChooseMovementMode"]
-script = ExtResource("2_ja1kr")
-metadata/_custom_type_script = "uid://cw22yurt5l74k"
+[node name="ChooseFollowTargetMode" type="Node" parent="ChooseMovementMode"]
+script = ExtResource("9_jt0vc")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
 
-[node name="IsTargetReached" type="Node" parent="ChooseMovementMode/FollowTarget"]
+[node name="IsAtTarget" type="Node" parent="ChooseMovementMode/ChooseFollowTargetMode"]
 script = ExtResource("9_ul175")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="FollowTarget" type="Node" parent="ChooseMovementMode/FollowTarget"]
+[node name="FollowTarget" type="Node" parent="ChooseMovementMode/ChooseFollowTargetMode"]
 script = ExtResource("4_1b0lc")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="AccelerateTowardsTarget" type="Node" parent="ChooseMovementMode/FollowTarget/FollowTarget"]
-script = ExtResource("11_ftuvd")
-metadata/_custom_type_script = "uid://cv74jjdrwevpr"
-
-[node name="MoveTowardsTarget" type="Node" parent="ChooseMovementMode/FollowTarget/FollowTarget"]
+[node name="MoveTowardsTarget" type="Node" parent="ChooseMovementMode/ChooseFollowTargetMode/FollowTarget"]
 script = ExtResource("12_jiigk")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="SlowDownToStop" type="Node" parent="ChooseMovementMode/FollowTarget/FollowTarget"]
+[node name="SlowDownToStop" type="Node" parent="ChooseMovementMode/ChooseFollowTargetMode/FollowTarget"]
 script = ExtResource("13_jiigk")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="AnnounceTargetReached" type="Node" parent="ChooseMovementMode/ChooseFollowTargetMode/FollowTarget"]
+script = ExtResource("14_jt0vc")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"

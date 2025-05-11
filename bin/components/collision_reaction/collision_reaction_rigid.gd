@@ -19,8 +19,7 @@ func on_collision(other: CollisionObject2D, collision: KinematicCollision2D):
 
 func handle_collision_from_character(other: CharacterBody2D, collision: KinematicCollision2D):
 	var hit_position = collision.get_position() - actor.global_position
-	var other_crc = Utils.get_child_of_type(other, CollisionReactionComponent)
-	var other_mass = other_crc.mass
+	#var other_crc = Utils.get_child_of_type(other, CollisionReactionComponent)
 	
 	var impulse = other.velocity
 	# TODO: This should somehow take mass of other into consideration, since

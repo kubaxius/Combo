@@ -70,5 +70,5 @@ func should_collide(other: CollisionObject2D) -> bool:
 	return true
 
 
-func on_collision(other: CollisionObject2D, collision: KinematicCollision2D):
+func on_collision(_other: CollisionObject2D, _collision: KinematicCollision2D):
 	return

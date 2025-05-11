@@ -7,7 +7,7 @@ extends Arrow
 var velocity := Vector2.ZERO
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	head_width = 10

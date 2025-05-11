@@ -34,8 +34,6 @@ func on_collision(other: CollisionObject2D, collision: KinematicCollision2D):
 
 
 func handle_collision_from_rigid(other: RigidBody2D, collision: KinematicCollision2D):
-	var restitution = 1
-	var other_crc: CollisionReactionComponent = Utils.get_child_of_type(other, CollisionReactionComponent)
 	var normal = collision.get_normal()
 	
 	var new_vel = calculate_my_reaction(actor.velocity, mass, other.linear_velocity, other.mass, normal)
@@ -44,7 +42,6 @@ func handle_collision_from_rigid(other: RigidBody2D, collision: KinematicCollisi
 
 
 func handle_collision_from_character(other: CharacterBody2D, collision: KinematicCollision2D):
-	var restitution = 1
 	var other_crc: CollisionReactionComponent = Utils.get_child_of_type(other, CollisionReactionComponent)
 	var normal = collision.get_normal()
 	

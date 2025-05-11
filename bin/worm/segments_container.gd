@@ -2,6 +2,7 @@ class_name WormSegmentsContainer extends Node2D
 
 signal segments_changed(segments_list:WormSegmentsContainer)
 
+var dock_path: Curve2D
 
 # -------------------------------- #
 #         Built-in methods         #
