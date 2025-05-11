@@ -21,7 +21,7 @@ func damage(amount: int, _damager: Node) -> int:
 	if health <= 0:
 		health = 0
 		health_reached_zero.emit()
-	print(health)
+	
 	return inflicted_damage
 
 
